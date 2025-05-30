@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dodgeSpeed;
     [SerializeField] private float dodgeDistance;
 
+    [Header("Player Stats Settings")]
+    [SerializeField] private int health;
+
     private Vector3 mousePosition;
     private Vector2 movementDirection;
     private bool isDodging;
@@ -71,5 +74,18 @@ public class PlayerController : MonoBehaviour
         {
             isDodging = false;
         }
+    }
+
+
+    public void DamagePlayer(int damage)
+    {
+        health -= damage;
+        Debug.Log("Player damage; new health: "+health);
+        if (health <= 0) KillPlayer();
+    }
+
+    private void KillPlayer()
+    {
+        Debug.Log("Player died!");
     }
 }
