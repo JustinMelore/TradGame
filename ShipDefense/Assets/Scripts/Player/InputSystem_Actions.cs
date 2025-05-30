@@ -108,6 +108,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MousePos"",
+                    ""type"": ""Value"",
+                    ""id"": ""877ed991-8dba-42c3-a1f5-28981ba41f8d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -174,6 +183,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6eb3be4a-9bb0-40ef-8be0-272f43dfb045"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePos"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -763,6 +783,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
+        m_Player_MousePos = m_Player.FindAction("MousePos", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -858,6 +879,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Dodge;
+    private readonly InputAction m_Player_MousePos;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -877,6 +899,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Dodge".
         /// </summary>
         public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/MousePos".
+        /// </summary>
+        public InputAction @MousePos => m_Wrapper.m_Player_MousePos;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -909,6 +935,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Dodge.started += instance.OnDodge;
             @Dodge.performed += instance.OnDodge;
             @Dodge.canceled += instance.OnDodge;
+            @MousePos.started += instance.OnMousePos;
+            @MousePos.performed += instance.OnMousePos;
+            @MousePos.canceled += instance.OnMousePos;
         }
 
         /// <summary>
@@ -926,6 +955,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Dodge.started -= instance.OnDodge;
             @Dodge.performed -= instance.OnDodge;
             @Dodge.canceled -= instance.OnDodge;
+            @MousePos.started -= instance.OnMousePos;
+            @MousePos.performed -= instance.OnMousePos;
+            @MousePos.canceled -= instance.OnMousePos;
         }
 
         /// <summary>
@@ -1240,6 +1272,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnDodge(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "MousePos" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMousePos(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
