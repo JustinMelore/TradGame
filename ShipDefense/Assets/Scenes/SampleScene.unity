@@ -487,6 +487,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2037480249}
   movementSpeed: 1
+  dodgeSpeed: 5
+  dodgeDistance: 3
 --- !u!4 &2037480251
 Transform:
   m_ObjectHideFlags: 0
