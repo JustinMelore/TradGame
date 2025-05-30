@@ -59,7 +59,6 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 positionDifference = (mousePosition - attackDirection.position).normalized;
         float rotationAmount = Mathf.Atan2(positionDifference.y, positionDifference.x) * Mathf.Rad2Deg;
-        Debug.Log(rotationAmount + 90f);
         attackDirection.localRotation = Quaternion.Euler(new Vector3(0f, 0f, rotationAmount + 90f));
     }
 

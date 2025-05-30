@@ -14,10 +14,12 @@ public class Projectile : MonoBehaviour
     public void ChangeMoveDirection(Vector2 newVelocity)
     {
         projectile.linearVelocity = newVelocity * speed;
+        Debug.Log("New projectile velocity: " + projectile.linearVelocity);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log(collision);
+        Destroy(gameObject);
     }
 }
