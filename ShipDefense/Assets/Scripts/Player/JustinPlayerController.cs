@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Camera playerCamera;
     [SerializeField] private Rigidbody2D player;
     [SerializeField] private Transform attackDirection;
+    [SerializeField] private Collider2D playerHitbox;
 
     [Header("Movement Settings")]
     [SerializeField] private float movementSpeed;
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
         currentDodgeDistance = 0f;
         preDodgePosition = player.position;
         dodgeDirection = (movementDirection == Vector2.zero) ? new Vector2(1, 0) : movementDirection;
+        playerHitbox.enabled = false;
     }
 
     private void OnMousePos(InputValue input)
@@ -72,6 +74,7 @@ public class PlayerController : MonoBehaviour
         } else
         {
             isDodging = false;
+            playerHitbox.enabled = true;
         }
     }
 

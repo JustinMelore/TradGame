@@ -138,6 +138,7 @@ MonoBehaviour:
   playerCamera: {fileID: 0}
   player: {fileID: 6992629752443777296}
   attackDirection: {fileID: 4900372921611179536}
+  playerHitbox: {fileID: 8646854476135638089}
   movementSpeed: 5
   dodgeSpeed: 20
   dodgeDistance: 3
