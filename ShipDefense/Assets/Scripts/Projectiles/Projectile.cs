@@ -19,7 +19,8 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision);
+        GameObject collided = collision.collider.gameObject;
+        if (collided.layer == LayerMask.NameToLayer("Player") && Owner != collided.transform.parent.gameObject) collided.GetComponentInParent<PlayerController>().DamagePlayer(damage);
         Destroy(gameObject);
     }
 }
