@@ -64,7 +64,6 @@ public class PlayerController : MonoBehaviour
         attackDirection.localRotation = Quaternion.Euler(new Vector3(0f, 0f, rotationAmount + 90f));
     }
 
-    //TODO Implement invincibility
     private void PerformDodge()
     {
         if(currentDodgeDistance < dodgeDistance)

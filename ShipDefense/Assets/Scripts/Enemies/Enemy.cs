@@ -26,8 +26,20 @@ public class Enemy : MonoBehaviour
         currentFireTime = 0f;
         Vector3 projectileSpawnPosition = transform.position + transform.right * 2;
         Projectile firedProjectile = Instantiate(projectile, new Vector2(projectileSpawnPosition.x, projectileSpawnPosition.y), transform.rotation).GetComponent<Projectile>();
-        firedProjectile.Owner = gameObject;
+        //firedProjectile.Owner = gameObject;
         firedProjectile.ChangeMoveDirection(transform.right);
     }
 
+    public void DamageEnemy(int damage)
+    {
+        health -= damage;
+        Debug.Log("Enemy damaged. New health is " + health);
+        if (health <= 0) KillEnemy();
+    }
+
+    private void KillEnemy()
+    {
+        Debug.Log("Enemy killed!");
+        Destroy(gameObject);
+    }
 }
