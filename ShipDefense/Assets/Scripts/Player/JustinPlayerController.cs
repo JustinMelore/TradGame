@@ -68,6 +68,8 @@ public class PlayerController : MonoBehaviour
         isParrying = true;
         playerParryBox.enabled = true;
         Debug.Log("Parrying!");
+        //TODO delete this in the future
+        playerParryBox.transform.GetComponent<SpriteRenderer>().enabled = true;
     }
 
     void FixedUpdate()
@@ -126,6 +128,8 @@ public class PlayerController : MonoBehaviour
             currentParryCooldown = 0f;
             parryOnCooldown = true;
             Debug.Log("Parry ended. Starting cooldown");
+            //TODO delete this in the future
+            playerParryBox.transform.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 
