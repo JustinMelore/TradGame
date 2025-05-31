@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
         currentParryTime = 0f;
         isParrying = true;
         playerParryBox.enabled = true;
-        Debug.Log("Parrying!");
+        //Debug.Log("Parrying!");
         //TODO delete this in the future
         playerParryBox.transform.GetComponent<SpriteRenderer>().enabled = true;
     }
@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
         currentAttackTime = 0f;
         isAttacking = true;
         playerHurtBox.enabled = true;
-        Debug.Log("Attacking!");
+        //Debug.Log("Attacking!");
         //TODO delete this in the future
         playerHurtBox.transform.GetComponent<SpriteRenderer>().enabled = true;
     }
@@ -154,7 +154,7 @@ public class PlayerController : MonoBehaviour
             playerParryBox.enabled = false;
             currentParryCooldown = 0f;
             parryOnCooldown = true;
-            Debug.Log("Parry ended. Starting cooldown");
+            //Debug.Log("Parry ended. Starting cooldown");
             //TODO delete this in the future
             playerParryBox.transform.GetComponent<SpriteRenderer>().enabled = false;
         }
@@ -168,7 +168,7 @@ public class PlayerController : MonoBehaviour
         } else
         {
             parryOnCooldown = false;
-            Debug.Log("Parry cooldown ended");
+            //Debug.Log("Parry cooldown ended");
         }
     }
 
@@ -184,7 +184,7 @@ public class PlayerController : MonoBehaviour
             playerHurtBox.enabled = false;
             currentAttackCooldown = 0f;
             attackOnCooldown = true;
-            Debug.Log("Attack ended. Starting cooldown");
+            //Debug.Log("Attack ended. Starting cooldown");
             //TODO delete this in the future
             playerHurtBox.transform.GetComponent<SpriteRenderer>().enabled = false;
         }
@@ -199,8 +199,13 @@ public class PlayerController : MonoBehaviour
         else
         {
             attackOnCooldown = false;
-            Debug.Log("Attack cooldown ended");
+            //Debug.Log("Attack cooldown ended");
         }
+    }
+
+    public int GetAttackDamage()
+    {
+        return damage;
     }
 
     public void DamagePlayer(int damage)
