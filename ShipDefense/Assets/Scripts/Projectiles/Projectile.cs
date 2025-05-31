@@ -25,12 +25,12 @@ public class Projectile : MonoBehaviour
     public void ChangeMoveDirection(Vector2 newVelocity)
     {
         projectile.linearVelocity = newVelocity * speed;
-        Debug.Log("New projectile velocity: " + projectile.linearVelocity);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {        
         GameObject collided = collision.collider.gameObject;
+        //Debug.Log(LayerMask.LayerToName(collided.layer));
         if (collided.layer == player.gameObject.layer)
         {
             collided.GetComponentInParent<PlayerController>().DamagePlayer(damage);
@@ -40,5 +40,13 @@ public class Projectile : MonoBehaviour
             collided.GetComponent<Enemy>().DamageEnemy(damage);
         }
             Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Player deflected projectile!");
+        enemyCollider.enabled = false;
+        playerCollider.enabled = true;
+        ChangeMoveDirection(player.GetAttackDirection());
     }
 }

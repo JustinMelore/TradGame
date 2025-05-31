@@ -22,7 +22,6 @@ public class Enemy : MonoBehaviour
 
     private void FireProjectile()
     {
-        Debug.Log("Firing projectile");
         currentFireTime = 0f;
         Vector3 projectileSpawnPosition = transform.position + transform.right * 2;
         Projectile firedProjectile = Instantiate(projectile, new Vector2(projectileSpawnPosition.x, projectileSpawnPosition.y), transform.rotation).GetComponent<Projectile>();
