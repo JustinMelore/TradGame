@@ -21,18 +21,26 @@ public class PlayerController : MonoBehaviour
     [Header("Combat Settings")]
     [SerializeField] private float parryDuration;
     [SerializeField] private float parryCooldown;
+    [SerializeField] private int damage;
+    [SerializeField] private float attackDuration;
+    [SerializeField] private float attackCooldown;
 
     private Vector3 mousePosition;
     private Vector2 movementDirection;
     private bool isDodging;
+    private float currentDodgeDistance;
+    private Vector2 preDodgePosition;
+    private Vector2 dodgeDirection;
+
     private bool isParrying;
     private bool parryOnCooldown;
-    private float currentDodgeDistance;
     private float currentParryTime;
     private float currentParryCooldown;
-    private Vector2 dodgeDirection;
-    private Vector2 preDodgePosition;
 
+    private bool isAttacking;
+    private bool attackOnCooldown;
+    private float currentAttackTime;
+    private float currentAttackCooldown;
 
     private void Awake()
     {
@@ -72,6 +80,17 @@ public class PlayerController : MonoBehaviour
         playerParryBox.transform.GetComponent<SpriteRenderer>().enabled = true;
     }
 
+    private void OnAttack()
+    {
+        if (isAttacking || attackOnCooldown) return;
+        currentAttackTime = 0f;
+        isAttacking = true;
+        playerParryBox.enabled = true;
+        Debug.Log("Attacking!");
+        //TODO delete this in the future
+        playerHurtBox.transform.GetComponent<SpriteRenderer>().enabled = true;
+    }
+
     void FixedUpdate()
     {
         UpdateAttackDirection();
@@ -88,6 +107,14 @@ public class PlayerController : MonoBehaviour
         } else if(parryOnCooldown)
         {
             RecoverParryCooldown();
+        }
+        if (isAttacking)
+        {
+            PerformAttack();
+        }
+        else if (attackOnCooldown)
+        {
+            RecoverAttackCooldown();
         }
     }
 
@@ -142,6 +169,37 @@ public class PlayerController : MonoBehaviour
         {
             parryOnCooldown = false;
             Debug.Log("Parry cooldown ended");
+        }
+    }
+
+    private void PerformAttack()
+    {
+        if (currentAttackTime < attackDuration)
+        {
+            currentAttackTime += Time.deltaTime;
+        }
+        else
+        {
+            isAttacking = false;
+            playerHurtBox.enabled = false;
+            currentAttackCooldown = 0f;
+            attackOnCooldown = true;
+            Debug.Log("Attack ended. Starting cooldown");
+            //TODO delete this in the future
+            playerHurtBox.transform.GetComponent<SpriteRenderer>().enabled = false;
+        }
+    }
+
+    private void RecoverAttackCooldown()
+    {
+        if (currentAttackCooldown < attackCooldown)
+        {
+            currentAttackCooldown += Time.deltaTime;
+        }
+        else
+        {
+            attackOnCooldown = false;
+            Debug.Log("Attack cooldown ended");
         }
     }
 
