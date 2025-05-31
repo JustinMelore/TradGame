@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
         if (isAttacking || attackOnCooldown) return;
         currentAttackTime = 0f;
         isAttacking = true;
-        playerParryBox.enabled = true;
+        playerHurtBox.enabled = true;
         Debug.Log("Attacking!");
         //TODO delete this in the future
         playerHurtBox.transform.GetComponent<SpriteRenderer>().enabled = true;
