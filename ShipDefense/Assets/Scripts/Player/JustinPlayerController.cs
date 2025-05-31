@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D player;
     [SerializeField] private Transform attackDirection;
     [SerializeField] private Collider2D playerHitbox;
+    [SerializeField] private Collider2D playerHurtBox;
+    [SerializeField] private Collider2D playerParryBox;
 
     [Header("Movement Settings")]
     [SerializeField] private float movementSpeed;
@@ -16,13 +18,27 @@ public class PlayerController : MonoBehaviour
     [Header("Player Stats Settings")]
     [SerializeField] private int health;
 
+    [Header("Combat Settings")]
+    [SerializeField] private float parryDuration;
+    [SerializeField] private float parryCooldown;
+
     private Vector3 mousePosition;
     private Vector2 movementDirection;
     private bool isDodging;
+    private bool isParrying;
+    private bool parryOnCooldown;
     private float currentDodgeDistance;
+    private float currentParryTime;
+    private float currentParryCooldown;
     private Vector2 dodgeDirection;
     private Vector2 preDodgePosition;
 
+
+    private void Awake()
+    {
+        playerHurtBox.enabled = false;
+        playerParryBox.enabled = false;
+    }
 
     private void OnMove(InputValue input)
     {
@@ -45,6 +61,15 @@ public class PlayerController : MonoBehaviour
         mousePosition = playerCamera.ScreenToWorldPoint(new Vector3(mouseInput.x, mouseInput.y, 1f));
     }
 
+    private void OnParry()
+    {
+        if (isParrying || parryOnCooldown) return;
+        currentParryTime = 0f;
+        isParrying = true;
+        playerParryBox.enabled = true;
+        Debug.Log("Parrying!");
+    }
+
     void FixedUpdate()
     {
         UpdateAttackDirection();
@@ -54,6 +79,13 @@ public class PlayerController : MonoBehaviour
         } else
         {
             PerformDodge();
+        }
+        if(isParrying)
+        {
+            PerformParry();
+        } else if(parryOnCooldown)
+        {
+            RecoverParryCooldown();
         }
     }
 
@@ -67,7 +99,6 @@ public class PlayerController : MonoBehaviour
     public Vector3 GetAttackDirection()
     {
         return -attackDirection.up;
-        //return attackDirection.right;
     }
 
     private void PerformDodge()
@@ -83,6 +114,32 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void PerformParry()
+    {
+        if(currentParryTime < parryDuration)
+        {
+            currentParryTime += Time.deltaTime;
+        } else
+        {
+            isParrying = false;
+            playerParryBox.enabled = false;
+            currentParryCooldown = 0f;
+            parryOnCooldown = true;
+            Debug.Log("Parry ended. Starting cooldown");
+        }
+    }
+
+    private void RecoverParryCooldown()
+    {
+        if(currentParryCooldown < parryCooldown)
+        {
+            currentParryCooldown += Time.deltaTime;
+        } else
+        {
+            parryOnCooldown = false;
+            Debug.Log("Parry cooldown ended");
+        }
+    }
 
     public void DamagePlayer(int damage)
     {
