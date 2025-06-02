@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Handles actions taken by the player
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Camera playerCamera;
@@ -49,11 +52,18 @@ public class PlayerController : MonoBehaviour
         playerParryBox.enabled = false;
     }
 
+    /// <summary>
+    /// Triggers when the player presses one of the movement keys
+    /// </summary>
+    /// <param name="input"></param>
     private void OnMove(InputValue input)
     {
         movementDirection = input.Get<Vector2>().normalized;        
     }
 
+    /// <summary>
+    /// Triggers when the player presses the dodge button
+    /// </summary>
     private void OnDodge()
     {
         if (isDodging) return;
@@ -64,12 +74,19 @@ public class PlayerController : MonoBehaviour
         playerHitbox.enabled = false;
     }
 
+    /// <summary>
+    /// Triggers when the player moves their mouse
+    /// </summary>
+    /// <param name="input"></param>
     private void OnMousePos(InputValue input)
     {
         Vector2 mouseInput = input.Get<Vector2>();
         mousePosition = playerCamera.ScreenToWorldPoint(new Vector3(mouseInput.x, mouseInput.y, 1f));
     }
 
+    /// <summary>
+    /// Triggers when the player presses the parry button
+    /// </summary>
     private void OnParry()
     {
         if (isParrying || parryOnCooldown || isDodging || isAttacking) return;
@@ -81,6 +98,9 @@ public class PlayerController : MonoBehaviour
         playerParryBox.transform.GetComponent<SpriteRenderer>().enabled = true;
     }
 
+    /// <summary>
+    /// Triggers when the player presses the attack button
+    /// </summary>
     private void OnAttack()
     {
         if (isAttacking || attackOnCooldown || isDodging || isParrying) return;
@@ -119,6 +139,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Changes the player's current attack direction to match up with their mouse position
+    /// </summary>
     private void UpdateAttackDirection()
     {
         Vector3 positionDifference = (mousePosition - attackDirection.position).normalized;
@@ -126,11 +149,18 @@ public class PlayerController : MonoBehaviour
         attackDirection.localRotation = Quaternion.Euler(new Vector3(0f, 0f, rotationAmount + 90f));
     }
 
+    /// <summary>
+    /// Returns the player's current attack direction
+    /// </summary>
+    /// <returns></returns>
     public Vector3 GetAttackDirection()
     {
         return -attackDirection.up;
     }
 
+    /// <summary>
+    /// Determines when the dodge ends
+    /// </summary>
     private void PerformDodge()
     {
         if(currentDodgeDistance < dodgeDistance)
@@ -144,6 +174,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Determines when the parry ends and goes on cooldown
+    /// </summary>
     private void PerformParry()
     {
         if(currentParryTime < parryDuration)
@@ -161,6 +194,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Determines when the parry's cooldown has ended
+    /// </summary>
     private void RecoverParryCooldown()
     {
         if(currentParryCooldown < parryCooldown)
@@ -173,6 +209,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Determines when the attack should end and go on cooldown
+    /// </summary>
     private void PerformAttack()
     {
         if (currentAttackTime < attackDuration)
@@ -191,6 +230,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Determines when the attack cooldown has ended
+    /// </summary>
     private void RecoverAttackCooldown()
     {
         if (currentAttackCooldown < attackCooldown)
@@ -204,11 +246,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Returns the player's attack damage
+    /// </summary>
+    /// <returns></returns>
     public int GetAttackDamage()
     {
         return damage;
     }
 
+    /// <summary>
+    /// Damages the player by a given amount
+    /// </summary>
+    /// <param name="damage">The amount of damage to apply to the player</param>
     public void DamagePlayer(int damage)
     {
         health -= damage;
@@ -216,6 +266,9 @@ public class PlayerController : MonoBehaviour
         if (health <= 0) KillPlayer();
     }
 
+    /// <summary>
+    /// Causes the player to die
+    /// </summary>
     private void KillPlayer()
     {
         Debug.Log("Player died!");

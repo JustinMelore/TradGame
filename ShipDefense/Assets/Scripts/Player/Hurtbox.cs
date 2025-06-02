@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Handles behavior for melee attack hurtboxes
+/// </summary>
 public class Hurtbox : MonoBehaviour
 {
     //TODO Implement code for enemy

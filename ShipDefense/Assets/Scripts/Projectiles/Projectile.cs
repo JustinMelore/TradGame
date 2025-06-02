@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Script for handling basic projectile behavior
+/// </summary>
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D projectile;
@@ -22,6 +25,10 @@ public class Projectile : MonoBehaviour
         playerCollider.enabled = false;
     }
 
+    /// <summary>
+    /// Redirects the projectile to move in a new given direction
+    /// </summary>
+    /// <param name="newVelocity">The new direction of the projectile</param>
     public void ChangeMoveDirection(Vector2 newVelocity)
     {
         projectile.linearVelocity = newVelocity * speed;

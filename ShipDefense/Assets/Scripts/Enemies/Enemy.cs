@@ -21,6 +21,9 @@ public class Enemy : MonoBehaviour
         if (currentFireTime >= fireRate) FireProjectile();
     }
 
+    /// <summary>
+    /// Fires a projectile in the enemy's current direction
+    /// </summary>
     private void FireProjectile()
     {
         currentFireTime = 0f;
@@ -30,6 +33,10 @@ public class Enemy : MonoBehaviour
         firedProjectile.ChangeMoveDirection(transform.right);
     }
 
+    /// <summary>
+    /// Damages this enemy by a given amount
+    /// </summary>
+    /// <param name="damage">The amount of damage to apply</param>
     public void DamageEnemy(int damage)
     {
         health -= damage;
@@ -37,6 +44,9 @@ public class Enemy : MonoBehaviour
         if (health <= 0) KillEnemy();
     }
 
+    /// <summary>
+    /// Causes the current enemy to die
+    /// </summary>
     private void KillEnemy()
     {
         Debug.Log("Enemy killed!");
