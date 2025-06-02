@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Collider2D playerHurtBox;
     [SerializeField] private Collider2D playerParryBox;
     [SerializeField] private WaveManager waveManager;
+    [SerializeField] private AudioSource audioSource;
 
     [Header("Movement Settings")]
     [SerializeField] private float movementSpeed;
@@ -28,6 +29,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private float attackDuration;
     [SerializeField] private float attackCooldown;
+
+    [Header("Sounds")]
+    [SerializeField] private AudioClip swordSwing;
 
     private Vector3 mousePosition;
     private Vector2 movementDirection;
@@ -110,6 +114,7 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Attacking!");
         //TODO delete this in the future
         playerHurtBox.transform.GetComponent<SpriteRenderer>().enabled = true;
+        PlaySound(swordSwing);
     }
 
     void FixedUpdate()
@@ -274,5 +279,15 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Player died!");
         Destroy(gameObject);
         waveManager.FailWave();
+    }
+
+    /// <summary>
+    /// Helper method for playing a given audio clip. Will likely be moved to separate utility class in the future.
+    /// </summary>
+    /// <param name="audio"></param>
+    private void PlaySound(AudioClip audio)
+    {
+        audioSource.pitch = Random.Range(0.8f, 1.2f);
+        audioSource.PlayOneShot(audio);
     }
 }
