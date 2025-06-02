@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Collider2D playerHitbox;
     [SerializeField] private Collider2D playerHurtBox;
     [SerializeField] private Collider2D playerParryBox;
+    [SerializeField] private WaveManager waveManager;
 
     [Header("Movement Settings")]
     [SerializeField] private float movementSpeed;
@@ -218,5 +219,7 @@ public class PlayerController : MonoBehaviour
     private void KillPlayer()
     {
         Debug.Log("Player died!");
+        Destroy(gameObject);
+        waveManager.FailWave();
     }
 }

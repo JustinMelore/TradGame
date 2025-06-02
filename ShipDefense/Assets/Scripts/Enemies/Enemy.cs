@@ -6,6 +6,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D enemy;
+    [SerializeField] private WaveManager waveManager;
 
     [Header("Enemy settings")]
     [SerializeField] private GameObject projectile;
@@ -39,6 +40,7 @@ public class Enemy : MonoBehaviour
     private void KillEnemy()
     {
         Debug.Log("Enemy killed!");
+        waveManager.DecrementEnemyCount();
         Destroy(gameObject);
     }
 }
