@@ -13,6 +13,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int health;
     [SerializeField] private float fireRate;
 
+    [Header("VFX")]
+    [SerializeField] private ParticleSystem enemyDamageParticles;
+
     private float currentFireTime;
 
     private void Update()
@@ -41,6 +44,7 @@ public class Enemy : MonoBehaviour
     {
         health -= damage;
         Debug.Log("Enemy damaged. New health is " + health);
+        Instantiate(enemyDamageParticles, transform.position, Quaternion.identity);
         if (health <= 0) KillEnemy();
     }
 

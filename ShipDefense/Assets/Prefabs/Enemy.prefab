@@ -107,6 +107,7 @@ MonoBehaviour:
   projectile: {fileID: 4874766230130804674, guid: 30b8d494ef7228c49855581d86363b36, type: 3}
   health: 10
   fireRate: 5
+  enemyDamageParticles: {fileID: 3352877640750334326, guid: 419faec969e95b0489372eb1b831e400, type: 3}
 --- !u!50 &679729310433279169
 Rigidbody2D:
   serializedVersion: 5
