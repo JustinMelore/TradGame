@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnParry()
     {
-        if (isParrying || parryOnCooldown) return;
+        if (isParrying || parryOnCooldown || isDodging || isAttacking) return;
         currentParryTime = 0f;
         isParrying = true;
         playerParryBox.enabled = true;
@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnAttack()
     {
-        if (isAttacking || attackOnCooldown) return;
+        if (isAttacking || attackOnCooldown || isDodging || isParrying) return;
         currentAttackTime = 0f;
         isAttacking = true;
         playerHurtBox.enabled = true;
