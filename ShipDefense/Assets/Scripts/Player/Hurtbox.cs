@@ -12,7 +12,26 @@ public class Hurtbox : MonoBehaviour
         if (gameObject.layer == LayerMask.NameToLayer("PlayerHurtbox"))
         {
 
-            collision.gameObject.GetComponent<Enemy>().DamageEnemy(transform.parent.parent.GetComponent<PlayerController>().GetAttackDamage());
+            if (gameObject.layer == LayerMask.NameToLayer("PlayerHurtbox"))
+            {
+                Enemy enemy = collision.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    PlayerController player = transform.parent?.parent?.GetComponent<PlayerController>();
+                    if (player != null)
+                    {
+                        enemy.DamageEnemy(player.GetAttackDamage());
+                    }
+                    else
+                    {
+                        Debug.LogWarning("PlayerController not found on Hurtbox parent.");
+                    }
+                }
+                else
+                {
+                    Debug.Log("Hurtbox hit something that is not an enemy: " + collision.name);
+                }
+            }
         }
     }
 }
