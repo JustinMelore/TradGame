@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Script to define enemy behavior. This script is mostly for testing purposes and will later be exchanged with more specific scripts for different enemy types
@@ -85,6 +86,7 @@ public class Enemy : MonoBehaviour
     private void KillEnemy()
     {
         Debug.Log("Enemy killed!");
+        Score.Instance.AddScore(10);
         waveManager.DecrementEnemyCount();
         Destroy(gameObject);
     }
