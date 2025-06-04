@@ -245,6 +245,7 @@ MonoBehaviour:
   damage: 10
   speed: 10
   parrySound: {fileID: 8300000, guid: 3600a0f19dbf0ad42876b028a41f77a5, type: 3}
+  parryVFX: {fileID: 2460324084387704818, guid: e145641c88d6f9244a555b1261050ac6, type: 3}
 --- !u!50 &1570716795210124184
 Rigidbody2D:
   serializedVersion: 5

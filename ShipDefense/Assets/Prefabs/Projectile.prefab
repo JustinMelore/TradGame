@@ -165,7 +165,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.68805, y: 0.55877, z: 0}
-  m_LocalScale: {x: 0.19018029, y: 0.19018029, z: 0.19018029}
+  m_LocalScale: {x: 0.38853833, y: 0.38853833, z: 0.38853833}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2673487869094823407}
@@ -243,8 +243,9 @@ MonoBehaviour:
   enemyCollider: {fileID: 4211730070289834402}
   playerCollider: {fileID: 8727368030161467179}
   damage: 5
-  speed: 10
+  speed: 7
   parrySound: {fileID: 8300000, guid: 3600a0f19dbf0ad42876b028a41f77a5, type: 3}
+  parryVFX: {fileID: 2460324084387704818, guid: e145641c88d6f9244a555b1261050ac6, type: 3}
 --- !u!50 &1570716795210124184
 Rigidbody2D:
   serializedVersion: 5

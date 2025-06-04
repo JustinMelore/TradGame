@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private float speed;
     [SerializeField] private AudioClip parrySound;
-
+    [SerializeField] private ParticleSystem parryVFX;
 
     private PlayerController player;
 
@@ -56,5 +56,9 @@ public class Projectile : MonoBehaviour
         playerCollider.enabled = true;
         ChangeMoveDirection(player.GetAttackDirection());
         AudioSource.PlayClipAtPoint(parrySound, transform.position);
+        if (parryVFX != null)
+        {
+            Instantiate(parryVFX, transform.position, Quaternion.identity);
+        }
     }
 }
