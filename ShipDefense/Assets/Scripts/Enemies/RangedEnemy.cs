@@ -21,8 +21,13 @@ public class RangedEnemy : Enemy
 
     private void FireProjectile()
     {
-        Vector3 projectileSpawnPosition = transform.position + transform.right * 2;
-        Projectile firedProjectile = Instantiate(projectile, projectileSpawnPosition, transform.rotation).GetComponent<Projectile>();
-        firedProjectile.ChangeMoveDirection(transform.right);
+        if (target == null) return;
+
+        Vector3 direction = (target.transform.position - transform.position).normalized;
+        Vector3 spawnOffset = direction * 0.5f; 
+
+        Vector3 projectileSpawnPosition = transform.position + spawnOffset;
+        Projectile firedProjectile = Instantiate(projectile, projectileSpawnPosition, Quaternion.identity).GetComponent<Projectile>();
+        firedProjectile.ChangeMoveDirection(direction);
     }
 }
