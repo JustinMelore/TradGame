@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float movementSpeed;
     [SerializeField] private float dodgeSpeed;
     [SerializeField] private float dodgeDistance;
+    [SerializeField] private float runSpeed;
 
     [Header("Player Stats Settings")]
     [SerializeField] private int health;
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour
     private bool attackOnCooldown;
     private float currentAttackTime;
     private float currentAttackCooldown;
+    private bool isRunning;
 
     private void Awake()
     {
@@ -117,17 +119,25 @@ public class PlayerController : MonoBehaviour
         PlaySound(swordSwing);
     }
 
+    private void OnRun()
+    {
+        isRunning = !isRunning;
+    }
     void FixedUpdate()
     {
         UpdateAttackDirection();
         if (!isDodging)
         {
-            player.linearVelocity = movementDirection * movementSpeed;
-        } else
+            float currentSpeed = isRunning ? runSpeed : movementSpeed;
+            player.linearVelocity = movementDirection * currentSpeed;
+
+        }
+        else
         {
             PerformDodge();
         }
-        if(isParrying)
+        
+        if (isParrying)
         {
             PerformParry();
         } else if(parryOnCooldown)
