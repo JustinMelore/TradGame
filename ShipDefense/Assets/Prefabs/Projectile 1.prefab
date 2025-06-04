@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 7058695053774276406}
   - component: {fileID: 1570716795210124184}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: Projectile 1
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -217,7 +217,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.31583333, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.14044952, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -242,7 +242,7 @@ MonoBehaviour:
   projectile: {fileID: 1570716795210124184}
   enemyCollider: {fileID: 4211730070289834402}
   playerCollider: {fileID: 8727368030161467179}
-  damage: 5
+  damage: 10
   speed: 10
   parrySound: {fileID: 8300000, guid: 3600a0f19dbf0ad42876b028a41f77a5, type: 3}
 --- !u!50 &1570716795210124184

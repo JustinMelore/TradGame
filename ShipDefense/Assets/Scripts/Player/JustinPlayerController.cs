@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField] private AudioClip swordSwing;
+    [SerializeField] private AudioClip parrySound;
 
     private Vector3 mousePosition;
     private Vector2 movementDirection;
@@ -102,6 +103,15 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Parrying!");
         //TODO delete this in the future
         playerParryBox.transform.GetComponent<SpriteRenderer>().enabled = true;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (playerParryBox.enabled && isParrying && collision.CompareTag("Projectile"))
+        {
+            PlaySound(parrySound);
+            Destroy(collision.gameObject); 
+            Debug.Log("Parry success!");
+        }
     }
 
     /// <summary>

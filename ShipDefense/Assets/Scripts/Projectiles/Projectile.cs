@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour
     [Header("Projectile Settings")]
     [SerializeField] private int damage;
     [SerializeField] private float speed;
+    [SerializeField] private AudioClip parrySound;
 
 
     private PlayerController player;
@@ -48,12 +49,12 @@ public class Projectile : MonoBehaviour
         }
             Destroy(gameObject);
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Player deflected projectile!");
         enemyCollider.enabled = false;
         playerCollider.enabled = true;
         ChangeMoveDirection(player.GetAttackDirection());
+        AudioSource.PlayClipAtPoint(parrySound, transform.position);
     }
 }
