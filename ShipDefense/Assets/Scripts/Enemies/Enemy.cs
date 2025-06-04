@@ -12,16 +12,47 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject projectile;
     [SerializeField] private int health;
     [SerializeField] private float fireRate;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float moveDistance;
+
+    private Vector2 startPos;
+    [SerializeField] private bool movingUp;
 
     [Header("VFX")]
     [SerializeField] private ParticleSystem enemyDamageParticles;
 
     private float currentFireTime;
 
+    private void Start()
+    {
+        startPos = transform.position;
+    }
     private void Update()
     {
         currentFireTime += Time.deltaTime;
         if (currentFireTime >= fireRate) FireProjectile();
+
+        Vector2 newPos = enemy.position;
+        if (movingUp)
+        {
+            newPos.y += moveSpeed * Time.deltaTime;
+            if (newPos.y >= startPos.y + moveDistance)
+            {
+                newPos.y = startPos.y + moveDistance;
+                movingUp = false;
+            }
+        }
+        else
+        {
+            newPos.y -= moveSpeed * Time.deltaTime;
+            if (newPos.y <= startPos.y - moveDistance)
+            {
+                newPos.y = startPos.y - moveDistance;
+                movingUp = true;
+            }
+        }
+
+        enemy.MovePosition(newPos);
     }
 
     /// <summary>
