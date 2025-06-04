@@ -17,7 +17,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected ParticleSystem enemyDamageParticles;
 
     protected float distance;
-
+    protected virtual void Awake()
+    {
+        gameObject.tag = "Enemy";
+    }
     protected virtual void Start()
     {
         

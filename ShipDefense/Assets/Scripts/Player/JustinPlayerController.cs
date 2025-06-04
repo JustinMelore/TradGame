@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        gameObject.tag = "Player";
         if (hurtbox == null)
             hurtbox = GetComponentInChildren<PlayerHurtbox>();
         if (parrybox == null)
