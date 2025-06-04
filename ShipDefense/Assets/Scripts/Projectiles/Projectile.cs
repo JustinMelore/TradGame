@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -46,7 +47,8 @@ public class Projectile : MonoBehaviour
             Debug.Log("Projectile hit enemy!");
             collided.GetComponent<Enemy>().DamageEnemy(damage);
         }
-            Destroy(gameObject);
+        
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -56,4 +58,17 @@ public class Projectile : MonoBehaviour
         playerCollider.enabled = true;
         ChangeMoveDirection(player.GetAttackDirection());
     }
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
+
+    internal void Reflect(Vector2 newDirection)
+    {
+        Debug.Log("Projectile reflected!");
+        enemyCollider.enabled = false;
+        playerCollider.enabled = true;
+        ChangeMoveDirection(newDirection);
+    }
 }
+

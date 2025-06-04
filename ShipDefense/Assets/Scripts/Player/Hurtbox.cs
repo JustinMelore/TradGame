@@ -3,35 +3,20 @@ using UnityEngine;
 /// <summary>
 /// Handles behavior for melee attack hurtboxes
 /// </summary>
-public class Hurtbox : MonoBehaviour
+public abstract class Hurtbox : MonoBehaviour
 {
-    //TODO Implement code for enemy
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("Hurtbox hit something");
-        if (gameObject.layer == LayerMask.NameToLayer("PlayerHurtbox"))
-        {
+    protected int damage;
 
-            if (gameObject.layer == LayerMask.NameToLayer("PlayerHurtbox"))
-            {
-                Enemy enemy = collision.GetComponent<Enemy>();
-                if (enemy != null)
-                {
-                    PlayerController player = transform.parent?.parent?.GetComponent<PlayerController>();
-                    if (player != null)
-                    {
-                        enemy.DamageEnemy(player.GetAttackDamage());
-                    }
-                    else
-                    {
-                        Debug.LogWarning("PlayerController not found on Hurtbox parent.");
-                    }
-                }
-                else
-                {
-                    Debug.Log("Hurtbox hit something that is not an enemy: " + collision.name);
-                }
-            }
-        }
+    public virtual void Activate(int dmg)
+    {
+        damage = dmg;
+        gameObject.SetActive(true);
     }
+
+    public virtual void Deactivate()
+    {
+        gameObject.SetActive(false);
+    }
+
+    protected abstract void OnTriggerEnter2D(Collider2D collision);
 }

@@ -10,8 +10,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D player;
     [SerializeField] private Transform attackDirection;
     [SerializeField] private Collider2D playerHitbox;
-    [SerializeField] private Collider2D playerHurtBox;
-    [SerializeField] private Collider2D playerParryBox;
+    [SerializeField] private PlayerHurtbox hurtbox;
+    [SerializeField] private PlayerParrybox parrybox;
     [SerializeField] private WaveManager waveManager;
     [SerializeField] private AudioSource audioSource;
 
@@ -52,8 +52,12 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        playerHurtBox.enabled = false;
-        playerParryBox.enabled = false;
+        if (hurtbox == null)
+            hurtbox = GetComponentInChildren<PlayerHurtbox>();
+        if (parrybox == null)
+            parrybox = GetComponentInChildren<PlayerParrybox>();
+        hurtbox.Deactivate();
+        parrybox.Deactivate();
     }
 
     /// <summary>
@@ -96,10 +100,7 @@ public class PlayerController : MonoBehaviour
         if (isParrying || parryOnCooldown || isDodging || isAttacking) return;
         currentParryTime = 0f;
         isParrying = true;
-        playerParryBox.enabled = true;
-        //Debug.Log("Parrying!");
-        //TODO delete this in the future
-        playerParryBox.transform.GetComponent<SpriteRenderer>().enabled = true;
+        parrybox.Activate(0);
     }
 
     /// <summary>
@@ -110,10 +111,7 @@ public class PlayerController : MonoBehaviour
         if (isAttacking || attackOnCooldown || isDodging || isParrying) return;
         currentAttackTime = 0f;
         isAttacking = true;
-        playerHurtBox.enabled = true;
-        //Debug.Log("Attacking!");
-        //TODO delete this in the future
-        playerHurtBox.transform.GetComponent<SpriteRenderer>().enabled = true;
+        hurtbox.Activate(damage);
         PlaySound(swordSwing);
     }
 
@@ -190,12 +188,9 @@ public class PlayerController : MonoBehaviour
         } else
         {
             isParrying = false;
-            playerParryBox.enabled = false;
+            parrybox.Deactivate();
             currentParryCooldown = 0f;
             parryOnCooldown = true;
-            //Debug.Log("Parry ended. Starting cooldown");
-            //TODO delete this in the future
-            playerParryBox.transform.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 
@@ -226,12 +221,9 @@ public class PlayerController : MonoBehaviour
         else
         {
             isAttacking = false;
-            playerHurtBox.enabled = false;
+            hurtbox.Deactivate();
             currentAttackCooldown = 0f;
             attackOnCooldown = true;
-            //Debug.Log("Attack ended. Starting cooldown");
-            //TODO delete this in the future
-            playerHurtBox.transform.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 
@@ -291,3 +283,4 @@ public class PlayerController : MonoBehaviour
         audioSource.PlayOneShot(audio);
     }
 }
+ 
