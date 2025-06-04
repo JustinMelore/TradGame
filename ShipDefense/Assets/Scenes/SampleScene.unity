@@ -368,6 +368,10 @@ PrefabInstance:
       value: Enemy (3)
       objectReference: {fileID: 0}
     - target: {fileID: 6525838437251021765, guid: 49468378e54518749befae4d84af22e3, type: 3}
+      propertyPath: fireRate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525838437251021765, guid: 49468378e54518749befae4d84af22e3, type: 3}
       propertyPath: movingUp
       value: 1
       objectReference: {fileID: 0}
@@ -728,6 +732,10 @@ PrefabInstance:
       value: Enemy (1)
       objectReference: {fileID: 0}
     - target: {fileID: 6525838437251021765, guid: 49468378e54518749befae4d84af22e3, type: 3}
+      propertyPath: fireRate
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525838437251021765, guid: 49468378e54518749befae4d84af22e3, type: 3}
       propertyPath: movingUp
       value: 0
       objectReference: {fileID: 0}
@@ -735,6 +743,10 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 6525838437251021765, guid: 49468378e54518749befae4d84af22e3, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 4874766230130804674, guid: 0701bf9707ffd02428210fba50291e9d, type: 3}
     - target: {fileID: 6525838437251021765, guid: 49468378e54518749befae4d84af22e3, type: 3}
       propertyPath: waveManager
       value: 
@@ -1469,6 +1481,10 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6525838437251021765, guid: 49468378e54518749befae4d84af22e3, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 4874766230130804674, guid: 0701bf9707ffd02428210fba50291e9d, type: 3}
+    - target: {fileID: 6525838437251021765, guid: 49468378e54518749befae4d84af22e3, type: 3}
       propertyPath: waveManager
       value: 
       objectReference: {fileID: 671327389}
@@ -1876,7 +1892,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5464889536035247992, guid: da71ff931c4b51a459b36e254aa5108b, type: 3}
       propertyPath: health
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5464889536035247992, guid: da71ff931c4b51a459b36e254aa5108b, type: 3}
       propertyPath: runSpeed
@@ -1886,6 +1902,10 @@ PrefabInstance:
       propertyPath: dodgeSpeed
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 5464889536035247992, guid: da71ff931c4b51a459b36e254aa5108b, type: 3}
+      propertyPath: parrySound
+      value: 
+      objectReference: {fileID: 8300000, guid: 3600a0f19dbf0ad42876b028a41f77a5, type: 3}
     - target: {fileID: 5464889536035247992, guid: da71ff931c4b51a459b36e254aa5108b, type: 3}
       propertyPath: waveManager
       value: 
