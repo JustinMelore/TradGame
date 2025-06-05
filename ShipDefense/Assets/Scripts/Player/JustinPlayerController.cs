@@ -21,7 +21,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dodgeDistance;
 
     [Header("Player Stats Settings")]
-    [SerializeField] private int health;
+    [SerializeField] private PlayerHealthUI healthUI;
+    [SerializeField] private int maxhealth;
 
     [Header("Combat Settings")]
     [SerializeField] private float parryDuration;
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField] private AudioClip swordSwing;
+    [SerializeField] private AudioClip DogeSound;
     [Header("VFX")]
     [SerializeField] private GameObject playerDamageVFX;
 
@@ -51,6 +53,7 @@ public class PlayerController : MonoBehaviour
     private bool attackOnCooldown;
     private float currentAttackTime;
     private float currentAttackCooldown;
+    private int health;
 
     private void Awake()
     {
@@ -59,6 +62,7 @@ public class PlayerController : MonoBehaviour
             hurtbox = GetComponentInChildren<PlayerHurtbox>();
         if (parrybox == null)
             parrybox = GetComponentInChildren<PlayerParrybox>();
+        health = maxhealth;
         hurtbox.Deactivate();
         parrybox.Deactivate();
     }
@@ -83,6 +87,7 @@ public class PlayerController : MonoBehaviour
         preDodgePosition = player.position;
         dodgeDirection = (movementDirection == Vector2.zero) ? new Vector2(1, 0) : movementDirection;
         playerHitbox.enabled = false;
+        PlaySound(DogeSound);
     }
 
     /// <summary>0        
@@ -278,7 +283,9 @@ public class PlayerController : MonoBehaviour
     public void DamagePlayer(int damage)
     {
         health -= damage;
-        Debug.Log("Player damage; new health: "+health);
+        health = Mathf.Clamp(health, 0, maxhealth); 
+        healthUI.SetHealth(health, maxhealth); 
+        Debug.Log("Player damage; new health: " + health);
         Instantiate(playerDamageVFX, transform.position, Quaternion.identity);
         if (health <= 0) KillPlayer();
     }

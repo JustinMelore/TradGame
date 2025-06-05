@@ -7,6 +7,12 @@ public class RangedEnemy : Enemy
 
     private float currentFireTime;
 
+    protected override void Start()
+    {
+        base.Start();
+        lastAttackTime = Time.time;
+    }
+
     protected override void Update()
     {
         base.Update();
