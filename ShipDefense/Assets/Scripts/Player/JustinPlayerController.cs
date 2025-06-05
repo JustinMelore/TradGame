@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField] private AudioClip swordSwing;
+    [Header("VFX")]
+    [SerializeField] private GameObject playerDamageVFX;
 
     private Vector3 mousePosition;
     private Vector2 movementDirection;
@@ -83,7 +85,7 @@ public class PlayerController : MonoBehaviour
         playerHitbox.enabled = false;
     }
 
-    /// <summary>
+    /// <summary>0        
     /// Triggers when the player moves their mouse
     /// </summary>
     /// <param name="input"></param>
@@ -167,16 +169,32 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void PerformDodge()
     {
-        if(currentDodgeDistance < dodgeDistance)
+        float step = dodgeSpeed * Time.fixedDeltaTime;
+        Vector2 currentPosition = player.position;
+        // Doge should not go over the Col
+        RaycastHit2D hit = Physics2D.Raycast(currentPosition, dodgeDirection, step, LayerMask.GetMask("Col"));
+
+        if (hit.collider != null)
         {
-            currentDodgeDistance = Vector2.Distance(player.position, preDodgePosition);
-            player.linearVelocity = dodgeDirection * dodgeSpeed;
-        } else
+            Vector2 stopPosition = hit.point - dodgeDirection * 0.1f; // small offset to avoid overlap
+            player.MovePosition(stopPosition);
+            isDodging = false;
+            playerHitbox.enabled = true;
+            player.linearVelocity = Vector2.zero;
+            return;
+        }
+        // regular dodge
+        currentDodgeDistance = Vector2.Distance(player.position, preDodgePosition);
+        player.linearVelocity = dodgeDirection * dodgeSpeed;
+
+        if (currentDodgeDistance >= dodgeDistance)
         {
             isDodging = false;
             playerHitbox.enabled = true;
+            player.linearVelocity = Vector2.zero;
         }
     }
+
 
     /// <summary>
     /// Determines when the parry ends and goes on cooldown
@@ -261,6 +279,7 @@ public class PlayerController : MonoBehaviour
     {
         health -= damage;
         Debug.Log("Player damage; new health: "+health);
+        Instantiate(playerDamageVFX, transform.position, Quaternion.identity);
         if (health <= 0) KillPlayer();
     }
 

@@ -11,7 +11,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected int health;
     [SerializeField] protected GameObject target;
     [SerializeField] protected float speed;
-
+    [SerializeField] protected float attackCooldown = 2f; 
+    protected float lastAttackTime;
 
     [Header("VFX")]
     [SerializeField] protected ParticleSystem enemyDamageParticles;

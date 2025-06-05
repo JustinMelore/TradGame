@@ -4,18 +4,17 @@ public class RangedEnemy : Enemy
 {
     [Header("Ranged Settings")]
     [SerializeField] private GameObject projectile;
-    [SerializeField] private float fireRate;
 
     private float currentFireTime;
 
     protected override void Update()
     {
         base.Update();
-        currentFireTime += Time.deltaTime;
-        if (currentFireTime >= fireRate)
+
+        if (target != null && Time.time - lastAttackTime >= attackCooldown)
         {
             FireProjectile();
-            currentFireTime = 0f;
+            lastAttackTime = Time.time;
         }
     }
 
@@ -24,7 +23,7 @@ public class RangedEnemy : Enemy
         if (target == null) return;
 
         Vector3 direction = (target.transform.position - transform.position).normalized;
-        Vector3 spawnOffset = direction * 0.5f; 
+        Vector3 spawnOffset = direction * 0.5f;
 
         Vector3 projectileSpawnPosition = transform.position + spawnOffset;
         Projectile firedProjectile = Instantiate(projectile, projectileSpawnPosition, Quaternion.identity).GetComponent<Projectile>();
