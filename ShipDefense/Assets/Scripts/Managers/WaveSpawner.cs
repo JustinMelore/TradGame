@@ -56,9 +56,10 @@ public class WaveSpawner : MonoBehaviour
         isSpawningWave = true;
         yield return new WaitForSeconds(waveDowntimeInterval);
         Debug.Log("Spawning wave");
+        HashSet<Vector3> takenSpawnPoints = new HashSet<Vector3>();
         currentWaveEnemyCount = enemyWaves[currentWaveIndex].BoatEnemyCount + enemyWaves[currentWaveIndex].SeaEnemyCount;
-        SpawnEnemies(enemyWaves[currentWaveIndex].BoatEnemyCount, enemyWaves[currentWaveIndex].BoatEnemies, shipSpawnLocations);
-        SpawnEnemies(enemyWaves[currentWaveIndex].SeaEnemyCount, enemyWaves[currentWaveIndex].SeaEnemies, seaSpawnLocations);
+        SpawnEnemies(enemyWaves[currentWaveIndex].BoatEnemyCount, enemyWaves[currentWaveIndex].BoatEnemies, shipSpawnLocations, takenSpawnPoints);
+        SpawnEnemies(enemyWaves[currentWaveIndex].SeaEnemyCount, enemyWaves[currentWaveIndex].SeaEnemies, seaSpawnLocations, takenSpawnPoints);
         isSpawningWave = false;
     }
 
@@ -83,14 +84,16 @@ public class WaveSpawner : MonoBehaviour
         return tilePositions;
     }
 
-    private void SpawnEnemies(int enemyCount, List<Tuple<GameObject, float>> availableEnemies, List<Vector3> spawnLocations)
+    private void SpawnEnemies(int enemyCount, List<Tuple<GameObject, float>> availableEnemies, List<Vector3> spawnLocations, HashSet<Vector3> takenLocations)
     {
         foreach(var availableEnemy in availableEnemies) {
             Debug.Log($"{availableEnemy.Item1} has a weight of {availableEnemy.Item2}: Total spawns should be {enemyCount * availableEnemy.Item2}");
             for(int i = 1; i < enemyCount * availableEnemy.Item2; i++)
             {
                 Vector3 spawnLocation = spawnLocations[UnityEngine.Random.Range(0, spawnLocations.Count - 1)];
+                while(takenLocations.Contains(spawnLocation)) spawnLocation = spawnLocations[UnityEngine.Random.Range(0, spawnLocations.Count - 1)];
                 Instantiate(availableEnemy.Item1, spawnLocation, Quaternion.identity);
+                takenLocations.Add(spawnLocation);
             }
         }
     }
