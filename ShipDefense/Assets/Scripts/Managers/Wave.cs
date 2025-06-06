@@ -46,20 +46,4 @@ public class Wave
             return seaEnemies;
         }
     }
-
-    /// <summary>
-    /// Creates a new enemy wave
-    /// </summary>
-    /// <param name="boatEnemyCount">How many enemies should spawn on the boat</param>
-    /// <param name="seaEnemyCount">How many enemies should spawn outside of the boat</param>
-    /// <param name="boatEnemies">The available enemy types that spawn on the boat plus the percentage of the boat enemy count they should make up</param>
-    /// <param name="seaEnemies">The available enemy types that spawn outside the boat plus the percentage of the sea enemy count they should make up</param>
-
-    //public Wave(int boatEnemyCount, int seaEnemyCount, List<Tuple<GameObject, float>> boatEnemies, List<Tuple<GameObject, float>> seaEnemies)
-    //{
-    //    BoatEnemyCount = boatEnemyCount;
-    //    SeaEnemyCount = seaEnemyCount;
-    //    BoatEnemies = boatEnemies;
-    //    SeaEnemies = seaEnemies;
-    //}
 }

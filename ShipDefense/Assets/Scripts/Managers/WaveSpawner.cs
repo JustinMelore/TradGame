@@ -51,6 +51,10 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Spawns the next wave of enemies after the waveDowntimeInterval expires
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator SpawnWave()
     {
         isSpawningWave = true;
@@ -72,6 +76,11 @@ public class WaveSpawner : MonoBehaviour
         Debug.Log("Enemy defeated. New enemy count: " + currentWaveEnemyCount);
     }
 
+    /// <summary>
+    /// Gets the world positions of all tiles in a given tilemap
+    /// </summary>
+    /// <param name="tileMap">The tilemap to get the tile positions from</param>
+    /// <returns>A list of all the world positions of each tile</returns>
     private List<Vector3> GetTilePositions(Tilemap tileMap)
     {
         List<Vector3> tilePositions = new List<Vector3>();
@@ -84,6 +93,13 @@ public class WaveSpawner : MonoBehaviour
         return tilePositions;
     }
 
+    /// <summary>
+    /// Spawns enemies from a list based on their spawn weight
+    /// </summary>
+    /// <param name="enemyCount">The total number of enemies to spawn</param>
+    /// <param name="availableEnemies">A list of all available enemy types</param>
+    /// <param name="spawnLocations">The list of all possible spawn locations</param>
+    /// <param name="takenLocations">A set containing spawn locations that are already in use</param>
     private void SpawnEnemies(int enemyCount, List<Tuple<GameObject, float>> availableEnemies, List<Vector3> spawnLocations, HashSet<Vector3> takenLocations)
     {
         foreach(var availableEnemy in availableEnemies) {
