@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -46,14 +47,32 @@ public class Projectile : MonoBehaviour
             Debug.Log("Projectile hit enemy!");
             collided.GetComponent<Enemy>().DamageEnemy(damage);
         }
-            Destroy(gameObject);
+        
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Player deflected projectile!");
+        if (collision.CompareTag("PlayerParryTag"))
+        {
+            Debug.Log("Player deflected projectile!");
+            enemyCollider.enabled = false;
+            playerCollider.enabled = true;
+            ChangeMoveDirection(player.GetAttackDirection());
+
+        }
+    }
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
+
+    internal void Reflect(Vector2 newDirection)
+    {
+        Debug.Log("Projectile reflected!");
         enemyCollider.enabled = false;
         playerCollider.enabled = true;
-        ChangeMoveDirection(player.GetAttackDirection());
+        ChangeMoveDirection(newDirection);
     }
 }
+

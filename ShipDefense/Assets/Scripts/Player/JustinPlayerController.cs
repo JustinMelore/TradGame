@@ -10,8 +10,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D player;
     [SerializeField] private Transform attackDirection;
     [SerializeField] private Collider2D playerHitbox;
-    [SerializeField] private Collider2D playerHurtBox;
-    [SerializeField] private Collider2D playerParryBox;
+    [SerializeField] private PlayerHurtbox hurtbox;
+    [SerializeField] private PlayerParrybox parrybox;
     [SerializeField] private WaveManager waveManager;
     [SerializeField] private AudioSource audioSource;
 
@@ -21,7 +21,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dodgeDistance;
 
     [Header("Player Stats Settings")]
-    [SerializeField] private int health;
+    [SerializeField] private PlayerHealthUI healthUI;
+    [SerializeField] private int maxhealth;
 
     [Header("Combat Settings")]
     [SerializeField] private float parryDuration;
@@ -32,6 +33,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField] private AudioClip swordSwing;
+    [SerializeField] private AudioClip DogeSound;
+    [Header("VFX")]
+    [SerializeField] private GameObject playerDamageVFX;
 
     private Vector3 mousePosition;
     private Vector2 movementDirection;
@@ -49,11 +53,18 @@ public class PlayerController : MonoBehaviour
     private bool attackOnCooldown;
     private float currentAttackTime;
     private float currentAttackCooldown;
+    private int health;
 
     private void Awake()
     {
-        playerHurtBox.enabled = false;
-        playerParryBox.enabled = false;
+        gameObject.tag = "Player";
+        if (hurtbox == null)
+            hurtbox = GetComponentInChildren<PlayerHurtbox>();
+        if (parrybox == null)
+            parrybox = GetComponentInChildren<PlayerParrybox>();
+        health = maxhealth;
+        hurtbox.Deactivate();
+        parrybox.Deactivate();
     }
 
     /// <summary>
@@ -76,9 +87,10 @@ public class PlayerController : MonoBehaviour
         preDodgePosition = player.position;
         dodgeDirection = (movementDirection == Vector2.zero) ? new Vector2(1, 0) : movementDirection;
         playerHitbox.enabled = false;
+        PlaySound(DogeSound);
     }
 
-    /// <summary>
+    /// <summary>0        
     /// Triggers when the player moves their mouse
     /// </summary>
     /// <param name="input"></param>
@@ -96,10 +108,7 @@ public class PlayerController : MonoBehaviour
         if (isParrying || parryOnCooldown || isDodging || isAttacking) return;
         currentParryTime = 0f;
         isParrying = true;
-        playerParryBox.enabled = true;
-        //Debug.Log("Parrying!");
-        //TODO delete this in the future
-        playerParryBox.transform.GetComponent<SpriteRenderer>().enabled = true;
+        parrybox.Activate(0);
     }
 
     /// <summary>
@@ -110,10 +119,7 @@ public class PlayerController : MonoBehaviour
         if (isAttacking || attackOnCooldown || isDodging || isParrying) return;
         currentAttackTime = 0f;
         isAttacking = true;
-        playerHurtBox.enabled = true;
-        //Debug.Log("Attacking!");
-        //TODO delete this in the future
-        playerHurtBox.transform.GetComponent<SpriteRenderer>().enabled = true;
+        hurtbox.Activate(damage);
         PlaySound(swordSwing);
     }
 
@@ -168,16 +174,32 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void PerformDodge()
     {
-        if(currentDodgeDistance < dodgeDistance)
+        float step = dodgeSpeed * Time.fixedDeltaTime;
+        Vector2 currentPosition = player.position;
+        // Doge should not go over the Col
+        RaycastHit2D hit = Physics2D.Raycast(currentPosition, dodgeDirection, step, LayerMask.GetMask("Col"));
+
+        if (hit.collider != null)
         {
-            currentDodgeDistance = Vector2.Distance(player.position, preDodgePosition);
-            player.linearVelocity = dodgeDirection * dodgeSpeed;
-        } else
+            Vector2 stopPosition = hit.point - dodgeDirection * 0.1f; // small offset to avoid overlap
+            player.MovePosition(stopPosition);
+            isDodging = false;
+            playerHitbox.enabled = true;
+            player.linearVelocity = Vector2.zero;
+            return;
+        }
+        // regular dodge
+        currentDodgeDistance = Vector2.Distance(player.position, preDodgePosition);
+        player.linearVelocity = dodgeDirection * dodgeSpeed;
+
+        if (currentDodgeDistance >= dodgeDistance)
         {
             isDodging = false;
             playerHitbox.enabled = true;
+            player.linearVelocity = Vector2.zero;
         }
     }
+
 
     /// <summary>
     /// Determines when the parry ends and goes on cooldown
@@ -190,12 +212,9 @@ public class PlayerController : MonoBehaviour
         } else
         {
             isParrying = false;
-            playerParryBox.enabled = false;
+            parrybox.Deactivate();
             currentParryCooldown = 0f;
             parryOnCooldown = true;
-            //Debug.Log("Parry ended. Starting cooldown");
-            //TODO delete this in the future
-            playerParryBox.transform.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 
@@ -226,12 +245,9 @@ public class PlayerController : MonoBehaviour
         else
         {
             isAttacking = false;
-            playerHurtBox.enabled = false;
+            hurtbox.Deactivate();
             currentAttackCooldown = 0f;
             attackOnCooldown = true;
-            //Debug.Log("Attack ended. Starting cooldown");
-            //TODO delete this in the future
-            playerHurtBox.transform.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 
@@ -267,7 +283,10 @@ public class PlayerController : MonoBehaviour
     public void DamagePlayer(int damage)
     {
         health -= damage;
-        Debug.Log("Player damage; new health: "+health);
+        health = Mathf.Clamp(health, 0, maxhealth); 
+        healthUI.SetHealth(health, maxhealth); 
+        Debug.Log("Player damage; new health: " + health);
+        Instantiate(playerDamageVFX, transform.position, Quaternion.identity);
         if (health <= 0) KillPlayer();
     }
 
@@ -291,3 +310,4 @@ public class PlayerController : MonoBehaviour
         audioSource.PlayOneShot(audio);
     }
 }
+ 

@@ -1,57 +1,60 @@
 using UnityEngine;
-
 /// <summary>
 /// Script to define enemy behavior. This script is mostly for testing purposes and will later be exchanged with more specific scripts for different enemy types
 /// </summary>
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D enemy;
-    [SerializeField] private WaveManager waveManager;
+    [SerializeField] protected Rigidbody2D enemy;
+    [SerializeField] protected WaveManager waveManager;
 
-    [Header("Enemy settings")]
-    [SerializeField] private GameObject projectile;
-    [SerializeField] private int health;
-    [SerializeField] private float fireRate;
+    [Header("Common Enemy settings")]
+    [SerializeField] protected int health;
+    [SerializeField] protected GameObject target;
+    [SerializeField] protected float speed;
+    [SerializeField] protected float attackCooldown = 2f; 
+    protected float lastAttackTime;
 
     [Header("VFX")]
-    [SerializeField] private ParticleSystem enemyDamageParticles;
+    [SerializeField] protected ParticleSystem enemyDamageParticles;
 
-    private float currentFireTime;
-
-    private void Update()
+    protected float distance;
+    protected virtual void Awake()
     {
-        currentFireTime += Time.deltaTime;
-        if (currentFireTime >= fireRate) FireProjectile();
+        gameObject.tag = "Enemy";
+    }
+    protected virtual void Start()
+    {
+        
+    }
+    protected virtual void Update()
+    {
+        Chaser();
     }
 
-    /// <summary>
-    /// Fires a projectile in the enemy's current direction
-    /// </summary>
-    private void FireProjectile()
+    protected virtual void Chaser()
     {
-        currentFireTime = 0f;
-        Vector3 projectileSpawnPosition = transform.position + transform.right * 2;
-        Projectile firedProjectile = Instantiate(projectile, new Vector2(projectileSpawnPosition.x, projectileSpawnPosition.y), transform.rotation).GetComponent<Projectile>();
-        //firedProjectile.Owner = gameObject;
-        firedProjectile.ChangeMoveDirection(transform.right);
+        if (target)
+        {
+            distance = Vector2.Distance(transform.position, target.transform.position);
+            Vector2 direction = target.transform.position - transform.position;
+            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+        }
     }
-
     /// <summary>
     /// Damages this enemy by a given amount
     /// </summary>
     /// <param name="damage">The amount of damage to apply</param>
-    public void DamageEnemy(int damage)
+    public virtual void DamageEnemy(int damage)
     {
         health -= damage;
         Debug.Log("Enemy damaged. New health is " + health);
         Instantiate(enemyDamageParticles, transform.position, Quaternion.identity);
         if (health <= 0) KillEnemy();
     }
-
     /// <summary>
     /// Causes the current enemy to die
     /// </summary>
-    private void KillEnemy()
+    protected virtual void KillEnemy()
     {
         Debug.Log("Enemy killed!");
         waveManager.DecrementEnemyCount();
