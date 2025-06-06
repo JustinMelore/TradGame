@@ -3715,6 +3715,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a50b2d0fcb496d840a6cb6a9c3bb2f9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyWaves:
+  - boatEnemyCount: 5
+    seaEnemyCount: 0
+    boatEnemyTypes:
+    - {fileID: 4183514784179678787, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
+    - {fileID: 1053278187521713555, guid: aac2f8425516e2b4d8048738fb3cab63, type: 3}
+    boatEnemyWeights:
+    - 0.6
+    - 0.4
+    seaEnemyTypes: []
+    seaEnemyWeights: []
   waveDowntimeInterval: 5
   shipTiles: {fileID: 309163759}
   seaTiles: {fileID: 220705020}

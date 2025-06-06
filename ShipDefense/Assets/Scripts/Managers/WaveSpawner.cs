@@ -23,11 +23,13 @@ public class WaveSpawner : MonoBehaviour
     private List<Vector3> seaSpawnLocations;
     private bool wavesRemaining;
     private int currentWaveEnemyCount;
+    private bool isSpawningWave;
 
     private void Awake()
     {
         currentWaveIndex = -1;
         wavesRemaining = true;
+        isSpawningWave = false;
         shipSpawnLocations = GetTilePositions(shipTiles);
         seaSpawnLocations = GetTilePositions(seaTiles);
     }
@@ -35,7 +37,7 @@ public class WaveSpawner : MonoBehaviour
     private void Update()
     {
         if (!wavesRemaining) return;
-        if (currentWaveEnemyCount <= 0)
+        if (currentWaveEnemyCount <= 0 && !isSpawningWave)
         {
             Debug.Log("Enemy wave defeated");
             currentWaveIndex++;
@@ -51,11 +53,13 @@ public class WaveSpawner : MonoBehaviour
 
     private IEnumerator SpawnWave()
     {
+        isSpawningWave = true;
         yield return new WaitForSeconds(waveDowntimeInterval);
         Debug.Log("Spawning wave");
         currentWaveEnemyCount = enemyWaves[currentWaveIndex].BoatEnemyCount + enemyWaves[currentWaveIndex].SeaEnemyCount;
         SpawnEnemies(enemyWaves[currentWaveIndex].BoatEnemyCount, enemyWaves[currentWaveIndex].BoatEnemies, shipSpawnLocations);
         SpawnEnemies(enemyWaves[currentWaveIndex].SeaEnemyCount, enemyWaves[currentWaveIndex].SeaEnemies, seaSpawnLocations);
+        isSpawningWave = false;
     }
 
     /// <summary>
@@ -82,7 +86,8 @@ public class WaveSpawner : MonoBehaviour
     private void SpawnEnemies(int enemyCount, List<Tuple<GameObject, float>> availableEnemies, List<Vector3> spawnLocations)
     {
         foreach(var availableEnemy in availableEnemies) {
-            for(int i = 0; i < enemyCount * availableEnemy.Item2; i++)
+            Debug.Log($"{availableEnemy.Item1} has a weight of {availableEnemy.Item2}: Total spawns should be {enemyCount * availableEnemy.Item2}");
+            for(int i = 1; i < enemyCount * availableEnemy.Item2; i++)
             {
                 Vector3 spawnLocation = spawnLocations[UnityEngine.Random.Range(0, spawnLocations.Count - 1)];
                 Instantiate(availableEnemy.Item1, spawnLocation, Quaternion.identity);
