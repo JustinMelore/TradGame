@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] protected Rigidbody2D enemy;
-    [SerializeField] protected WaveManager waveManager;
+    protected WaveSpawner waveSpawner;
 
     [Header("Common Enemy settings")]
     [SerializeField] protected int health;
@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     protected virtual void Awake()
     {
         gameObject.tag = "Enemy";
+        waveSpawner = FindFirstObjectByType<WaveSpawner>();
     }
     protected virtual void Start()
     {
@@ -57,7 +58,7 @@ public class Enemy : MonoBehaviour
     protected virtual void KillEnemy()
     {
         Debug.Log("Enemy killed!");
-        waveManager.DecrementEnemyCount();
+        waveSpawner.DecrementEnemyCount();
         Destroy(gameObject);
     }
 }
