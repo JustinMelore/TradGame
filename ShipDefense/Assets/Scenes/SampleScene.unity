@@ -3716,14 +3716,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyWaves:
-  - boatEnemyCount: 5
+  - boatEnemyCount: 8
     seaEnemyCount: 0
     boatEnemyTypes:
     - {fileID: 4183514784179678787, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
     - {fileID: 1053278187521713555, guid: aac2f8425516e2b4d8048738fb3cab63, type: 3}
     boatEnemyWeights:
-    - 0.6
-    - 0.4
+    - 0.875
+    - 0.125
+    seaEnemyTypes: []
+    seaEnemyWeights: []
+  - boatEnemyCount: 8
+    seaEnemyCount: 0
+    boatEnemyTypes:
+    - {fileID: 4183514784179678787, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
+    - {fileID: 1053278187521713555, guid: aac2f8425516e2b4d8048738fb3cab63, type: 3}
+    boatEnemyWeights:
+    - 0.875
+    - 0.125
     seaEnemyTypes: []
     seaEnemyWeights: []
   waveDowntimeInterval: 5

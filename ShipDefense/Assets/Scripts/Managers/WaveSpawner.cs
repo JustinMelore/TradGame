@@ -103,9 +103,11 @@ public class WaveSpawner : MonoBehaviour
     private void SpawnEnemies(int enemyCount, List<Tuple<GameObject, float>> availableEnemies, List<Vector3> spawnLocations, HashSet<Vector3> takenLocations)
     {
         foreach(var availableEnemy in availableEnemies) {
-            Debug.Log($"{availableEnemy.Item1} has a weight of {availableEnemy.Item2}: Total spawns should be {enemyCount * availableEnemy.Item2}");
-            for(int i = 1; i < enemyCount * availableEnemy.Item2; i++)
+            //Debug.Log($"{availableEnemy.Item1} has a weight of {availableEnemy.Item2}: Total spawns should be {enemyCount * availableEnemy.Item2}");
+            Debug.Log($"{enemyCount * availableEnemy.Item2}");
+            for(int i = 0; i < enemyCount * availableEnemy.Item2; i++)
             {
+                Debug.Log($"{i} < {enemyCount * availableEnemy.Item2}: {i < enemyCount * availableEnemy.Item2}");
                 Vector3 spawnLocation = spawnLocations[UnityEngine.Random.Range(0, spawnLocations.Count - 1)];
                 while(takenLocations.Contains(spawnLocation)) spawnLocation = spawnLocations[UnityEngine.Random.Range(0, spawnLocations.Count - 1)];
                 Instantiate(availableEnemy.Item1, spawnLocation, Quaternion.identity);
