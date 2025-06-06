@@ -53,10 +53,14 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Player deflected projectile!");
-        enemyCollider.enabled = false;
-        playerCollider.enabled = true;
-        ChangeMoveDirection(player.GetAttackDirection());
+        if (collision.CompareTag("PlayerParryTag"))
+        {
+            Debug.Log("Player deflected projectile!");
+            enemyCollider.enabled = false;
+            playerCollider.enabled = true;
+            ChangeMoveDirection(player.GetAttackDirection());
+
+        }
     }
     private void OnBecameInvisible()
     {
