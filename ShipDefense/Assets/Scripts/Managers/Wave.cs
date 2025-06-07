@@ -9,40 +9,40 @@ using UnityEngine;
 /// </summary>
 public class Wave
 {
-    [SerializeField] private int boatEnemyCount;
-    [SerializeField] private int seaEnemyCount;
+    [SerializeField] private int boatEnemyPoints;
+    [SerializeField] private int seaEnemyPoints;
     [SerializeField] private List<GameObject> boatEnemyTypes;
-    [SerializeField] private List<float> boatEnemyWeights;
+    [SerializeField] private List<int> boatEnemyCosts;
     [SerializeField] private List<GameObject> seaEnemyTypes;
-    [SerializeField] private List<float> seaEnemyWeights;
+    [SerializeField] private List<int> seaEnemyCosts;
 
     /// <summary>
-    /// The number of enemies that spawn on the ship
+    /// The total amount of points available to "spend" on boat enemies for this wave
     /// </summary>
-    public int BoatEnemyCount { get { return boatEnemyCount; } private set { boatEnemyCount = value; } }
+    public int BoatEnemyCount { get { return boatEnemyPoints; } private set { boatEnemyPoints = value; } }
 
     /// <summary>
-    /// The number of enemies that spawn outside the ship
+    /// The total amount of points available to "spend" on sea enemies for this wave
     /// </summary>
-    public int SeaEnemyCount { get { return seaEnemyCount; } private set { seaEnemyCount = value; } }
+    public int SeaEnemyCount { get { return seaEnemyPoints; } private set { seaEnemyPoints = value; } }
 
     /// <summary>
-    /// The list of available ship enemies, including what percentage of the boat enemy count they should make up
+    /// The list of available ship enemies, including the cost of each enemy
     /// </summary>
-    public List<Tuple<GameObject, float>> BoatEnemies { 
+    public List<Tuple<GameObject, int>> BoatEnemies { 
         get {
-            List<Tuple<GameObject, float>> boatEnemies = new List<Tuple<GameObject, float>>();
-            for (int i = 0; i < boatEnemyTypes.Count; i++) boatEnemies.Add(new Tuple<GameObject, float>(boatEnemyTypes[i], boatEnemyWeights[i]));
+            List<Tuple<GameObject, int>> boatEnemies = new List<Tuple<GameObject, int>>();
+            for (int i = 0; i < boatEnemyTypes.Count; i++) boatEnemies.Add(new Tuple<GameObject, int>(boatEnemyTypes[i], boatEnemyCosts[i]));
             return boatEnemies;
         }}
 
     /// <summary>
-    /// The list of available sea enemies, including what percentage of the sea enemy count they should make up
+    /// The list of available sea enemies, including the cost of each enemy
     /// </summary>
-    public List<Tuple<GameObject, float>> SeaEnemies { 
+    public List<Tuple<GameObject, int>> SeaEnemies { 
         get {
-            List<Tuple<GameObject, float>> seaEnemies = new List<Tuple<GameObject, float>>();
-            for (int i = 0; i < seaEnemyTypes.Count; i++) seaEnemies.Add(new Tuple<GameObject, float>(seaEnemyTypes[i], seaEnemyWeights[i]));
+            List<Tuple<GameObject, int>> seaEnemies = new List<Tuple<GameObject, int>>();
+            for (int i = 0; i < seaEnemyTypes.Count; i++) seaEnemies.Add(new Tuple<GameObject, int>(seaEnemyTypes[i], seaEnemyCosts[i]));
             return seaEnemies;
         }
     }

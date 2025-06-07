@@ -61,7 +61,7 @@ public class WaveSpawner : MonoBehaviour
         yield return new WaitForSeconds(waveDowntimeInterval);
         Debug.Log("Spawning wave");
         HashSet<Vector3> takenSpawnPoints = new HashSet<Vector3>();
-        currentWaveEnemyCount = enemyWaves[currentWaveIndex].BoatEnemyCount + enemyWaves[currentWaveIndex].SeaEnemyCount;
+        //currentWaveEnemyCount = enemyWaves[currentWaveIndex].BoatEnemyCount + enemyWaves[currentWaveIndex].SeaEnemyCount;
         SpawnEnemies(enemyWaves[currentWaveIndex].BoatEnemyCount, enemyWaves[currentWaveIndex].BoatEnemies, shipSpawnLocations, takenSpawnPoints);
         SpawnEnemies(enemyWaves[currentWaveIndex].SeaEnemyCount, enemyWaves[currentWaveIndex].SeaEnemies, seaSpawnLocations, takenSpawnPoints);
         isSpawningWave = false;
@@ -96,23 +96,37 @@ public class WaveSpawner : MonoBehaviour
     /// <summary>
     /// Spawns enemies from a list based on their spawn weight
     /// </summary>
-    /// <param name="enemyCount">The total number of enemies to spawn</param>
-    /// <param name="availableEnemies">A list of all available enemy types</param>
+    /// <param name="enemyPoints">The amount of points available to spend on enemy units</param>
+    /// <param name="availableEnemies">A list of all available enemy types, including their point cost</param>
     /// <param name="spawnLocations">The list of all possible spawn locations</param>
     /// <param name="takenLocations">A set containing spawn locations that are already in use</param>
-    private void SpawnEnemies(int enemyCount, List<Tuple<GameObject, float>> availableEnemies, List<Vector3> spawnLocations, HashSet<Vector3> takenLocations)
+    private void SpawnEnemies(int enemyPoints, List<Tuple<GameObject, int>> availableEnemies, List<Vector3> spawnLocations, HashSet<Vector3> takenLocations)
     {
-        foreach(var availableEnemy in availableEnemies) {
-            //Debug.Log($"{availableEnemy.Item1} has a weight of {availableEnemy.Item2}: Total spawns should be {enemyCount * availableEnemy.Item2}");
-            Debug.Log($"{enemyCount * availableEnemy.Item2}");
-            for(int i = 0; i < enemyCount * availableEnemy.Item2; i++)
-            {
-                Debug.Log($"{i} < {enemyCount * availableEnemy.Item2}: {i < enemyCount * availableEnemy.Item2}");
-                Vector3 spawnLocation = spawnLocations[UnityEngine.Random.Range(0, spawnLocations.Count - 1)];
-                while(takenLocations.Contains(spawnLocation)) spawnLocation = spawnLocations[UnityEngine.Random.Range(0, spawnLocations.Count - 1)];
-                Instantiate(availableEnemy.Item1, spawnLocation, Quaternion.identity);
-                takenLocations.Add(spawnLocation);
-            }
+        //foreach (var availableEnemy in availableEnemies)
+        //{
+        //    //Debug.Log($"{availableEnemy.Item1} has a weight of {availableEnemy.Item2}: Total spawns should be {enemyCount * availableEnemy.Item2}");
+        //    Debug.Log($"{enemyCount * availableEnemy.Item2}");
+        //    for (int i = 0; i < enemyCount * availableEnemy.Item2; i++)
+        //    {
+        //        Debug.Log($"{i} < {enemyCount * availableEnemy.Item2}: {i < enemyCount * availableEnemy.Item2}");
+        //        Vector3 spawnLocation = spawnLocations[UnityEngine.Random.Range(0, spawnLocations.Count - 1)];
+        //        while (takenLocations.Contains(spawnLocation)) spawnLocation = spawnLocations[UnityEngine.Random.Range(0, spawnLocations.Count - 1)];
+        //        Instantiate(availableEnemy.Item1, spawnLocation, Quaternion.identity);
+        //        takenLocations.Add(spawnLocation);
+        //    }
+        //}
+
+        while (enemyPoints > 0)
+        {
+            Vector3 spawnLocation = spawnLocations[UnityEngine.Random.Range(0, spawnLocations.Count - 1)];
+            while (takenLocations.Contains(spawnLocation)) spawnLocation = spawnLocations[UnityEngine.Random.Range(0, spawnLocations.Count - 1)];
+            takenLocations.Add(spawnLocation);
+            Tuple<GameObject, int> chosenEnemyType = availableEnemies[UnityEngine.Random.Range(0, availableEnemies.Count)];
+            while(enemyPoints - chosenEnemyType.Item2 < 0) chosenEnemyType = availableEnemies[UnityEngine.Random.Range(0, availableEnemies.Count - 1)];
+            Instantiate(chosenEnemyType.Item1, spawnLocation, Quaternion.identity);
+            enemyPoints -= chosenEnemyType.Item2;
+            currentWaveEnemyCount++;
+            //Debug.Log($"Spawning {chosenEnemyType.Item1}");
         }
     }
 }
