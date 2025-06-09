@@ -178,7 +178,6 @@ public class PlayerController : MonoBehaviour
         Vector2 currentPosition = player.position;
         // Doge should not go over the Col
         RaycastHit2D hit = Physics2D.Raycast(currentPosition, dodgeDirection, step, LayerMask.GetMask("Col"));
-
         if (hit.collider != null)
         {
             Vector2 stopPosition = hit.point - dodgeDirection * 0.1f; // small offset to avoid overlap
