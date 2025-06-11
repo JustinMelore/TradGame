@@ -40,4 +40,12 @@ public class GameOverScreen : MonoBehaviour
         gameObject.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    /// <summary>
+    /// Quits the level and returns the player to the main menu on hitting the "Quit" button
+    /// </summary>
+    public void OnQuitLevel()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }
