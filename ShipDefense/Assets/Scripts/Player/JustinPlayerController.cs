@@ -63,6 +63,18 @@ public class PlayerController : MonoBehaviour
         if (parrybox == null)
             parrybox = GetComponentInChildren<PlayerParrybox>();
         health = maxhealth;
+        if (healthUI == null)
+        {
+            GameObject uiObject = GameObject.FindWithTag("PlayerHealthBar");
+            if (uiObject != null)
+            {
+                healthUI = uiObject.GetComponent<PlayerHealthUI>();
+            }
+            else
+            {
+                Debug.LogWarning("PlayerHealthUI not found in scene. Make sure it is tagged correctly.");
+            }
+        }
         hurtbox.Deactivate();
         parrybox.Deactivate();
     }
@@ -176,11 +188,12 @@ public class PlayerController : MonoBehaviour
     {
         float step = dodgeSpeed * Time.fixedDeltaTime;
         Vector2 currentPosition = player.position;
+        float predictedDistance = dodgeDistance - currentDodgeDistance;
         // Doge should not go over the Col
-        RaycastHit2D hit = Physics2D.Raycast(currentPosition, dodgeDirection, step, LayerMask.GetMask("Col"));
+        RaycastHit2D hit = Physics2D.Raycast(currentPosition, dodgeDirection, predictedDistance, LayerMask.GetMask("Col"));
         if (hit.collider != null)
         {
-            Vector2 stopPosition = hit.point - dodgeDirection * 0.1f; // small offset to avoid overlap
+            Vector2 stopPosition = currentPosition; // small offset to avoid overlap
             player.MovePosition(stopPosition);
             isDodging = false;
             playerHitbox.enabled = true;

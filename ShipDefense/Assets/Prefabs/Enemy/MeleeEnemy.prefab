@@ -179,7 +179,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 877f7b812c42ff9449ae142e600baaf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerDamageVFX: {fileID: 8038313975001508686, guid: 660777c0547ae5c4b8c3e0349ed58b0c, type: 3}
 --- !u!1 &4183514784179678787
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,7 +194,7 @@ GameObject:
   - component: {fileID: 6744393726137937865}
   m_Layer: 7
   m_Name: MeleeEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -357,14 +356,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 3499446583932511021}
-  waveManager: {fileID: 0}
   health: 10
   target: {fileID: 0}
   speed: 1
   attackCooldown: 2
   enemyDamageParticles: {fileID: 3352877640750334326, guid: 419faec969e95b0489372eb1b831e400, type: 3}
-  attackRange: 6
-  meleeDamage: 1
+  attackRange: 2
+  meleeDamage: 5
   hurtbox: {fileID: 6657450396415278253}
   attackDirection: {fileID: 7918703361646121497}
   attackDuration: 0.3

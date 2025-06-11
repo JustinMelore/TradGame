@@ -25,9 +25,13 @@ public class Enemy : MonoBehaviour
     }
     protected virtual void Start()
     {
-        
+        target = GameObject.FindGameObjectWithTag("Player");
     }
     protected virtual void Update()
+    {
+        Chaser();
+    }
+    protected virtual void FixedUpdate()
     {
         Chaser();
     }

@@ -87,7 +87,7 @@ public class WaveSpawner : MonoBehaviour
         foreach(var position in tileMap.cellBounds.allPositionsWithin)
         {
             Vector3Int cellPos = new Vector3Int(position.x, position.y, position.z);
-            Vector3 worldPos = tileMap.CellToWorld(cellPos);
+            Vector3 worldPos = tileMap.GetCellCenterWorld(cellPos);
             if (tileMap.HasTile(cellPos)) tilePositions.Add(worldPos);
         }
         return tilePositions;
