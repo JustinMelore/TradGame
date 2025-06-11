@@ -20,9 +20,9 @@ TagManager:
   - PlayerParry
   - EnemyHurtbox
   - PlayerProjectile
-  - Ground
   - Col
-  - 
+  - Ground
+  - Background
   - 
   - 
   - 
@@ -42,6 +42,15 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Col
+    uniqueID: 2450587143
+    locked: 0
+  - name: Ground
+    uniqueID: 1158309339
+    locked: 0
+  - name: Background
+    uniqueID: 2004500893
     locked: 0
   m_RenderingLayers:
   - Default

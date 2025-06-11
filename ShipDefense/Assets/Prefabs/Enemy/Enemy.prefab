@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 178379768298621229}
   m_Layer: 7
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,10 +103,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 679729310433279169}
-  waveManager: {fileID: 0}
-  projectile: {fileID: 4874766230130804674, guid: 30b8d494ef7228c49855581d86363b36, type: 3}
   health: 10
-  fireRate: 5
+  target: {fileID: 0}
+  speed: 0
+  attackCooldown: 2
   enemyDamageParticles: {fileID: 3352877640750334326, guid: 419faec969e95b0489372eb1b831e400, type: 3}
 --- !u!50 &679729310433279169
 Rigidbody2D:
