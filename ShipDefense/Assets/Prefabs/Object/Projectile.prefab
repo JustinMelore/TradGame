@@ -242,7 +242,7 @@ MonoBehaviour:
   projectile: {fileID: 1570716795210124184}
   enemyCollider: {fileID: 4211730070289834402}
   playerCollider: {fileID: 8727368030161467179}
-  damage: 10
+  damage: 5
   speed: 8
 --- !u!50 &1570716795210124184
 Rigidbody2D:

@@ -362,7 +362,7 @@ MonoBehaviour:
   attackCooldown: 2
   enemyDamageParticles: {fileID: 3352877640750334326, guid: 419faec969e95b0489372eb1b831e400, type: 3}
   attackRange: 2
-  meleeDamage: 1
+  meleeDamage: 5
   hurtbox: {fileID: 6657450396415278253}
   attackDirection: {fileID: 7918703361646121497}
   attackDuration: 0.3
