@@ -23603,7 +23603,7 @@ MonoBehaviour:
   waveDowntimeInterval: 5
   shipTiles: {fileID: 309163759}
   seaTiles: {fileID: 220705020}
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 268777749}
 --- !u!4 &1662319309
 Transform:
   m_ObjectHideFlags: 0
