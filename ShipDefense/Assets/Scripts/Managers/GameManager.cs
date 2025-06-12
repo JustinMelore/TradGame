@@ -8,6 +8,10 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameOverScreen endScreen;
 
+    public void Awake()
+    {
+        endScreen = GetComponent<GameOverScreen>();
+    }
     /// <summary>
     /// Signals that the player has defeated the current wave.
     /// </summary>
