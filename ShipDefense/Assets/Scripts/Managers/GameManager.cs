@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     public void Awake()
     {
-        endScreen = GetComponent<GameOverScreen>();
+        //endScreen = GetComponent<GameOverScreen>();
     }
     /// <summary>
     /// Signals that the player has defeated the current wave.

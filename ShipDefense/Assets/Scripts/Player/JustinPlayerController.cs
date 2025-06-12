@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Collider2D playerHitbox;
     [SerializeField] private PlayerHurtbox hurtbox;
     [SerializeField] private PlayerParrybox parrybox;
-    [SerializeField] private GameManager waveManager;
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private AudioSource audioSource;
 
     [Header("Movement Settings")]
@@ -309,7 +309,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Player died!");
         Destroy(gameObject);
-        waveManager.FailGame();
+        gameManager.FailGame();
     }
 
     /// <summary>
