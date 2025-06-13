@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Handles the behavior of the ship, specifically in regards to its health
+/// </summary>
 public class Ship : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
@@ -14,6 +17,10 @@ public class Ship : MonoBehaviour
         currentShipHealth = shipHealth;
     }
 
+    /// <summary>
+    /// Damages the ship's health by a given amount
+    /// </summary>
+    /// <param name="damage"></param>
     public void DamageShip(int damage)
     {
         currentShipHealth -= damage;
@@ -21,6 +28,9 @@ public class Ship : MonoBehaviour
         if (currentShipHealth <= 0) DestroyShip();
     }
 
+    /// <summary>
+    /// Destroys the ship, causing a game over
+    /// </summary>
     private void DestroyShip()
     {
         gameManager.FailGame();
