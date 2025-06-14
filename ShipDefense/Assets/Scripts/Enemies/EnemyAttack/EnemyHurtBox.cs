@@ -6,6 +6,13 @@ using UnityEngine;
 public class EnemyHurtbox : Hurtbox
 
 {
+    private Ship ship;
+
+    private void Awake()
+    {
+        ship = FindFirstObjectByType<Ship>();
+    }
+
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -17,6 +24,12 @@ public class EnemyHurtbox : Hurtbox
                 Debug.Log("Enemy hit the player! with Damage" + damage);
                 Deactivate();
             }
+        }
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            ship.DamageShip(damage);
+            Debug.Log("Enemy hit the ship for " + damage + " damage");
+            Deactivate();
         }
     }
 }
