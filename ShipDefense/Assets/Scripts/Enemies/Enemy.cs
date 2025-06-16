@@ -31,10 +31,10 @@ public class Enemy : MonoBehaviour
     {
         Chaser();
     }
-    protected virtual void FixedUpdate()
-    {
-        Chaser();
-    }
+    //protected virtual void FixedUpdate()
+    //{
+        //Chaser();
+    //}
 
     protected virtual void Chaser()
     {

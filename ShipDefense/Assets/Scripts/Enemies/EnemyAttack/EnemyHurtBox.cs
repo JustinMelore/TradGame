@@ -27,9 +27,13 @@ public class EnemyHurtbox : Hurtbox
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            ship.DamageShip(damage);
-            Debug.Log("Enemy hit the ship for " + damage + " damage");
-            Deactivate();
+            SeaMeleeEnemy seaMeleeEnemy = GetComponentInParent<SeaMeleeEnemy>();
+            if (seaMeleeEnemy != null)
+            {
+                ship.DamageShip(damage);
+                Debug.Log("Enemy hit the ship for " + damage + " damage");
+                Deactivate();
+            }
         }
     }
 }

@@ -8,10 +8,15 @@ public class MeleeEnemy : Enemy
     [SerializeField] private EnemyHurtbox hurtbox;
     [SerializeField] private Transform attackDirection;
     [SerializeField] private float attackDuration;
-
+    private bool isStunned = false;
+    private float stunDuration; 
+    private float stunTimer = 0f;
     protected override void Update()
     {
-        base.Update();
+        UpdateStun();
+        if (isStunned) return;
+
+        //base.Update();
 
         if (target != null)
         {
@@ -31,6 +36,7 @@ public class MeleeEnemy : Enemy
                 }
             }
         }
+
     }
 
     private void Attack()
@@ -45,5 +51,23 @@ public class MeleeEnemy : Enemy
     {
         yield return new WaitForSeconds(delay);
         hurtbox.Deactivate();
+    }
+
+    public void Stun(float duration)
+    {
+        isStunned = true;
+        stunDuration = duration;
+        stunTimer = 0f;
+    }
+    private void UpdateStun()
+    {
+        if (!isStunned) return;
+
+        stunTimer += Time.deltaTime;
+        if (stunTimer >= stunDuration)
+        {
+            isStunned = false;
+            stunTimer = 0f;
+        }
     }
 }

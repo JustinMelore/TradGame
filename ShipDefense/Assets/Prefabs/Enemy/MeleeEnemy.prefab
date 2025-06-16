@@ -192,6 +192,8 @@ GameObject:
   - component: {fileID: 3499446583932511021}
   - component: {fileID: 5625606783792689867}
   - component: {fileID: 6744393726137937865}
+  - component: {fileID: 1763341839127676535}
+  - component: {fileID: 534623324979849025}
   m_Layer: 7
   m_Name: MeleeEnemy
   m_TagString: Enemy
@@ -366,3 +368,65 @@ MonoBehaviour:
   hurtbox: {fileID: 6657450396415278253}
   attackDirection: {fileID: 7918703361646121497}
   attackDuration: 0.3
+--- !u!95 &1763341839127676535
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4183514784179678787}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3884d74517a70d34eb1fd64ab3980a5e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &534623324979849025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4183514784179678787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graph: {fileID: -6196405247967131207, guid: 4879a5b8ee6753b4698616f0a2a3a581, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 8659786928291840286
+  - rid: 8659786928291840369
+  m_IsInitialised: 0
+  m_IsStarted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 8659786928291840286
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 4183514784179678787}
+    - rid: 8659786928291840369
+      type: {class: 'BlackboardVariable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject, UnityEngine.CoreModule]], mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 69104009753313039
+          m_Value1: 15609460980652226577
+        Name: PatrolPoint
+        m_Value:
+        - {fileID: 0}
+        - {fileID: 0}
+        - {fileID: 0}
