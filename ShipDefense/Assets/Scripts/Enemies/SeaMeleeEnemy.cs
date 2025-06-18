@@ -18,14 +18,14 @@ public class SeaMeleeEnemy : Enemy
         lastAttackTime = Time.time;
     }
 
-    protected override void Update()
-    {
-        if (Time.time - lastAttackTime >= attackCooldown)
-        {
-            Attack();
-            lastAttackTime = Time.time;
-        }
-    }
+    //protected override void Update()
+    //{
+    //    if (Time.time - lastAttackTime >= attackCooldown)
+    //    {
+    //        Attack();
+    //        lastAttackTime = Time.time;
+    //    }
+    //}
 
     protected void Attack()
     {

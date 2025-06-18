@@ -13,16 +13,16 @@ public class RangedEnemy : Enemy
         lastAttackTime = Time.time;
     }
 
-    protected override void Update()
-    {
-        base.Update();
+    //protected override void Update()
+    //{
+    //    base.Update();
 
-        if (target != null && Time.time - lastAttackTime >= attackCooldown)
-        {
-            FireProjectile();
-            lastAttackTime = Time.time;
-        }
-    }
+    //    if (target != null && Time.time - lastAttackTime >= attackCooldown)
+    //    {
+    //        FireProjectile();
+    //        lastAttackTime = Time.time;
+    //    }
+    //}
 
     private void FireProjectile()
     {

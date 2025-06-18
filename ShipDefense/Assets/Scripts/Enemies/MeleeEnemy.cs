@@ -8,66 +8,130 @@ public class MeleeEnemy : Enemy
     [SerializeField] private EnemyHurtbox hurtbox;
     [SerializeField] private Transform attackDirection;
     [SerializeField] private float attackDuration;
+    [SerializeField] private float attackRadius = 1.2f;
+    [SerializeField] private float patrolRadius = 3f;
+    [SerializeField] private float detectionRadius = 5f;
+    [SerializeField] private float chaseSpeed = 2.0f;
+    [SerializeField] private LayerMask targetLayer;
+
     private bool isStunned = false;
-    private float stunDuration; 
-    private float stunTimer = 0f;
+    private float attackTimer = 0f;
+    private bool isAttacking = false;
+    protected override void Start()
+    {
+        base.Start();
+        targetLayer = LayerMask.GetMask("Player");
+    }
     protected override void Update()
     {
-        UpdateStun();
-        if (isStunned) return;
+        base.Update();
 
-        //base.Update();
-
-        if (target != null)
+        switch (currentState)
         {
-            Vector3 directionToTarget = (target.transform.position - transform.position).normalized;
-            float attackOffset = 0.6f; 
-            attackDirection.position = transform.position + directionToTarget * attackOffset;
+            case EnemyState.Patrol:
+                Patrol();
+                break;
 
-            float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
-            attackDirection.rotation = Quaternion.Euler(0f, 0f, angle);
-
-            if (Vector2.Distance(transform.position, target.transform.position) <= attackRange)
-            {
-                if (Time.time - lastAttackTime >= attackCooldown)
+            case EnemyState.Attack:
+                attackTimer += Time.deltaTime;
+                if (attackTimer >= attackCooldown)
                 {
-                    Attack();
-                    lastAttackTime = Time.time;
+                    isAttacking = false;
+                    attackTimer = 0f;
+
+                    if (!IsTargetInRange(attackRadius))
+                        SwitchState(EnemyState.Chase);
                 }
-            }
+                break;
         }
-
+        Debug.Log("Current state is:" + currentState);
+        Debug.Log("Current Layer is:" + targetLayer);
     }
+    protected override void HandleIdle()
+    {
+        idleTimer += Time.deltaTime;
+        if (idleTimer >= idleTime)
+        {
+            idleTimer = 0f;
+            SwitchState(EnemyState.Patrol);
+        }
+    }
+    protected override void HandleChase()
+    {
+        if (target == null || currentState != EnemyState.Chase) return;
+        agent.speed = chaseSpeed;
+        agent.SetDestination(target.transform.position);
 
+        if (IsTargetInRange(attackRadius))
+        {
+            agent.ResetPath();
+            SwitchState(EnemyState.Attack);
+            Attack();
+        }
+        else if (!IsTargetInRange(detectionRadius))
+        {
+            SwitchState(EnemyState.Patrol);
+        }
+    }
     private void Attack()
     {
-        hurtbox.transform.position = attackDirection.position;
-        hurtbox.transform.rotation = attackDirection.rotation;
-        hurtbox.Activate(meleeDamage);
-        StartCoroutine(DeactivateHurtboxAfterDelay(attackDuration));
-    }
+        if (isAttacking || currentState != EnemyState.Attack) return;
 
-    private System.Collections.IEnumerator DeactivateHurtboxAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        hurtbox.Deactivate();
+        isAttacking = true;
+        Debug.Log("Melee Enemy attacks!");
     }
-
-    public void Stun(float duration)
+    protected override void HandleStunned()
     {
-        isStunned = true;
-        stunDuration = duration;
-        stunTimer = 0f;
+        base.HandleStunned();
+        agent.ResetPath();
+        isAttacking = false;
     }
-    private void UpdateStun()
+    private void Patrol()
     {
-        if (!isStunned) return;
-
-        stunTimer += Time.deltaTime;
-        if (stunTimer >= stunDuration)
+        if (!agent.hasPath || agent.remainingDistance < 0.2f)
         {
-            isStunned = false;
-            stunTimer = 0f;
+            Vector2 randomDir = Random.insideUnitCircle * patrolRadius;
+            Vector3 patrolTarget = transform.position + new Vector3(randomDir.x, randomDir.y, 0f);
+            agent.SetDestination(patrolTarget);
         }
+        if (DetectTargetInRadius(detectionRadius))
+        {
+            SwitchState(EnemyState.Chase);
+        }
+    }
+    protected override void SwitchState(EnemyState newState)
+    {
+        base.SwitchState(newState);
+        agent.speed = speed;
+        if (newState == EnemyState.Patrol)
+        {
+            Patrol(); 
+        }
+    }
+    private bool DetectTargetInRadius(float radius)
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, radius, targetLayer);
+        foreach (var hit in hits)
+        {
+            if (hit.CompareTag("Player"))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    private bool IsTargetInRange(float range)
+    {
+        if (target == null) return false;
+        return Vector2.Distance(transform.position, target.transform.position) <= range;
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRadius);
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, patrolRadius);
     }
 }
