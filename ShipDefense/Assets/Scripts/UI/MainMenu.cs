@@ -6,11 +6,19 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] private StoryScreen storyScreen;
+    
+    /// <summary>
+    /// Starts the story "cutscene" prior to starting the game
+    /// </summary>
     public void StartGame()
     {
-        SceneManager.LoadScene("Act1");
+        storyScreen.RevealStoryScreen();
     }
 
+    /// <summary>
+    /// Quits the application
+    /// </summary>
     public void QuitGame()
     {
         Debug.Log("Quitting");
