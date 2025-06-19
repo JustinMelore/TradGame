@@ -1818,6 +1818,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShipHealthBar
       objectReference: {fileID: 0}
+    - target: {fileID: 3990602275913699559, guid: e9f3e007eef86984aa58ef7babf7b1c0, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 8350700316044895440, guid: e9f3e007eef86984aa58ef7babf7b1c0, type: 3}
       propertyPath: m_SizeDelta.x
       value: 758.41
