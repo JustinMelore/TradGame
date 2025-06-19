@@ -30321,6 +30321,10 @@ PrefabInstance:
       propertyPath: 'managedReferences[8659786928291840369].m_Value.Array.data[2]'
       value: 
       objectReference: {fileID: 1572989013}
+    - target: {fileID: 1763341839127676535, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f4e82017f5b2cc44f97572ecdb720b8a, type: 2}
     - target: {fileID: 4183514784179678787, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
       propertyPath: m_Name
       value: MeleeEnemy (2)
@@ -30328,6 +30332,14 @@ PrefabInstance:
     - target: {fileID: 4183514784179678787, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5625606783792689867, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.40625
+      objectReference: {fileID: 0}
+    - target: {fileID: 5625606783792689867, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6744393726137937865, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
       propertyPath: speed
@@ -30340,6 +30352,34 @@ PrefabInstance:
     - target: {fileID: 6744393726137937865, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
       propertyPath: waveManager
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7329405340196946001, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
+      propertyPath: m_Size.x
+      value: 1.40625
+      objectReference: {fileID: 0}
+    - target: {fileID: 7329405340196946001, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7329405340196946001, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7329405340196946001, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
+      propertyPath: m_Color.b
+      value: 0.7686275
+      objectReference: {fileID: 0}
+    - target: {fileID: 7329405340196946001, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7686275
+      objectReference: {fileID: 0}
+    - target: {fileID: 7329405340196946001, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
+      propertyPath: m_Color.r
+      value: 0.7686275
+      objectReference: {fileID: 0}
+    - target: {fileID: 7329405340196946001, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9157859909253006339, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
       propertyPath: m_LocalPosition.x

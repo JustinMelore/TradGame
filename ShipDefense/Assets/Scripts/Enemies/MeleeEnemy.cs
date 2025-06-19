@@ -78,6 +78,8 @@ public class MeleeEnemy : Enemy
         if (isAttacking || currentState != EnemyState.Attack) return;
 
         isAttacking = true;
+
+        //animator.setTrigger("attack");
         Debug.Log("Melee Enemy attacks!");
     }
     protected override void HandleStunned()

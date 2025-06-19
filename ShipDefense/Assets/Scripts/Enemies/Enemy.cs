@@ -16,7 +16,6 @@ public class Enemy : MonoBehaviour
     protected float lastAttackTime;
     [SerializeField] protected float idleTime = 2f;
     [SerializeField] protected float chaseRange = 5f;
-
     [Header("VFX")]
     [SerializeField] protected ParticleSystem enemyDamageParticles;
     
@@ -69,7 +68,6 @@ public class Enemy : MonoBehaviour
         if (idleTimer >= idleTime)
         {
             idleTimer = 0f;
-            SwitchState(EnemyState.Chase); 
         }
     }
     protected virtual void HandleChase()
