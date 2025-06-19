@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// This script manages enemy waves. Current functionality is temporary and will be updated with proper wave behavior in the future, and currently only serves to make
@@ -13,12 +14,13 @@ public class GameManager : MonoBehaviour
         //endScreen = GetComponent<GameOverScreen>();
     }
     /// <summary>
-    /// Signals that the player has defeated the current wave.
+    /// Signals that the player has defeated all the waves in this level
     /// </summary>
     public void WinGame()
     {
-        Debug.Log("Game won!");
-        endScreen.WinGame();
+        Debug.Log("Act won!");
+        if(SceneManager.GetActiveScene().name == "Act3") endScreen.WinGame();
+        else SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     /// <summary>
