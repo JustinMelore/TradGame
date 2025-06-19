@@ -23760,7 +23760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyWaves:
-  - boatEnemyPoints: 5
+  - boatEnemyPoints: 10
     seaEnemyPoints: 0
     boatEnemyTypes:
     - {fileID: 4183514784179678787, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
@@ -23768,12 +23768,28 @@ MonoBehaviour:
     boatEnemyCosts: 0100000002000000
     seaEnemyTypes: []
     seaEnemyCosts: 
-  - boatEnemyPoints: 10
+  - boatEnemyPoints: 15
     seaEnemyPoints: 0
     boatEnemyTypes:
     - {fileID: 4183514784179678787, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
     - {fileID: 1053278187521713555, guid: aac2f8425516e2b4d8048738fb3cab63, type: 3}
     boatEnemyCosts: 0100000002000000
+    seaEnemyTypes: []
+    seaEnemyCosts: 
+  - boatEnemyPoints: 20
+    seaEnemyPoints: 0
+    boatEnemyTypes:
+    - {fileID: 4183514784179678787, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
+    - {fileID: 1053278187521713555, guid: aac2f8425516e2b4d8048738fb3cab63, type: 3}
+    boatEnemyCosts: 0100000002000000
+    seaEnemyTypes: []
+    seaEnemyCosts: 
+  - boatEnemyPoints: 20
+    seaEnemyPoints: 0
+    boatEnemyTypes:
+    - {fileID: 4183514784179678787, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
+    - {fileID: 1053278187521713555, guid: aac2f8425516e2b4d8048738fb3cab63, type: 3}
+    boatEnemyCosts: 0100000001000000
     seaEnemyTypes: []
     seaEnemyCosts: 
   waveDowntimeInterval: 5
@@ -24288,67 +24304,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c048b8a68f0d2224f99370e00536d1ca, type: 3}
---- !u!1001 &3294125803380629942
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6138813387607737495, guid: 36771441c2e878e40872329ebaee2865, type: 3}
-      propertyPath: m_Name
-      value: MeleeSeaEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 6138813387607737495, guid: 36771441c2e878e40872329ebaee2865, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6613597719191493643, guid: 36771441c2e878e40872329ebaee2865, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -11.41
-      objectReference: {fileID: 0}
-    - target: {fileID: 6613597719191493643, guid: 36771441c2e878e40872329ebaee2865, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -9.71
-      objectReference: {fileID: 0}
-    - target: {fileID: 6613597719191493643, guid: 36771441c2e878e40872329ebaee2865, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6613597719191493643, guid: 36771441c2e878e40872329ebaee2865, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6613597719191493643, guid: 36771441c2e878e40872329ebaee2865, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6613597719191493643, guid: 36771441c2e878e40872329ebaee2865, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6613597719191493643, guid: 36771441c2e878e40872329ebaee2865, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6613597719191493643, guid: 36771441c2e878e40872329ebaee2865, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6613597719191493643, guid: 36771441c2e878e40872329ebaee2865, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6613597719191493643, guid: 36771441c2e878e40872329ebaee2865, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 36771441c2e878e40872329ebaee2865, type: 3}
 --- !u!1001 &5054132920944058665
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24535,4 +24490,3 @@ SceneRoots:
   - {fileID: 1662319309}
   - {fileID: 268777750}
   - {fileID: 1755546109}
-  - {fileID: 3294125803380629942}
