@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Handles behavior for melee enemies that spawn in the sea and attck the ship
+/// Handles behavior for melee enemies that spawn in the sea and attck the ship.
 /// </summary>
 public class SeaMeleeEnemy : Enemy
 {

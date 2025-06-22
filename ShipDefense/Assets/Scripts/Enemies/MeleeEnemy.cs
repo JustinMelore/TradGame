@@ -14,9 +14,9 @@ public class MeleeEnemy : Enemy
     [SerializeField] private float chaseSpeed = 2.0f;
     [SerializeField] private LayerMask targetLayer;
 
-    private bool isStunned = false;
     private float attackTimer = 0f;
     private bool isAttacking = false;
+    public bool canParry = false;
     protected override void Start()
     {
         base.Start();
@@ -26,36 +26,36 @@ public class MeleeEnemy : Enemy
     {
         base.Update();
 
+        float currentSpeed = agent.velocity.magnitude;
+        animator.SetFloat("Speed", currentSpeed);
+        animator.SetBool("HasTarget", DetectTargetInRadius(detectionRadius));
+
         switch (currentState)
         {
             case EnemyState.Patrol:
-                Patrol();
+                HandlePatrol();
+                break;
+
+            case EnemyState.Chase:
+                HandleChase();
                 break;
 
             case EnemyState.Attack:
-                attackTimer += Time.deltaTime;
-                if (attackTimer >= attackCooldown)
-                {
-                    isAttacking = false;
-                    attackTimer = 0f;
-
-                    if (!IsTargetInRange(attackRadius))
-                        SwitchState(EnemyState.Chase);
-                }
+                HandleAttack();
                 break;
         }
         Debug.Log("Current state is:" + currentState);
         Debug.Log("Current Layer is:" + targetLayer);
     }
-    protected override void HandleIdle()
-    {
-        idleTimer += Time.deltaTime;
-        if (idleTimer >= idleTime)
-        {
-            idleTimer = 0f;
-            SwitchState(EnemyState.Patrol);
-        }
-    }
+    //protected override void HandleIdle()
+    //{
+    //    idleTimer += Time.deltaTime;
+    //    if (idleTimer >= idleTime)
+    //    {
+    //        idleTimer = 0f;
+    //        HandlePatrol();
+    //    }
+    //}
     protected override void HandleChase()
     {
         if (target == null || currentState != EnemyState.Chase) return;
@@ -66,29 +66,56 @@ public class MeleeEnemy : Enemy
         {
             agent.ResetPath();
             SwitchState(EnemyState.Attack);
-            Attack();
         }
         else if (!IsTargetInRange(detectionRadius))
         {
-            SwitchState(EnemyState.Patrol);
+           SwitchState(EnemyState.Patrol);
         }
     }
-    private void Attack()
+    private void HandleAttack()
     {
-        if (isAttacking || currentState != EnemyState.Attack) return;
-
-        isAttacking = true;
-
-        //animator.setTrigger("attack");
+        if (!isAttacking)
+        {
+            isAttacking = true;
+            animator.SetBool("Attacking", true);
+            animator.SetTrigger("Attack");
+        }
         Debug.Log("Melee Enemy attacks!");
     }
-    protected override void HandleStunned()
+    public void Attack()
     {
-        base.HandleStunned();
-        agent.ResetPath();
-        isAttacking = false;
+        Vector3 directionToTarget = (target.transform.position - transform.position).normalized;
+        float attackOffset = 0.6f;
+        attackDirection.position = transform.position + directionToTarget * attackOffset;
+        float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
+        attackDirection.rotation = Quaternion.Euler(0f, 0f, angle);
+        hurtbox.transform.position = attackDirection.position;
+        hurtbox.transform.rotation = attackDirection.rotation;
+        hurtbox.Activate(meleeDamage);
+        canParry = true;
     }
-    private void Patrol()
+    //
+    public void OnAttackEnd()
+    {
+        isAttacking = false;
+        animator.SetBool("Attacking", false);
+        animator.ResetTrigger("Attack");
+        if (IsTargetInRange(attackRadius))
+        {
+            SwitchState(EnemyState.Chase);
+        }
+        else if (DetectTargetInRadius(detectionRadius))
+        {
+            SwitchState(EnemyState.Chase);
+        }
+        else
+        {
+            SwitchState(EnemyState.Patrol);
+        }
+        canParry = false;
+        hurtbox.Deactivate();
+    }
+    private void HandlePatrol()
     {
         if (!agent.hasPath || agent.remainingDistance < 0.2f)
         {
@@ -107,7 +134,7 @@ public class MeleeEnemy : Enemy
         agent.speed = speed;
         if (newState == EnemyState.Patrol)
         {
-            Patrol(); 
+            HandlePatrol(); 
         }
     }
     private bool DetectTargetInRadius(float radius)

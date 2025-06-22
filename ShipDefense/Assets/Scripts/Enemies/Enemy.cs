@@ -1,7 +1,8 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 /// <summary>
-/// Script to define enemy behavior. This script is mostly for testing purposes and will later be exchanged with more specific scripts for different enemy types
+/// Script to define enemy behavior. This script is mostly for testing purposes and will later be exchanged with more specific scripts for different enemy types.
 /// </summary>
 public class Enemy : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Enemy : MonoBehaviour
     protected float lastAttackTime;
     [SerializeField] protected float idleTime = 2f;
     [SerializeField] protected float chaseRange = 5f;
+    [SerializeField] protected Animator animator;
     [Header("VFX")]
     [SerializeField] protected ParticleSystem enemyDamageParticles;
     
@@ -34,20 +36,24 @@ public class Enemy : MonoBehaviour
         waveSpawner = FindFirstObjectByType<WaveSpawner>();
         agent = GetComponent<NavMeshAgent>();
         health = maxhealth;
+        animator = GetComponent<Animator>();
     }
     protected virtual void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
         agent.speed = speed;
-        currentState = EnemyState.Idle;
-
     }
     protected virtual void Update()
     {
         switch (currentState)
         {
+            case EnemyState.Intro:
+                break;
+
             case EnemyState.Idle:
-                HandleIdle();
+                break;
+
+            case EnemyState.Patrol:
                 break;
 
             case EnemyState.Chase:
@@ -55,21 +61,24 @@ public class Enemy : MonoBehaviour
                 break;
 
             case EnemyState.Stunned:
-                HandleStunned();
+                break;
+
+            case EnemyState.Attack:
                 break;
 
             case EnemyState.Dead:
                 break;
         }
     }
-    protected virtual void HandleIdle()
-    {
-        idleTimer += Time.deltaTime;
-        if (idleTimer >= idleTime)
-        {
-            idleTimer = 0f;
-        }
-    }
+    //protected virtual void HandleIdle()
+    //{
+    //    idleTimer += Time.deltaTime;
+    //    if (idleTimer >= idleTime)
+    //    {
+    //        idleTimer = 0f;
+    //        SwitchState(EnemyState.Patrol);
+    //    }
+    //}
     protected virtual void HandleChase()
     {
         if (agent == null || target == null) return;
@@ -82,21 +91,44 @@ public class Enemy : MonoBehaviour
             SwitchState(EnemyState.Idle);
         }
     }
-    protected virtual void HandleStunned()
-    {
-        stunTimer += Time.deltaTime;
-        if (stunTimer >= stunDuration)
-        {
-            SwitchState(EnemyState.Idle);
-        }
-    }
+    //protected virtual void HandleStunned()
+    //{
+    //    Debug.Log("Handling Stunned: Timer = " + stunTimer + " / " + stunDuration);
+    //    stunTimer += Time.deltaTime;
+    //    if (stunTimer >= stunDuration)
+    //    {
+    //        agent.isStopped = false;
+    //        SwitchState(EnemyState.Patrol);
+    //        animator.ResetTrigger("Stun");
+    //        animator.SetBool("IsStuned",false);
+    //    }
+    //}
     public virtual void Stun(float duration)
     {
-        stunTimer = 0f;
-        stunDuration = duration;
-        SwitchState(EnemyState.Stunned);
-    }
+        if (agent != null)
+        {
+            agent.ResetPath();
+            agent.isStopped = true;
+        }
 
+        animator.SetTrigger("Stun");
+        animator.SetBool("IsStuned", true);
+
+        SwitchState(EnemyState.Stunned);
+        StartCoroutine(StunTimer(duration));
+    }
+    private IEnumerator StunTimer(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        if (agent != null)
+            agent.isStopped = false;
+
+        animator.SetBool("IsStuned", false);
+        animator.ResetTrigger("Stun");
+
+        SwitchState(EnemyState.Patrol); 
+    }
     /// <summary>
     /// Damages this enemy by a given amount
     /// </summary>
@@ -115,17 +147,49 @@ public class Enemy : MonoBehaviour
     {
         Debug.Log("Enemy killed!");
         currentState = EnemyState.Dead;
-        agent.ResetPath();
-        waveSpawner.DecrementEnemyCount();
-        Destroy(gameObject);
+        if (agent != null)
+        {
+            agent.ResetPath();
+            agent.isStopped = true;
+        }
+        animator.SetTrigger("Dead"); 
+        //waveSpawner.DecrementEnemyCount();
+        Destroy(gameObject, 1.5f); 
+    }
+    public void OnIntroComplete()
+    {
+        animator.SetTrigger("IntroDone");
     }
     protected virtual void SwitchState(EnemyState newState)
     {
+        if (currentState == newState) return;
         currentState = newState;
 
-        if (agent != null && currentState == EnemyState.Stunned)
+        switch (newState)
         {
-            agent.ResetPath(); // Stop movement while stunned
+            case EnemyState.Idle:
+                idleTimer = 0f;
+                animator.SetFloat("Speed", 0f);
+                break;
+
+            case EnemyState.Patrol:
+                animator.SetFloat("Speed", 1f);
+                break;
+
+            case EnemyState.Chase:
+                animator.SetBool("HasTarget", true);
+                break;
+
+            case EnemyState.Stunned:
+                break;
+
+            case EnemyState.Attack:
+                animator.SetTrigger("Attack");
+                break;
+
+            case EnemyState.Dead:
+                animator.SetTrigger("Dead");
+                break;
         }
     }
 }

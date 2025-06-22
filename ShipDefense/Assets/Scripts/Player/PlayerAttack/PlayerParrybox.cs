@@ -15,8 +15,11 @@ public class PlayerParrybox : Hurtbox
         MeleeEnemy meleeEnemy = collision.GetComponentInParent<MeleeEnemy>();
         if (meleeEnemy != null)
         {
-            Debug.Log("Parried a melee enemy!");
-            meleeEnemy.Stun(this.GetStunDuration());
+            if (meleeEnemy.canParry)
+            {
+                Debug.Log("Parried a melee enemy!");
+                meleeEnemy.Stun(this.GetStunDuration());
+            }
         }
     }
 
