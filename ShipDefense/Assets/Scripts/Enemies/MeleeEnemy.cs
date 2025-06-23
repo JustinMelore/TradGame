@@ -3,14 +3,14 @@ using UnityEngine;
 public class MeleeEnemy : Enemy
 {
     [Header("Melee Settings")]
-    [SerializeField] private float attackRange = 1.5f;
+    ////[SerializeField] private float attackRange = 1.5f;
     [SerializeField] private int meleeDamage = 5;
     [SerializeField] private EnemyHurtbox hurtbox;
     [SerializeField] private Transform attackDirection;
     [SerializeField] private float attackDuration;
-    [SerializeField] private float attackRadius = 1.2f;
-    [SerializeField] private float patrolRadius = 3f;
-    [SerializeField] private float detectionRadius = 5f;
+    [SerializeField] private float attackRadius = 1.0f;
+    [SerializeField] private float patrolRadius = 4.0f;
+    [SerializeField] private float detectionRadius = 6.0f;
     [SerializeField] private float chaseSpeed = 2.0f;
     [SerializeField] private LayerMask targetLayer;
 
@@ -62,12 +62,12 @@ public class MeleeEnemy : Enemy
         agent.speed = chaseSpeed;
         agent.SetDestination(target.transform.position);
 
-        if (IsTargetInRange(attackRadius))
+        if (DetectTargetInRadius(attackRadius))
         {
             agent.ResetPath();
             SwitchState(EnemyState.Attack);
         }
-        else if (!IsTargetInRange(detectionRadius))
+        else if (!DetectTargetInRadius(detectionRadius))
         {
            SwitchState(EnemyState.Patrol);
         }
@@ -84,6 +84,7 @@ public class MeleeEnemy : Enemy
     }
     public void Attack()
     {
+        if (currentState == EnemyState.Stunned) return;
         Vector3 directionToTarget = (target.transform.position - transform.position).normalized;
         float attackOffset = 0.6f;
         attackDirection.position = transform.position + directionToTarget * attackOffset;
@@ -92,6 +93,9 @@ public class MeleeEnemy : Enemy
         hurtbox.transform.position = attackDirection.position;
         hurtbox.transform.rotation = attackDirection.rotation;
         hurtbox.Activate(meleeDamage);
+    }
+    public void CanParry()
+    {
         canParry = true;
     }
     //
@@ -100,11 +104,11 @@ public class MeleeEnemy : Enemy
         isAttacking = false;
         animator.SetBool("Attacking", false);
         animator.ResetTrigger("Attack");
-        if (IsTargetInRange(attackRadius))
+        if (DetectTargetInRadius(attackRadius) && currentState != EnemyState.Stunned)
         {
             SwitchState(EnemyState.Chase);
         }
-        else if (DetectTargetInRadius(detectionRadius))
+        else if (DetectTargetInRadius(detectionRadius) && currentState != EnemyState.Stunned)
         {
             SwitchState(EnemyState.Chase);
         }
@@ -148,11 +152,6 @@ public class MeleeEnemy : Enemy
             }
         }
         return false;
-    }
-    private bool IsTargetInRange(float range)
-    {
-        if (target == null) return false;
-        return Vector2.Distance(transform.position, target.transform.position) <= range;
     }
     private void OnDrawGizmosSelected()
     {
