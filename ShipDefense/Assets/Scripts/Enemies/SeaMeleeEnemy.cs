@@ -8,12 +8,15 @@ public class SeaMeleeEnemy : MeleeEnemy
     [Header("Sea Melee Enemy Settings")]
     [SerializeField] private GameObject enemyHitbox;
 
+
+    //TODO Implement wave spawner implementation
     protected override void Awake()
     {
         target = FindFirstObjectByType<PlayerController>().gameObject;
         Vector2 direction = target.transform.position - transform.position;
         if (direction.x < 0) transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         lastAttackTime = Time.time;
+        health = maxhealth;
     }
 
     protected override void Start()

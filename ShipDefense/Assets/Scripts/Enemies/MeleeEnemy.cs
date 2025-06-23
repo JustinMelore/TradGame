@@ -44,8 +44,8 @@ public class MeleeEnemy : Enemy
                 HandleAttack();
                 break;
         }
-        //Debug.Log("Current state is:" + currentState);
-        //Debug.Log("Current Layer is:" + targetLayer);
+        Debug.Log("Current state is:" + currentState);
+        Debug.Log("Current Layer is:" + targetLayer);
     }
     //protected override void HandleIdle()
     //{
