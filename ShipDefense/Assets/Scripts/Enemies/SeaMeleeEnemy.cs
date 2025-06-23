@@ -14,24 +14,29 @@ public class SeaMeleeEnemy : MeleeEnemy
         lastAttackTime = Time.time;
     }
 
-    //protected override void Update()
-    //{
-    //    if (Time.time - lastAttackTime >= attackCooldown)
-    //    {
-    //        Attack();
-    //        lastAttackTime = Time.time;
-    //    }
-    //}
-
-    protected void Attack()
+    protected override void Update()
     {
-        hurtbox.Activate(meleeDamage);
-        StartCoroutine(DeactivateHurtboxAfterDelay(attackDuration));
+        if (Time.time - lastAttackTime >= attackCooldown)
+        {
+            HandleAttack();
+            lastAttackTime = Time.time;
+        }
     }
 
-    protected System.Collections.IEnumerator DeactivateHurtboxAfterDelay(float delay)
+    public override void Attack()
     {
-        yield return new WaitForSeconds(delay);
+        if (currentState == EnemyState.Stunned) return;
+        hurtbox.Activate(meleeDamage);
+    }
+
+    public override void OnAttackEnd()
+    {
+        isAttacking = false;
+        animator.SetBool("Attacking", false);
+        animator.ResetTrigger("Attack");
+        canParry = false;
         hurtbox.Deactivate();
     }
+
+    //TODO Add in function to enable hurtbox
 }

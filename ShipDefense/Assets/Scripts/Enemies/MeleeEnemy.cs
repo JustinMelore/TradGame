@@ -15,7 +15,7 @@ public class MeleeEnemy : Enemy
     [SerializeField] protected LayerMask targetLayer;
 
     private float attackTimer = 0f;
-    private bool isAttacking = false;
+    protected bool isAttacking = false;
     public bool canParry = false;
     protected override void Start()
     {
@@ -72,7 +72,7 @@ public class MeleeEnemy : Enemy
            SwitchState(EnemyState.Patrol);
         }
     }
-    private void HandleAttack()
+    protected void HandleAttack()
     {
         if (!isAttacking)
         {
@@ -82,7 +82,7 @@ public class MeleeEnemy : Enemy
         }
         Debug.Log("Melee Enemy attacks!");
     }
-    public void Attack()
+    public virtual void Attack()
     {
         if (currentState == EnemyState.Stunned) return;
         Vector3 directionToTarget = (target.transform.position - transform.position).normalized;
@@ -99,7 +99,7 @@ public class MeleeEnemy : Enemy
         canParry = true;
     }
     //
-    public void OnAttackEnd()
+    public virtual void OnAttackEnd()
     {
         isAttacking = false;
         animator.SetBool("Attacking", false);
