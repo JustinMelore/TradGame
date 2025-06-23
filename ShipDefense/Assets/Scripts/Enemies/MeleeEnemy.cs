@@ -4,15 +4,15 @@ public class MeleeEnemy : Enemy
 {
     [Header("Melee Settings")]
     ////[SerializeField] private float attackRange = 1.5f;
-    [SerializeField] private int meleeDamage = 5;
-    [SerializeField] private EnemyHurtbox hurtbox;
-    [SerializeField] private Transform attackDirection;
-    [SerializeField] private float attackDuration;
-    [SerializeField] private float attackRadius = 1.0f;
-    [SerializeField] private float patrolRadius = 4.0f;
-    [SerializeField] private float detectionRadius = 6.0f;
-    [SerializeField] private float chaseSpeed = 2.0f;
-    [SerializeField] private LayerMask targetLayer;
+    [SerializeField] protected int meleeDamage = 5;
+    [SerializeField] protected EnemyHurtbox hurtbox;
+    [SerializeField] protected Transform attackDirection;
+    [SerializeField] protected float attackDuration;
+    [SerializeField] protected float attackRadius = 1.0f;
+    [SerializeField] protected float patrolRadius = 4.0f;
+    [SerializeField] protected float detectionRadius = 6.0f;
+    [SerializeField] protected float chaseSpeed = 2.0f;
+    [SerializeField] protected LayerMask targetLayer;
 
     private float attackTimer = 0f;
     private bool isAttacking = false;

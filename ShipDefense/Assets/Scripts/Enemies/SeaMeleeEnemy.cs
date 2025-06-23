@@ -3,12 +3,8 @@ using UnityEngine;
 /// <summary>
 /// Handles behavior for melee enemies that spawn in the sea and attck the ship.
 /// </summary>
-public class SeaMeleeEnemy : Enemy
+public class SeaMeleeEnemy : MeleeEnemy
 {
-    [Header("Melee Settings")]
-    [SerializeField] private int meleeDamage = 5;
-    [SerializeField] private EnemyHurtbox hurtbox;
-    [SerializeField] private float attackDuration;
 
     protected override void Awake()
     {
