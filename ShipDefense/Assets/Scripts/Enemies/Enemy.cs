@@ -117,7 +117,7 @@ public class Enemy : MonoBehaviour
         SwitchState(EnemyState.Stunned);
         StartCoroutine(StunTimer(duration));
     }
-    private IEnumerator StunTimer(float duration)
+    protected virtual IEnumerator StunTimer(float duration)
     {
         yield return new WaitForSeconds(duration);
 

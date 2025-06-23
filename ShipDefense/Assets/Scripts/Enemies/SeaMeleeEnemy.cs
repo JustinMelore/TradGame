@@ -5,6 +5,8 @@ using UnityEngine;
 /// </summary>
 public class SeaMeleeEnemy : MeleeEnemy
 {
+    [Header("Sea Melee Enemy Settings")]
+    [SerializeField] private GameObject enemyHitbox;
 
     protected override void Awake()
     {
@@ -37,6 +39,14 @@ public class SeaMeleeEnemy : MeleeEnemy
         canParry = false;
         hurtbox.Deactivate();
     }
+    
+    public void MakeVulnerable()
+    {
+        enemyHitbox.SetActive(true);
+    }
 
-    //TODO Add in function to enable hurtbox
+    public void MakeInvulnerable()
+    {
+        enemyHitbox.SetActive(false);
+    }
 }
