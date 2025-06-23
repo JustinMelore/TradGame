@@ -44,8 +44,8 @@ public class MeleeEnemy : Enemy
                 HandleAttack();
                 break;
         }
-        Debug.Log("Current state is:" + currentState);
-        Debug.Log("Current Layer is:" + targetLayer);
+        //Debug.Log("Current state is:" + currentState);
+        //Debug.Log("Current Layer is:" + targetLayer);
     }
     //protected override void HandleIdle()
     //{
@@ -78,7 +78,6 @@ public class MeleeEnemy : Enemy
         {
             isAttacking = true;
             animator.SetBool("Attacking", true);
-            animator.SetTrigger("Attack");
         }
         Debug.Log("Melee Enemy attacks!");
     }

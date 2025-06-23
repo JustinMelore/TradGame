@@ -30331,7 +30331,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4183514784179678787, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5625606783792689867, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
       propertyPath: m_Size.x
@@ -31035,6 +31035,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d870348fa375c942bae32f062b642fe, type: 3}
+--- !u!114 &1719417183 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4744141567988537960, guid: 36771441c2e878e40872329ebaee2865, type: 3}
+  m_PrefabInstance: {fileID: 3294125803380629942}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 877f7b812c42ff9449ae142e600baaf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1755546107
 GameObject:
   m_ObjectHideFlags: 0
@@ -31548,13 +31559,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4744141567988537960, guid: 36771441c2e878e40872329ebaee2865, type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5436573826867610894, guid: 36771441c2e878e40872329ebaee2865, type: 3}
+      propertyPath: hurtbox
+      value: 
+      objectReference: {fileID: 1719417183}
+    - target: {fileID: 5436573826867610894, guid: 36771441c2e878e40872329ebaee2865, type: 3}
+      propertyPath: chaseSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5436573826867610894, guid: 36771441c2e878e40872329ebaee2865, type: 3}
+      propertyPath: meleeDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5436573826867610894, guid: 36771441c2e878e40872329ebaee2865, type: 3}
+      propertyPath: patrolRadius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5436573826867610894, guid: 36771441c2e878e40872329ebaee2865, type: 3}
+      propertyPath: attackCooldown
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5436573826867610894, guid: 36771441c2e878e40872329ebaee2865, type: 3}
+      propertyPath: detectionRadius
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6138813387607737495, guid: 36771441c2e878e40872329ebaee2865, type: 3}
       propertyPath: m_Name
       value: MeleeSeaEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 6138813387607737495, guid: 36771441c2e878e40872329ebaee2865, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6613597719191493643, guid: 36771441c2e878e40872329ebaee2865, type: 3}
       propertyPath: m_LocalPosition.x

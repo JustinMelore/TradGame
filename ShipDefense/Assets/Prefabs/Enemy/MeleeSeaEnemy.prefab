@@ -452,7 +452,7 @@ MonoBehaviour:
   attackCooldown: 2
   idleTime: 2
   chaseRange: 5
-  animator: {fileID: 0}
+  animator: {fileID: 8815836370398095847}
   enemyDamageParticles: {fileID: 3352877640750334326, guid: 419faec969e95b0489372eb1b831e400, type: 3}
   meleeDamage: 10
   hurtbox: {fileID: 4744141567988537960}

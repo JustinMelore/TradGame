@@ -22,7 +22,7 @@ public class EnemyHurtbox : Hurtbox
             {
                 player.DamagePlayer(damage);
                 Debug.Log("Enemy hit the player! with Damage" + damage);
-                Deactivate();
+                //Deactivate();
             }
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
@@ -32,7 +32,7 @@ public class EnemyHurtbox : Hurtbox
             {
                 ship.DamageShip(damage);
                 Debug.Log("Enemy hit the ship for " + damage + " damage");
-                Deactivate();
+                //Deactivate();
             }
         }
     }

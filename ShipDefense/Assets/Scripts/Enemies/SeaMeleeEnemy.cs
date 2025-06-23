@@ -16,26 +16,24 @@ public class SeaMeleeEnemy : MeleeEnemy
         lastAttackTime = Time.time;
     }
 
+    protected override void Start()
+    {
+        
+    }
+
     protected override void Update()
     {
-        if (Time.time - lastAttackTime >= attackCooldown)
+        if (Time.time - lastAttackTime >= attackCooldown && currentState != EnemyState.Stunned)
         {
             HandleAttack();
             lastAttackTime = Time.time;
         }
     }
 
-    public override void Attack()
-    {
-        if (currentState == EnemyState.Stunned) return;
-        hurtbox.Activate(meleeDamage);
-    }
-
     public override void OnAttackEnd()
     {
         isAttacking = false;
         animator.SetBool("Attacking", false);
-        animator.ResetTrigger("Attack");
         canParry = false;
         hurtbox.Deactivate();
     }
