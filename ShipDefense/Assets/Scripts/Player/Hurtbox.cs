@@ -5,7 +5,7 @@ using UnityEngine;
 /// </summary>
 public abstract class Hurtbox : MonoBehaviour
 {
-    protected int damage;
+    [SerializeField] protected int damage;
 
     public virtual void Activate(int dmg)
     {

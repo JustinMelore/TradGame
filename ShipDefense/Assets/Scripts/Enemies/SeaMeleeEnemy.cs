@@ -1,41 +1,53 @@
 using UnityEngine;
 
 /// <summary>
-/// Handles behavior for melee enemies that spawn in the sea and attck the ship
+/// Handles behavior for melee enemies that spawn in the sea and attck the ship.
 /// </summary>
-public class SeaMeleeEnemy : Enemy
+public class SeaMeleeEnemy : MeleeEnemy
 {
-    [Header("Melee Settings")]
-    [SerializeField] private int meleeDamage = 5;
-    [SerializeField] private EnemyHurtbox hurtbox;
-    [SerializeField] private float attackDuration;
+    [Header("Sea Melee Enemy Settings")]
+    [SerializeField] private GameObject enemyHitbox;
 
+
+    //TODO Implement wave spawner implementation
     protected override void Awake()
     {
         target = FindFirstObjectByType<PlayerController>().gameObject;
         Vector2 direction = target.transform.position - transform.position;
         if (direction.x < 0) transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         lastAttackTime = Time.time;
+        health = maxhealth;
+    }
+
+    protected override void Start()
+    {
+        
     }
 
     protected override void Update()
     {
-        if (Time.time - lastAttackTime >= attackCooldown)
+        if (Time.time - lastAttackTime >= attackCooldown && currentState != EnemyState.Stunned && currentState != EnemyState.Dead)
         {
-            Attack();
+            HandleAttack();
             lastAttackTime = Time.time;
         }
     }
 
-    protected void Attack()
+    public override void OnAttackEnd()
     {
-        hurtbox.Activate(meleeDamage);
-        StartCoroutine(DeactivateHurtboxAfterDelay(attackDuration));
+        isAttacking = false;
+        animator.SetBool("Attacking", false);
+        canParry = false;
+        hurtbox.Deactivate();
+    }
+    
+    public void MakeVulnerable()
+    {
+        enemyHitbox.SetActive(true);
     }
 
-    protected System.Collections.IEnumerator DeactivateHurtboxAfterDelay(float delay)
+    public void MakeInvulnerable()
     {
-        yield return new WaitForSeconds(delay);
-        hurtbox.Deactivate();
+        enemyHitbox.SetActive(false);
     }
 }
