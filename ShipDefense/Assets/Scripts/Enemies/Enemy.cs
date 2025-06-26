@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
         gameObject.tag = "Enemy";
         waveSpawner = FindFirstObjectByType<WaveSpawner>();
         agent = GetComponent<NavMeshAgent>();
-        health = maxhealth;
+        health = maxhealth; 
         animator = GetComponent<Animator>();
     }
     protected virtual void Start()

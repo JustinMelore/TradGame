@@ -6,5 +6,6 @@ public enum EnemyState
     Intro,
     Attack,
     Stunned,
-    Dead
+    Dead,
+    Evading
 }

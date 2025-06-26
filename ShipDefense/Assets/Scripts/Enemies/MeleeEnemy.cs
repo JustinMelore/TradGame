@@ -44,8 +44,8 @@ public class MeleeEnemy : Enemy
                 HandleAttack();
                 break;
         }
-        Debug.Log("Current state is:" + currentState);
-        Debug.Log("Current Layer is:" + targetLayer);
+        //Debug.Log("Current state is:" + currentState);
+        //Debug.Log("Current Layer is:" + targetLayer);
     }
     //protected override void HandleIdle()
     //{
@@ -140,6 +140,7 @@ public class MeleeEnemy : Enemy
             HandlePatrol(); 
         }
     }
+
     private bool DetectTargetInRadius(float radius)
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, radius, targetLayer);
