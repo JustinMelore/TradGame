@@ -120,7 +120,7 @@ public class MeleeEnemy : Enemy
     }
     private void HandlePatrol()
     {
-        if (!agent.hasPath || agent.remainingDistance < 0.2f)
+        if (agent != null && !agent.hasPath || agent.remainingDistance < 0.2f)
         {
             Vector2 randomDir = Random.insideUnitCircle * patrolRadius;
             Vector3 patrolTarget = transform.position + new Vector3(randomDir.x, randomDir.y, 0f);

@@ -13,15 +13,20 @@ public class SeaMeleeEnemy : MeleeEnemy
     protected override void Awake()
     {
         target = FindFirstObjectByType<PlayerController>().gameObject;
+        waveSpawner = FindFirstObjectByType<WaveSpawner>();
         Vector2 direction = target.transform.position - transform.position;
-        if (direction.x < 0) transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        //In order for this to work, the SeaMeleeEnemy must be inside a container object
+        if (direction.x < 0)
+        {
+            transform.parent.localScale = new Vector3(-transform.parent.localScale.x, transform.parent.localScale.y, transform.parent.localScale.z);
+        }
         lastAttackTime = Time.time;
         health = maxhealth;
     }
 
     protected override void Start()
     {
-        
+
     }
 
     protected override void Update()
@@ -49,5 +54,10 @@ public class SeaMeleeEnemy : MeleeEnemy
     public void MakeInvulnerable()
     {
         enemyHitbox.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(transform.parent.gameObject);
     }
 }
