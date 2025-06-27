@@ -154,6 +154,7 @@ public class Enemy : MonoBehaviour
         }
         animator.SetTrigger("Dead"); 
         waveSpawner.DecrementEnemyCount();
+        GetComponent<BoxCollider2D>().enabled = false;
         Destroy(gameObject, 1.5f); 
     }
     public void OnIntroComplete()
