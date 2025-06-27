@@ -153,7 +153,7 @@ public class Enemy : MonoBehaviour
             agent.isStopped = true;
         }
         animator.SetTrigger("Dead"); 
-        //waveSpawner.DecrementEnemyCount();
+        waveSpawner.DecrementEnemyCount();
         Destroy(gameObject, 1.5f); 
     }
     public void OnIntroComplete()

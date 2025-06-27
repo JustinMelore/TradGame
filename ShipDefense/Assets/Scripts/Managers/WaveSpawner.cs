@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Tilemaps;
 
 /// <summary>
@@ -61,6 +62,7 @@ public class WaveSpawner : MonoBehaviour
         yield return new WaitForSeconds(waveDowntimeInterval);
         Debug.Log("Spawning wave");
         HashSet<Vector3> takenSpawnPoints = new HashSet<Vector3>();
+        takenSpawnPoints.Add(FindFirstObjectByType<PlayerController>().transform.position);
         //currentWaveEnemyCount = enemyWaves[currentWaveIndex].BoatEnemyCount + enemyWaves[currentWaveIndex].SeaEnemyCount;
         SpawnEnemies(enemyWaves[currentWaveIndex].BoatEnemyCount, enemyWaves[currentWaveIndex].BoatEnemies, shipSpawnLocations, takenSpawnPoints);
         SpawnEnemies(enemyWaves[currentWaveIndex].SeaEnemyCount, enemyWaves[currentWaveIndex].SeaEnemies, seaSpawnLocations, takenSpawnPoints);
@@ -88,7 +90,7 @@ public class WaveSpawner : MonoBehaviour
         {
             Vector3Int cellPos = new Vector3Int(position.x, position.y, position.z);
             Vector3 worldPos = tileMap.GetCellCenterWorld(cellPos);
-            if (tileMap.HasTile(cellPos)) tilePositions.Add(worldPos);
+            if (tileMap.HasTile(cellPos) && worldPos.x >= -3.25f && worldPos.x <= 4.0f && worldPos.y >= -13.0f && worldPos.y <= 7.0f) tilePositions.Add(worldPos);
         }
         return tilePositions;
     }
@@ -118,9 +120,11 @@ public class WaveSpawner : MonoBehaviour
 
         while (enemyPoints > 0)
         {
+            NavMeshHit hit = new NavMeshHit();
             Vector3 spawnLocation = spawnLocations[UnityEngine.Random.Range(0, spawnLocations.Count - 1)];
-            while (takenLocations.Contains(spawnLocation)) spawnLocation = spawnLocations[UnityEngine.Random.Range(0, spawnLocations.Count - 1)];
+            while (takenLocations.Contains(spawnLocation) || !NavMesh.SamplePosition(spawnLocation, out hit, 0.1f, 1 << NavMesh.GetAreaFromName("Walkable"))) spawnLocation = spawnLocations[UnityEngine.Random.Range(0, spawnLocations.Count - 1)];
             takenLocations.Add(spawnLocation);
+            Debug.Log("Point chosen: " + spawnLocation);
             Tuple<GameObject, int> chosenEnemyType = availableEnemies[UnityEngine.Random.Range(0, availableEnemies.Count)];
             while(enemyPoints - chosenEnemyType.Item2 < 0) chosenEnemyType = availableEnemies[UnityEngine.Random.Range(0, availableEnemies.Count - 1)];
             Instantiate(chosenEnemyType.Item1, spawnLocation, Quaternion.identity);
