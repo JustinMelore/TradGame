@@ -24657,7 +24657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyWaves:
-  - boatEnemyPoints: 10
+  - boatEnemyPoints: 5
     seaEnemyPoints: 0
     boatEnemyTypes:
     - {fileID: 1645228321}
@@ -24665,8 +24665,8 @@ MonoBehaviour:
     boatEnemyCosts: 0100000002000000
     seaEnemyTypes: []
     seaEnemyCosts: 
-  - boatEnemyPoints: 0
-    seaEnemyPoints: 2
+  - boatEnemyPoints: 10
+    seaEnemyPoints: 0
     boatEnemyTypes:
     - {fileID: 1645228321}
     - {fileID: 2288634875506053353, guid: aac2f8425516e2b4d8048738fb3cab63, type: 3}
