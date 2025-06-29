@@ -244,6 +244,7 @@ MonoBehaviour:
   playerCollider: {fileID: 8727368030161467179}
   damage: 5
   speed: 8
+  projectileLifetime: 10
 --- !u!50 &1570716795210124184
 Rigidbody2D:
   serializedVersion: 5
