@@ -25,7 +25,7 @@ public class MeleeEnemy : Enemy
     protected override void Update()
     {
         base.Update();
-
+        targetLayer = LayerMask.GetMask("Player");
         float currentSpeed = agent.velocity.magnitude;
         animator.SetFloat("Speed", currentSpeed);
         animator.SetBool("HasTarget", DetectTargetInRadius(detectionRadius));
@@ -44,7 +44,9 @@ public class MeleeEnemy : Enemy
                 HandleAttack();
                 break;
         }
-        //Debug.Log("Current state is:" + currentState);
+        Debug.Log("TargetLayer is" + targetLayer);
+        Debug.Log("Target is" + target);
+        Debug.Log("Current state is:" + currentState);
         //Debug.Log("Current Layer is:" + targetLayer);
     }
     //protected override void HandleIdle()
@@ -118,10 +120,11 @@ public class MeleeEnemy : Enemy
         canParry = false;
         hurtbox.Deactivate();
     }
-    private void HandlePatrol()
+    protected override void HandlePatrol()
     {
         if (agent != null && !agent.hasPath || agent.remainingDistance < 0.2f)
         {
+            agent.ResetPath();
             Vector2 randomDir = Random.insideUnitCircle * patrolRadius;
             Vector3 patrolTarget = transform.position + new Vector3(randomDir.x, randomDir.y, 0f);
             agent.SetDestination(patrolTarget);
@@ -148,6 +151,7 @@ public class MeleeEnemy : Enemy
         {
             if (hit.CompareTag("Player"))
             {
+                target = hit.gameObject;
                 return true;
             }
         }

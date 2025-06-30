@@ -45,15 +45,18 @@ public class Enemy : MonoBehaviour
     }
     protected virtual void Update()
     {
+        if (currentState == EnemyState.Dead) return;
         switch (currentState)
         {
             case EnemyState.Intro:
                 break;
 
             case EnemyState.Idle:
+                HandleIdle();
                 break;
 
             case EnemyState.Patrol:
+                HandlePatrol();
                 break;
 
             case EnemyState.Chase:
@@ -70,15 +73,16 @@ public class Enemy : MonoBehaviour
                 break;
         }
     }
-    //protected virtual void HandleIdle()
-    //{
-    //    idleTimer += Time.deltaTime;
-    //    if (idleTimer >= idleTime)
-    //    {
-    //        idleTimer = 0f;
-    //        SwitchState(EnemyState.Patrol);
-    //    }
-    //}
+    protected virtual void HandleIdle()
+    {
+        idleTimer += Time.deltaTime;
+        if (idleTimer >= idleTime)
+        {
+            idleTimer = 0f;
+            SwitchState(EnemyState.Patrol);
+        }
+    }
+    protected virtual void HandlePatrol() { }
     protected virtual void HandleChase()
     {
         if (agent == null || target == null) return;
@@ -174,6 +178,7 @@ public class Enemy : MonoBehaviour
                 break;
 
             case EnemyState.Patrol:
+                HandlePatrol();
                 animator.SetFloat("Speed", 1f);
                 break;
 

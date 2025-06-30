@@ -65,7 +65,7 @@ public class RangedEnemy : Enemy
         }
     }
 
-    private void HandlePatrol()
+    protected override void HandlePatrol()
     {
         if (!agent.hasPath || agent.remainingDistance < 0.2f)
         {
