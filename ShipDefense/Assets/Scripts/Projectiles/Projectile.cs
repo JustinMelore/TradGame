@@ -13,9 +13,11 @@ public class Projectile : MonoBehaviour
     [Header("Projectile Settings")]
     [SerializeField] private int damage;
     [SerializeField] private float speed;
+    [SerializeField] private float projectileLifetime; 
 
 
     private PlayerController player;
+    private float currentLifetime;
 
     //public GameObject Owner { get; set; }
 
@@ -24,6 +26,13 @@ public class Projectile : MonoBehaviour
         player = FindFirstObjectByType<PlayerController>();
         enemyCollider.enabled = true;
         playerCollider.enabled = false;
+        currentLifetime = 0f;
+    }
+
+    private void Update()
+    {
+        currentLifetime += Time.deltaTime;
+        if (currentLifetime >= projectileLifetime) Destroy(gameObject);
     }
 
     /// <summary>
@@ -59,7 +68,7 @@ public class Projectile : MonoBehaviour
             enemyCollider.enabled = false;
             playerCollider.enabled = true;
             ChangeMoveDirection(player.GetAttackDirection());
-
+            currentLifetime = 0f;
         }
     }
     private void OnBecameInvisible()
