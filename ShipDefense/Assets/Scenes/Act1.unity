@@ -24569,7 +24569,6 @@ MonoBehaviour:
   waveDowntimeInterval: 5
   shipTiles: {fileID: 309163759}
   seaTiles: {fileID: 463991952}
-  gameManager: {fileID: 268777749}
 --- !u!4 &1662319309
 Transform:
   m_ObjectHideFlags: 0
@@ -24903,7 +24902,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.471
+  m_MatchWidthOrHeight: 0.317
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
