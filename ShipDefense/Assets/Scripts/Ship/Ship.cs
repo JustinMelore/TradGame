@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Handles the behavior of the ship, specifically in regards to its health
@@ -14,7 +15,10 @@ public class Ship : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         currentShipHealth = shipHealth;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     /// <summary>
@@ -34,5 +38,12 @@ public class Ship : MonoBehaviour
     private void DestroyShip()
     {
         gameManager.FailGame();
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (gameManager == null) gameManager = FindFirstObjectByType<GameManager>();
+        if (healthBar == null) healthBar = FindFirstObjectByType<Canvas>().transform.Find("ShipHealthBar").GetComponent<PlayerHealthUI>();
+        healthBar.SetHealth(currentShipHealth, shipHealth);
     }
 }
