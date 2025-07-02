@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Tilemaps;
 
 /// <summary>
@@ -30,8 +31,10 @@ public class WaveSpawner : MonoBehaviour
         currentWaveIndex = -1;
         wavesRemaining = true;
         isSpawningWave = false;
-        shipSpawnLocations = GetTilePositions(shipTiles);
-        seaSpawnLocations = GetTilePositions(seaTiles);
+        shipSpawnLocations = GetTilePositions(shipTiles, -3.25f, 4.0f, -13.0f, 7.0f);
+        //Split seaSpawnLocations in two to account for left and right side of ship while cutting out the spawn points in the middle
+        seaSpawnLocations = GetTilePositions(seaTiles, -9.0f, -7.0f, -13.0f, 6.0f);
+        seaSpawnLocations.AddRange(GetTilePositions(seaTiles, 7.0f, 9.0f, -13.0f, 6.0f));
     }
 
     private void Update()
@@ -61,6 +64,7 @@ public class WaveSpawner : MonoBehaviour
         yield return new WaitForSeconds(waveDowntimeInterval);
         Debug.Log("Spawning wave");
         HashSet<Vector3> takenSpawnPoints = new HashSet<Vector3>();
+        takenSpawnPoints.Add(FindFirstObjectByType<PlayerController>().transform.position);
         //currentWaveEnemyCount = enemyWaves[currentWaveIndex].BoatEnemyCount + enemyWaves[currentWaveIndex].SeaEnemyCount;
         SpawnEnemies(enemyWaves[currentWaveIndex].BoatEnemyCount, enemyWaves[currentWaveIndex].BoatEnemies, shipSpawnLocations, takenSpawnPoints);
         SpawnEnemies(enemyWaves[currentWaveIndex].SeaEnemyCount, enemyWaves[currentWaveIndex].SeaEnemies, seaSpawnLocations, takenSpawnPoints);
@@ -81,14 +85,14 @@ public class WaveSpawner : MonoBehaviour
     /// </summary>
     /// <param name="tileMap">The tilemap to get the tile positions from</param>
     /// <returns>A list of all the world positions of each tile</returns>
-    private List<Vector3> GetTilePositions(Tilemap tileMap)
+    private List<Vector3> GetTilePositions(Tilemap tileMap, float xLowerBound, float xUpperBound, float yLowerBound, float yUpperBound)
     {
         List<Vector3> tilePositions = new List<Vector3>();
         foreach(var position in tileMap.cellBounds.allPositionsWithin)
         {
             Vector3Int cellPos = new Vector3Int(position.x, position.y, position.z);
             Vector3 worldPos = tileMap.GetCellCenterWorld(cellPos);
-            if (tileMap.HasTile(cellPos)) tilePositions.Add(worldPos);
+            if (tileMap.HasTile(cellPos) && worldPos.x >= xLowerBound && worldPos.x <= xUpperBound && worldPos.y >= yLowerBound && worldPos.y <= yUpperBound) tilePositions.Add(worldPos);
         }
         return tilePositions;
     }
@@ -118,8 +122,9 @@ public class WaveSpawner : MonoBehaviour
 
         while (enemyPoints > 0)
         {
+            NavMeshHit hit = new NavMeshHit();
             Vector3 spawnLocation = spawnLocations[UnityEngine.Random.Range(0, spawnLocations.Count - 1)];
-            while (takenLocations.Contains(spawnLocation)) spawnLocation = spawnLocations[UnityEngine.Random.Range(0, spawnLocations.Count - 1)];
+            while (takenLocations.Contains(spawnLocation) || !NavMesh.SamplePosition(spawnLocation, out hit, 0.1f, 1 << NavMesh.GetAreaFromName("Walkable"))) spawnLocation = spawnLocations[UnityEngine.Random.Range(0, spawnLocations.Count - 1)];
             takenLocations.Add(spawnLocation);
             Tuple<GameObject, int> chosenEnemyType = availableEnemies[UnityEngine.Random.Range(0, availableEnemies.Count)];
             while(enemyPoints - chosenEnemyType.Item2 < 0) chosenEnemyType = availableEnemies[UnityEngine.Random.Range(0, availableEnemies.Count - 1)];

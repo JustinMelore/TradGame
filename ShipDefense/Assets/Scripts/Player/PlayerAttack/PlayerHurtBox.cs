@@ -9,7 +9,8 @@ public class PlayerHurtbox : Hurtbox
     {
         if (collision.CompareTag("Enemy"))
         {
-            Enemy enemy = collision.GetComponent<Enemy>();
+            Enemy enemy = collision.GetComponentInParent<Enemy>();
+            Debug.Log(enemy);
             if (enemy != null)
             {
                 enemy.DamageEnemy(damage);
