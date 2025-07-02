@@ -17,7 +17,6 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private float waveDowntimeInterval;
     [SerializeField] private Tilemap shipTiles;
     [SerializeField] private Tilemap seaTiles;
-    [SerializeField] private GameManager gameManager;
 
     private int currentWaveIndex;
     private List<Vector3> shipSpawnLocations;
@@ -48,7 +47,7 @@ public class WaveSpawner : MonoBehaviour
             {
                 wavesRemaining = false;
                 Debug.Log("All waves defeated");
-                gameManager.WinGame();
+                FindFirstObjectByType<SceneTransition>().TriggerSceneExit();
             }
             else StartCoroutine(SpawnWave());
         }
