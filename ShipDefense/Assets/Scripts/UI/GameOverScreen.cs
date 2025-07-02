@@ -38,7 +38,8 @@ public class GameOverScreen : MonoBehaviour
     public void OnPlayAgain()
     {
         gameObject.SetActive(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Destroy(FindFirstObjectByType<Ship>().gameObject);
+        SceneManager.LoadScene("Act1");
     }
 
     /// <summary>
@@ -46,6 +47,7 @@ public class GameOverScreen : MonoBehaviour
     /// </summary>
     public void OnQuitLevel()
     {
+        Destroy(FindFirstObjectByType<Ship>().gameObject);
         SceneManager.LoadScene("MainMenu");
     }
 }

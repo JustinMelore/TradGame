@@ -46,4 +46,9 @@ public class Ship : MonoBehaviour
         if (healthBar == null) healthBar = FindFirstObjectByType<Canvas>().transform.Find("ShipHealthBar").GetComponent<PlayerHealthUI>();
         healthBar.SetHealth(currentShipHealth, shipHealth);
     }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 }
