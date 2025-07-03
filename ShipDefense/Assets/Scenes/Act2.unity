@@ -24678,7 +24678,7 @@ MonoBehaviour:
   - boatEnemyPoints: 5
     seaEnemyPoints: 2
     boatEnemyTypes:
-    - {fileID: 1998829741044148101, guid: 24256a8e9ac84fa4d8b5f3e799f7c5b0, type: 3}
+    - {fileID: 8856321867918069183, guid: 24256a8e9ac84fa4d8b5f3e799f7c5b0, type: 3}
     - {fileID: 2288634875506053353, guid: aac2f8425516e2b4d8048738fb3cab63, type: 3}
     boatEnemyCosts: 0100000002000000
     seaEnemyTypes:
@@ -24687,7 +24687,7 @@ MonoBehaviour:
   - boatEnemyPoints: 7
     seaEnemyPoints: 3
     boatEnemyTypes:
-    - {fileID: 1998829741044148101, guid: 24256a8e9ac84fa4d8b5f3e799f7c5b0, type: 3}
+    - {fileID: 8856321867918069183, guid: 24256a8e9ac84fa4d8b5f3e799f7c5b0, type: 3}
     - {fileID: 2288634875506053353, guid: aac2f8425516e2b4d8048738fb3cab63, type: 3}
     boatEnemyCosts: 0100000002000000
     seaEnemyTypes:
