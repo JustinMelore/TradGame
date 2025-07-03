@@ -19,8 +19,14 @@ public class SceneTransition : MonoBehaviour
 
     public void TriggerSceneExit()
     {
-        transitonAnimator.SetTrigger("SceneExit");
-        StartCoroutine(TransitionSceneCoroutine());
+        if(SceneManager.GetActiveScene().name == "Act3")
+        {
+            FindFirstObjectByType<GameManager>().WinGame();
+        } else
+        {
+            transitonAnimator.SetTrigger("SceneExit");
+            StartCoroutine(TransitionSceneCoroutine());
+        }
     }
 
     private IEnumerator TransitionSceneCoroutine()
