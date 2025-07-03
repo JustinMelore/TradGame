@@ -24483,6 +24483,14 @@ PrefabInstance:
       propertyPath: playersprite
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2367699985549124048, guid: da71ff931c4b51a459b36e254aa5108b, type: 3}
+      propertyPath: parryDuration
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2367699985549124048, guid: da71ff931c4b51a459b36e254aa5108b, type: 3}
+      propertyPath: attackDuration
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 2968253831575955491, guid: da71ff931c4b51a459b36e254aa5108b, type: 3}
       propertyPath: m_Color.b
       value: 0.21960786

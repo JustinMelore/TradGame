@@ -57,7 +57,7 @@ MonoBehaviour:
   playerHitbox: {fileID: 3137451919693355983}
   hurtbox: {fileID: 6182050002062896602}
   parrybox: {fileID: 2865147638107901525}
-  waveManager: {fileID: 0}
+  gameManager: {fileID: 0}
   audioSource: {fileID: 4246422879269335579}
   movementSpeed: 5
   dodgeSpeed: 20
@@ -67,7 +67,7 @@ MonoBehaviour:
   parryDuration: 0.5
   parryCooldown: 0.25
   damage: 5
-  attackDuration: 0.1
+  attackDuration: 0.35
   attackCooldown: 0.25
   swordSwing: {fileID: 8300000, guid: 395a4acec656c8d4082ee3c22aa1c9cb, type: 3}
   DogeSound: {fileID: 8300000, guid: 56703418e3aed4c47a5f6622816b8e41, type: 3}
@@ -407,7 +407,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.6, y: -1.2, z: 0}
-  m_LocalScale: {x: 2.875, y: 0.55, z: 1}
+  m_LocalScale: {x: 1.1859375, y: 0.69437504, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3108816124598006659}
@@ -456,7 +456,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 0.15574935, g: 0.277419, b: 0.9433962, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -464,7 +464,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &6100039678811099159
@@ -525,6 +525,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 923d1be2e91246241b097091669aa1f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
+  stunDuration: 2
 --- !u!1 &6320839252007948615
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,7 +556,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.6, y: -1.2, z: 0}
-  m_LocalScale: {x: 2.875, y: 0.55, z: 1}
+  m_LocalScale: {x: 1.2066016, y: 0.70125, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3108816124598006659}
@@ -603,7 +605,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 0.9150943, g: 0.2719384, b: 0.29122555, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -611,7 +613,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &6182050002062896602
@@ -626,6 +628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d643a0f4305c27479a43ebb2f6f60e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
 --- !u!61 &4916125420928236446
 BoxCollider2D:
   m_ObjectHideFlags: 0

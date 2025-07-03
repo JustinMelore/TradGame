@@ -55,7 +55,8 @@ public class PlayerController : MonoBehaviour
     private float currentAttackTime;
     private float currentAttackCooldown;
     private int health;
-    private Vector2 lastMoveDirection = Vector2.down;
+    private Vector2 lastMoveDirection;
+
 
 
     private void Awake()
@@ -164,25 +165,24 @@ public class PlayerController : MonoBehaviour
 
         if (isAttacking)
         {
-            Vector2 mouseDir = ((Vector2)mousePosition - (Vector2)transform.position).normalized;
-
-            if (Mathf.Abs(mouseDir.x) > Mathf.Abs(mouseDir.y))
-            {
-                animator.SetFloat("X", mouseDir.x > 0 ? 1 : -1);
-                animator.SetFloat("Y", 0);
-            }
-            else
-            {
-                animator.SetFloat("X", 0);
-                animator.SetFloat("Y", mouseDir.y > 0 ? 1 : -1);
-            }
+            Vector2 attackDirection = (mousePosition - transform.position).normalized;
+            //if (Mathf.Abs(mouseDir.x) > Mathf.Abs(mouseDir.y))
+            //{
+            //    animator.SetFloat("X", mouseDir.x > 0 ? 1 : -1);
+            //    animator.SetFloat("Y", 0);
+            //}
+            //else
+            //{
+            //    animator.SetFloat("X", 0);
+            //    animator.SetFloat("Y", mouseDir.y > 0 ? 1 : -1);
+            //}
+            animator.SetFloat("X", attackDirection.x > 0 ? 1 : -1);
             PerformAttack();
         }
         else
         {
             if (movementDirection != Vector2.zero)
             {
-                lastMoveDirection = movementDirection;
                 animator.SetBool("isRunning", true);
                 animator.SetFloat("X", movementDirection.x);
                 animator.SetFloat("Y", movementDirection.y);
@@ -190,8 +190,8 @@ public class PlayerController : MonoBehaviour
             else
             {
                 animator.SetBool("isRunning", false);
-                animator.SetFloat("X", lastMoveDirection.x);
-                animator.SetFloat("Y", lastMoveDirection.y);
+                animator.SetFloat("X", movementDirection.x);
+                animator.SetFloat("Y", movementDirection.y);
             }
         }
 
