@@ -87,7 +87,7 @@ public class MeleeEnemy : Enemy
     {
         if (currentState == EnemyState.Stunned) return;
         Vector3 directionToTarget = (target.transform.position - transform.position).normalized;
-        float attackOffset = 1.2f;
+        float attackOffset = 0.6f;
         attackDirection.position = transform.position + directionToTarget * attackOffset;
         float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
         attackDirection.rotation = Quaternion.Euler(0f, 0f, angle);
@@ -99,10 +99,7 @@ public class MeleeEnemy : Enemy
     {
         canParry = true;
     }
-    public void CannotParry()
-    {
-        canParry = false;
-    }
+    //
     public virtual void OnAttackEnd()
     {
         isAttacking = false;

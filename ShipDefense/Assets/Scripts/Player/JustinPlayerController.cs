@@ -43,7 +43,6 @@ public class PlayerController : MonoBehaviour
     private float currentDodgeDistance;
     private Vector2 preDodgePosition;
     private Vector2 dodgeDirection;
-    private Animator animator;
 
     private bool isParrying;
     private bool parryOnCooldown;
@@ -55,8 +54,6 @@ public class PlayerController : MonoBehaviour
     private float currentAttackTime;
     private float currentAttackCooldown;
     private int health;
-    private Vector2 lastMoveDirection = Vector2.down;
-
 
     private void Awake()
     {
@@ -80,7 +77,6 @@ public class PlayerController : MonoBehaviour
         }
         hurtbox.Deactivate();
         parrybox.Deactivate();
-        animator = GetComponent<Animator>();
     }
 
     /// <summary>
@@ -117,13 +113,12 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Triggers when the player presses the parry button..
+    /// Triggers when the player presses the parry button
     /// </summary>
     private void OnParry()
     {
         if (isParrying || parryOnCooldown || isDodging || isAttacking) return;
         currentParryTime = 0f;
-        animator.SetTrigger("Parry");
         isParrying = true;
         parrybox.Activate(0);
     }
@@ -136,7 +131,6 @@ public class PlayerController : MonoBehaviour
         if (isAttacking || attackOnCooldown || isDodging || isParrying) return;
         currentAttackTime = 0f;
         isAttacking = true;
-        animator.SetTrigger("Attack");
         hurtbox.Activate(damage);
         PlaySound(swordSwing);
     }
@@ -147,63 +141,29 @@ public class PlayerController : MonoBehaviour
         if (!isDodging)
         {
             player.linearVelocity = movementDirection * movementSpeed;
-        }
-        else
+        } else
         {
             PerformDodge();
         }
-
-        if (isParrying)
+        if(isParrying)
         {
             PerformParry();
-        }
-        else if (parryOnCooldown)
+        } else if(parryOnCooldown)
         {
             RecoverParryCooldown();
         }
-
         if (isAttacking)
         {
-            Vector2 mouseDir = ((Vector2)mousePosition - (Vector2)transform.position).normalized;
-
-            if (Mathf.Abs(mouseDir.x) > Mathf.Abs(mouseDir.y))
-            {
-                animator.SetFloat("X", mouseDir.x > 0 ? 1 : -1);
-                animator.SetFloat("Y", 0);
-            }
-            else
-            {
-                animator.SetFloat("X", 0);
-                animator.SetFloat("Y", mouseDir.y > 0 ? 1 : -1);
-            }
             PerformAttack();
         }
-        else
-        {
-            if (movementDirection != Vector2.zero)
-            {
-                lastMoveDirection = movementDirection;
-                animator.SetBool("isRunning", true);
-                animator.SetFloat("X", movementDirection.x);
-                animator.SetFloat("Y", movementDirection.y);
-            }
-            else
-            {
-                animator.SetBool("isRunning", false);
-                animator.SetFloat("X", lastMoveDirection.x);
-                animator.SetFloat("Y", lastMoveDirection.y);
-            }
-        }
-
-        if (attackOnCooldown && !isAttacking)
+        else if (attackOnCooldown)
         {
             RecoverAttackCooldown();
         }
     }
 
-
     /// <summary>
-    /// Changes the player's current attack direction to match up with their mouse position.
+    /// Changes the player's current attack direction to match up with their mouse position
     /// </summary>
     private void UpdateAttackDirection()
     {
@@ -254,7 +214,7 @@ public class PlayerController : MonoBehaviour
 
 
     /// <summary>
-    /// Determines when the parry ends and goes on cooldown.
+    /// Determines when the parry ends and goes on cooldown
     /// </summary>
     private void PerformParry()
     {
