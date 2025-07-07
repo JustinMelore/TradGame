@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerParrybox parrybox;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private TrailRenderer attackVisual;
 
     [Header("Movement Settings")]
     [SerializeField] private float movementSpeed;
@@ -137,6 +138,7 @@ public class PlayerController : MonoBehaviour
         if (isAttacking || attackOnCooldown || isDodging || isParrying) return;
         currentAttackTime = 0f;
         isAttacking = true;
+        attackVisual.enabled = true;
         animator.SetTrigger("Attack");
         hurtbox.Activate(damage);
         PlaySound(swordSwing);
@@ -299,6 +301,7 @@ public class PlayerController : MonoBehaviour
             isAttacking = false;
             hurtbox.Deactivate();
             currentAttackCooldown = 0f;
+            attackVisual.enabled = false;
             attackOnCooldown = true;
         }
     }
