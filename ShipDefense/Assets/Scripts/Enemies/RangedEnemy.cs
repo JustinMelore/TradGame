@@ -106,7 +106,7 @@ public class RangedEnemy : Enemy
         {
             HandleEvading();
         }
-        Debug.Log("Current state: " + currentState);
+        //Debug.Log("Current state: " + currentState);
     }
 
     private bool DetectTargetInRadius(float radius)

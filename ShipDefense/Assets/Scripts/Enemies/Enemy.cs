@@ -140,7 +140,7 @@ public class Enemy : MonoBehaviour
     public virtual void DamageEnemy(int damage)
     {
         health -= damage;
-        Debug.Log("Enemy damaged. New health is " + health);
+        //Debug.Log("Enemy damaged. New health is " + health);
         Instantiate(enemyDamageParticles, transform.position, Quaternion.identity);
         if (health <= 0) KillEnemy();
     }
@@ -149,7 +149,7 @@ public class Enemy : MonoBehaviour
     /// </summary>
     protected virtual void KillEnemy()
     {
-        Debug.Log("Enemy killed!");
+        //Debug.Log("Enemy killed!");
         currentState = EnemyState.Dead;
         if (agent != null)
         {

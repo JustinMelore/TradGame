@@ -69,8 +69,10 @@ public class Projectile : MonoBehaviour
             playerCollider.enabled = true;
             ChangeMoveDirection(player.GetAttackDirection());
             currentLifetime = 0f;
+            collision.transform.parent.GetComponentInParent<Animator>().SetTrigger("Deflected");
         }
     }
+
     private void OnBecameInvisible()
     {
         Destroy(gameObject);
@@ -82,6 +84,7 @@ public class Projectile : MonoBehaviour
         enemyCollider.enabled = false;
         playerCollider.enabled = true;
         ChangeMoveDirection(newDirection);
+        currentLifetime = 0f;
     }
 }
 

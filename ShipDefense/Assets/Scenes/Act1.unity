@@ -24495,6 +24495,10 @@ PrefabInstance:
       propertyPath: attackDuration
       value: 0.35
       objectReference: {fileID: 0}
+    - target: {fileID: 2865147638107901525, guid: da71ff931c4b51a459b36e254aa5108b, type: 3}
+      propertyPath: playerAnimator
+      value: 
+      objectReference: {fileID: 415652467}
     - target: {fileID: 2968253831575955491, guid: da71ff931c4b51a459b36e254aa5108b, type: 3}
       propertyPath: m_Color.b
       value: 0.21960786

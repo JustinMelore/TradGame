@@ -2,15 +2,18 @@ using UnityEngine;
 
 public class PlayerParrybox : Hurtbox
 {
+    [SerializeField] private Animator playerAnimator;
     [SerializeField] private float stunDuration = 2.0f;
+
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        Projectile projectile = collision.GetComponent<Projectile>();
-        if (projectile != null)
-        {
-            Debug.Log("Parried a projectile!");
-            projectile.Reflect(GetComponentInParent<PlayerController>().GetAttackDirection());
-        }
+        //Projectile projectile = collision.GetComponent<Projectile>();
+        //if (projectile != null)
+        //{
+        //    Debug.Log("Parried a projectile!");
+        //    projectile.Reflect(GetComponentInParent<PlayerController>().GetAttackDirection());
+        //    playerAnimator.SetTrigger("Deflected");
+        //}
 
         MeleeEnemy meleeEnemy = collision.GetComponentInParent<MeleeEnemy>();
         if (meleeEnemy != null)
@@ -19,6 +22,7 @@ public class PlayerParrybox : Hurtbox
             {
                 Debug.Log("Parried a melee enemy!");
                 meleeEnemy.Stun(this.GetStunDuration());
+                playerAnimator.SetTrigger("Deflected");
             }
         }
     }
