@@ -271,6 +271,7 @@ public class PlayerController : MonoBehaviour
             parrybox.Deactivate();
             currentParryCooldown = 0f;
             parryOnCooldown = true;
+            animator.ResetTrigger("Deflected");
         }
     }
 
