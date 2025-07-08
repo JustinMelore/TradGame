@@ -70,6 +70,7 @@ public class Projectile : MonoBehaviour
             ChangeMoveDirection(player.GetAttackDirection());
             currentLifetime = 0f;
             collision.transform.parent.GetComponentInParent<Animator>().SetTrigger("Deflected");
+            collision.transform.parent.GetComponentInParent<PlayerController>().SpawnDeflectParticles();
         }
     }
 

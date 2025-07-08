@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip DogeSound;
     [Header("VFX")]
     [SerializeField] private GameObject playerDamageVFX;
+    [SerializeField] private GameObject playerDeflectVFX;
     [SerializeField] private GameObject playerAttackVFX;
 
     private Vector3 mousePosition;
@@ -141,7 +143,7 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger("Attack");
         hurtbox.Activate(damage);
         PlaySound(swordSwing);
-        GameObject test = Instantiate(playerAttackVFX, transform.position, Quaternion.Euler(0f, 0f, attackDirection.rotation.eulerAngles.z - 90f));
+        GameObject attackVisual = Instantiate(playerAttackVFX, transform.position, Quaternion.Euler(0f, 0f, attackDirection.rotation.eulerAngles.z - 90f));
     }
 
     void FixedUpdate()
@@ -362,6 +364,14 @@ public class PlayerController : MonoBehaviour
     {
         audioSource.pitch = Random.Range(0.8f, 1.2f);
         audioSource.PlayOneShot(audio);
+    }
+
+    /// <summary>
+    /// Spawns in an instance of the playerDeflectVFX particles
+    /// </summary>
+    public void SpawnDeflectParticles()
+    {
+        Instantiate(playerDeflectVFX, parrybox.transform.position, Quaternion.Euler(0f, 0f, attackDirection.rotation.eulerAngles.z - 180f));
     }
 }
  
