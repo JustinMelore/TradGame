@@ -20,7 +20,7 @@ public class PlayerParrybox : Hurtbox
         //    projectile.Reflect(GetComponentInParent<PlayerController>().GetAttackDirection());
         //    playerAnimator.SetTrigger("Deflected");
         //}
-
+        Debug.Log($"Collided with {collision.gameObject}");
         MeleeEnemy meleeEnemy = collision.GetComponentInParent<MeleeEnemy>();
         if (meleeEnemy != null)
         {

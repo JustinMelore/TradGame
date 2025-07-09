@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2144817995443620241}
   - component: {fileID: 6410456910313613997}
   - component: {fileID: 654535342878467103}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: MeleeEnemyHurtBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
