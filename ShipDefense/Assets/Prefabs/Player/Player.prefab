@@ -156,6 +156,7 @@ MonoBehaviour:
   damage: 5
   attackDuration: 0.35
   attackCooldown: 0.25
+  healthFromParry: 5
   swordSwing: {fileID: 8300000, guid: 395a4acec656c8d4082ee3c22aa1c9cb, type: 3}
   DogeSound: {fileID: 8300000, guid: 56703418e3aed4c47a5f6622816b8e41, type: 3}
   playerDamageVFX: {fileID: 8038313975001508686, guid: 660777c0547ae5c4b8c3e0349ed58b0c, type: 3}

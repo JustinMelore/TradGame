@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private float attackDuration;
     [SerializeField] private float attackCooldown;
+    [SerializeField] private int healthFromParry;
 
     [Header("Sounds")]
     [SerializeField] private AudioClip swordSwing;
@@ -373,6 +374,16 @@ public class PlayerController : MonoBehaviour
     public void SpawnDeflectParticles()
     {
         Instantiate(playerDeflectVFX, parrybox.transform.position, Quaternion.Euler(0f, 0f, attackDirection.rotation.eulerAngles.z - 180f));
+    }
+
+    /// <summary>
+    /// Heals the player by the amount specified by healthFromParry
+    /// </summary>
+    public void HealFromParry()
+    {
+        health += healthFromParry;
+        health = Mathf.Clamp(health, 0, maxhealth);
+        healthUI.SetHealth(health, maxhealth);
     }
 }
  
