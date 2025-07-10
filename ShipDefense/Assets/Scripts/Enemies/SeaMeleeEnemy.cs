@@ -31,7 +31,8 @@ public class SeaMeleeEnemy : MeleeEnemy
 
     protected override void Update()
     {
-        if (Time.time - lastAttackTime >= attackCooldown && currentState != EnemyState.Stunned && currentState != EnemyState.Dead)
+        if (currentState == EnemyState.Dead) return;
+        if (Time.time - lastAttackTime >= attackCooldown && currentState != EnemyState.Stunned)
         {
             HandleAttack();
             lastAttackTime = Time.time;
