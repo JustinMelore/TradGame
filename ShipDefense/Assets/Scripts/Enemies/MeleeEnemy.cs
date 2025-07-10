@@ -140,6 +140,7 @@ public class MeleeEnemy : Enemy
     protected override void SwitchState(EnemyState newState)
     {
         base.SwitchState(newState);
+        hurtbox.Deactivate();
         if(agent != null) agent.speed = speed;
         if (newState == EnemyState.Patrol)
         {
