@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
     private float currentAttackCooldown;
     private int health;
     private Vector2 lastMoveDirection;
+    private Vector2 attackAnimationDirection;
 
 
 
@@ -139,6 +140,7 @@ public class PlayerController : MonoBehaviour
     private void OnAttack()
     {
         if (isAttacking || attackOnCooldown || isDodging || isParrying) return;
+        attackAnimationDirection = (mousePosition - transform.position).normalized;
         currentAttackTime = 0f;
         isAttacking = true;
         animator.SetTrigger("Attack");
@@ -170,7 +172,6 @@ public class PlayerController : MonoBehaviour
 
         if (isAttacking)
         {
-            Vector2 attackDirection = (mousePosition - transform.position).normalized;
             //if (Mathf.Abs(mouseDir.x) > Mathf.Abs(mouseDir.y))
             //{
             //    animator.SetFloat("X", mouseDir.x > 0 ? 1 : -1);
@@ -181,7 +182,7 @@ public class PlayerController : MonoBehaviour
             //    animator.SetFloat("X", 0);
             //    animator.SetFloat("Y", mouseDir.y > 0 ? 1 : -1);
             //}
-            animator.SetFloat("X", attackDirection.x > 0 ? 1 : -1);
+            animator.SetFloat("X", attackAnimationDirection.x > 0 ? 1 : -1);
             PerformAttack();
         }
         else
