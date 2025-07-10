@@ -32,8 +32,8 @@ public class WaveSpawner : MonoBehaviour
         isSpawningWave = false;
         shipSpawnLocations = GetTilePositions(shipTiles, -3.25f, 4.0f, -13.0f, 7.0f);
         //Split seaSpawnLocations in two to account for left and right side of ship while cutting out the spawn points in the middle
-        seaSpawnLocations = GetTilePositions(seaTiles, -9.0f, -7.0f, -13.0f, 6.0f);
-        seaSpawnLocations.AddRange(GetTilePositions(seaTiles, 7.0f, 9.0f, -13.0f, 6.0f));
+        seaSpawnLocations = GetTilePositions(seaTiles, -9.0f, -7.0f, -13.0f, 1.0f);
+        seaSpawnLocations.AddRange(GetTilePositions(seaTiles, 7.0f, 9.0f, -5.5f, 3.0f));
     }
 
     private void Update()
