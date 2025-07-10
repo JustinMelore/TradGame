@@ -639,10 +639,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: But not all hope was lost for Judas. For redemption was within reach. While
-    festering in his guilty soul deep in the underworld, he could hear God's almighty
-    voice calling out to him, telling him, "If you can brave the challenges ahead,
-    then heaven may await".
+  m_text: But not all hope was lost for Judas. He could hear God's almighty voice
+    calling out to him, telling him, "If you can brave the challenges ahead, then
+    heaven may await".
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -2245,10 +2244,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Following the crucifixtion of Jesus Christ, Judas hanged himself out of
-    guilt, for even he could not stomach what had happened. As a result of his actions,
-    he was punished by God. Not only had he sinned, but he had betrayed the one closest
-    to him. For his betrayal and injustice, he was condemned to the nine circles
-    of Hell.
+    guilt, and he was punished by God. For this betrayal and injustice, he was condemned
+    to the nine circles of Hell.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
