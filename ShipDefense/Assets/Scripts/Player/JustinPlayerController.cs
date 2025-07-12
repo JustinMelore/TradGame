@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float attackDuration;
     [SerializeField] private float attackCooldown;
     [SerializeField] private int healthFromParry;
+    [SerializeField] private Transform attackpointer;
 
     [Header("Sounds")]
     [SerializeField] private AudioClip swordSwing;
@@ -154,6 +155,14 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        Vector3 direction = mousePosition - transform.position;
+        direction.z = 0f;
+        direction.Normalize();
+        Vector3 arrowOffset = direction * 1.3f;
+        attackpointer.position = transform.position + arrowOffset;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        attackpointer.rotation = Quaternion.Euler(0f, 0f, angle - 90f);
+
         if (!isDodging)
         {
             player.linearVelocity = movementDirection * movementSpeed;
