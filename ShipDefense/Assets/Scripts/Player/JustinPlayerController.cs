@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerParrybox parrybox;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private AudioSource audioSource;
-
+   
     [Header("Movement Settings")]
     [SerializeField] private float movementSpeed;
     [SerializeField] private float dodgeSpeed;
@@ -120,6 +120,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 mouseInput = input.Get<Vector2>();
         mousePosition = playerCamera.ScreenToWorldPoint(new Vector3(mouseInput.x, mouseInput.y, 1f));
+        animator.SetFloat("IdleX", mousePosition.x);
     }
 
     /// <summary>
@@ -128,6 +129,7 @@ public class PlayerController : MonoBehaviour
     private void OnParry()
     {
         if (isParrying || parryOnCooldown || isDodging || isAttacking) return;
+        UpdateAttackDirection();
         currentParryTime = 0f;
         animator.SetTrigger("Parry");
         isParrying = true;
@@ -141,6 +143,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isAttacking || attackOnCooldown || isDodging || isParrying) return;
         attackAnimationDirection = (mousePosition - transform.position).normalized;
+        UpdateAttackDirection();
         currentAttackTime = 0f;
         isAttacking = true;
         animator.SetTrigger("Attack");
@@ -151,7 +154,6 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        UpdateAttackDirection();
         if (!isDodging)
         {
             player.linearVelocity = movementDirection * movementSpeed;
