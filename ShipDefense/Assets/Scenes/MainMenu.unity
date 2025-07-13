@@ -1439,7 +1439,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 450056056}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1146835192}
+        m_TargetAssemblyTypeName: TutorialScreen, Assembly-CSharp
+        m_MethodName: OnBackButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &450056056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1824,7 +1836,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 704450493}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1146835192}
+        m_TargetAssemblyTypeName: TutorialScreen, Assembly-CSharp
+        m_MethodName: OnTutorialButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &704450493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2163,6 +2187,7 @@ GameObject:
   - component: {fileID: 1146835188}
   - component: {fileID: 1146835187}
   - component: {fileID: 1146835191}
+  - component: {fileID: 1146835192}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2246,8 +2271,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 32391170}
-  - {fileID: 49912013}
   - {fileID: 287215324}
+  - {fileID: 49912013}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2268,6 +2293,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storyScreen: {fileID: 49912014}
+--- !u!114 &1146835192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146835186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2612f85c2f6d8cd4c9b88ce6edf040e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuScreen: {fileID: 32391169}
+  tutorialScreen: {fileID: 287215323}
 --- !u!1 &1396371227
 GameObject:
   m_ObjectHideFlags: 0
