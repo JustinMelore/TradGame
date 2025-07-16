@@ -19,7 +19,12 @@ public class GameManager : MonoBehaviour
     public void WinGame()
     {
         Debug.Log("Act won!");
-        if(SceneManager.GetActiveScene().name == "Act3") endScreen.WinGame();
+        if (SceneManager.GetActiveScene().name == "Act3")
+        {
+            FindFirstObjectByType<StoryScreen>(FindObjectsInactive.Include).RevealStoryScreen();
+            FindFirstObjectByType<PlayerController>().enabled = false;
+            Destroy(FindFirstObjectByType<Ship>().gameObject);
+        }
         else SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

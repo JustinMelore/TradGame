@@ -32,7 +32,8 @@ public class StoryScreen : MonoBehaviour
     /// </summary>
     public void OnContinue()
     {
-        SceneManager.LoadScene("Act1");
+        if (SceneManager.GetActiveScene().name == "MainMenu") SceneManager.LoadScene("Act1");
+        else SceneManager.LoadScene("MainMenu");
     }
        
     /// <summary>
