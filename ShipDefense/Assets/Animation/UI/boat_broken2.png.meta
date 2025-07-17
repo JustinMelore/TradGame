@@ -1,0 +1,260 @@
+fileFormatVersion: 2
+guid: 996fdf183d8195d45bddc8df17eea349
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1602520078765838058
+    second: boat_broken2_0
+  - first:
+      213: 2338706544025481500
+    second: boat_broken2_1
+  - first:
+      213: -6081048522822930601
+    second: boat_broken2_2
+  - first:
+      213: 8476214839814485472
+    second: boat_broken2_3
+  - first:
+      213: 1025732676659501243
+    second: boat_broken2_4
+  - first:
+      213: 1304115973644895724
+    second: boat_broken2_5
+  - first:
+      213: -2662802796303271740
+    second: boat_broken2_6
+  - first:
+      213: -4901149968989160823
+    second: boat_broken2_7
+  - first:
+      213: -5941882266294112697
+    second: boat_broken2_8
+  - first:
+      213: -4013763592265614252
+    second: boat_broken2_9
+  - first:
+      213: 2305041245903726510
+    second: boat_broken2_10
+  - first:
+      213: -3046362092675374715
+    second: boat_broken2_11
+  - first:
+      213: -7025635223606336689
+    second: boat_broken2_12
+  - first:
+      213: 7450858611575061511
+    second: boat_broken2_13
+  - first:
+      213: -6617480495114058043
+    second: boat_broken2_14
+  - first:
+      213: 4824195235050712561
+    second: boat_broken2_15
+  - first:
+      213: 3177346802462239981
+    second: boat_broken2_16
+  - first:
+      213: 4497870977784084850
+    second: boat_broken2_17
+  - first:
+      213: -2610369596732607531
+    second: boat_broken2_18
+  - first:
+      213: -4369329613450479390
+    second: boat_broken2_19
+  - first:
+      213: -2809624283445321988
+    second: boat_broken2_20
+  - first:
+      213: -615044806061368709
+    second: boat_broken2_21
+  - first:
+      213: -3196759881326907212
+    second: boat_broken2_22
+  - first:
+      213: 1186935293015388201
+    second: boat_broken2_23
+  - first:
+      213: -8759164696724344192
+    second: boat_broken2_24
+  - first:
+      213: -4222406837511657219
+    second: boat_broken2_25
+  - first:
+      213: 4727487063746011516
+    second: boat_broken2_26
+  - first:
+      213: -4282660690107959522
+    second: boat_broken2_27
+  - first:
+      213: 6771757920408647767
+    second: boat_broken2_28
+  - first:
+      213: 3330057982139621716
+    second: boat_broken2_29
+  - first:
+      213: 973642853162897725
+    second: boat_broken2_30
+  - first:
+      213: 1135590360964709567
+    second: boat_broken2_31
+  - first:
+      213: 6772686386663951968
+    second: boat_broken2_32
+  - first:
+      213: -1902045209892756950
+    second: boat_broken2_33
+  - first:
+      213: -7707624091919992305
+    second: boat_broken2_34
+  - first:
+      213: -4815963016426112025
+    second: boat_broken2_35
+  - first:
+      213: -2168007974547718397
+    second: boat_broken2_36
+  - first:
+      213: 7690179916748909413
+    second: boat_broken2_37
+  - first:
+      213: -3698850915566671025
+    second: boat_broken2_38
+  - first:
+      213: -8585237027760785520
+    second: boat_broken2_39
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: boat_broken2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 640
+        height: 1440
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6113bb79a74b2c9e0800000000000000
+      internalID: -1602520078765838058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 2e84a9cc31cb2da438cc88c79b16d6e5
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      boat_broken2_0: -1602520078765838058
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

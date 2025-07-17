@@ -8,6 +8,9 @@ public class Ship : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
     [SerializeField] private PlayerHealthUI healthBar;
+    [SerializeField] private GameObject shipBroken1;
+    [SerializeField] private GameObject shipBroken2;
+    [SerializeField] private GameObject shipBroken3;
 
     [Header("Ship Settings")]
     [SerializeField] private int shipHealth;
@@ -30,6 +33,18 @@ public class Ship : MonoBehaviour
         currentShipHealth -= damage;
         healthBar.SetHealth(currentShipHealth, shipHealth);
         if (currentShipHealth <= 0) DestroyShip();
+        if (currentShipHealth <= 700)
+        {
+            shipBroken1.SetActive(true);
+        }
+        if (currentShipHealth <= 500)
+        {
+            shipBroken2.SetActive(true);
+        }
+        if (currentShipHealth <= 300)
+        {
+            shipBroken3.SetActive(true);
+        }
     }
 
     /// <summary>
