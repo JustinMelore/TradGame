@@ -46,7 +46,6 @@ public class SeaMeleeEnemy : MeleeEnemy
         canParry = false;
         hurtbox.Deactivate();
     }
-    
     public void MakeVulnerable()
     {
         enemyHitbox.SetActive(true);
