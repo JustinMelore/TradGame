@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip swordSwing;
     [SerializeField] private AudioClip DogeSound;
     [SerializeField] private AudioClip successfulParrySound;
+    [SerializeField] private AudioClip playerDamagedSound;
     [Header("VFX")]
     [SerializeField] private GameObject playerDamageVFX;
     [SerializeField] private GameObject playerDeflectVFX;
@@ -355,7 +356,8 @@ public class PlayerController : MonoBehaviour
     public void DamagePlayer(int damage)
     {
         health -= damage;
-        health = Mathf.Clamp(health, 0, maxhealth); 
+        health = Mathf.Clamp(health, 0, maxhealth);
+        PlaySound(playerDamagedSound);
         healthUI.SetHealth(health, maxhealth); 
         Debug.Log("Player damage; new health: " + health);
         Instantiate(playerDamageVFX, transform.position, Quaternion.identity);

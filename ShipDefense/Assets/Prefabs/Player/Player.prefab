@@ -251,6 +251,7 @@ MonoBehaviour:
   swordSwing: {fileID: 8300000, guid: 395a4acec656c8d4082ee3c22aa1c9cb, type: 3}
   DogeSound: {fileID: 8300000, guid: 56703418e3aed4c47a5f6622816b8e41, type: 3}
   successfulParrySound: {fileID: 8300000, guid: 6889ed9502be3624c814149bc302e8ad, type: 3}
+  playerDamagedSound: {fileID: 8300000, guid: 2ff48fe59fc27d4468b824cbf03c9b34, type: 3}
   playerDamageVFX: {fileID: 8038313975001508686, guid: 660777c0547ae5c4b8c3e0349ed58b0c, type: 3}
   playerDeflectVFX: {fileID: 5932808162369177771, guid: 0987c3d1c68999b4483ab8c47f395f3e, type: 3}
   playerAttackVFX: {fileID: 4556427241580565313, guid: 042d1b7992720ff409f0c1f93b572f2a, type: 3}

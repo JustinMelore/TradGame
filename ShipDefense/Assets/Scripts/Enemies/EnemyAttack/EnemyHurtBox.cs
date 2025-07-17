@@ -39,11 +39,12 @@ public class EnemyHurtbox : Hurtbox
                 //ship.DamageShip(damage);
                 //Debug.Log("Enemy hit the ship for " + damage + " damage");
                 hitShip = true;
-                //Deactivate();
+                Deactivate();
             }
         } else if(collision.CompareTag("PlayerParryTag"))
         {
             hitParryBox = true;
+            Deactivate();
         }
     }
 

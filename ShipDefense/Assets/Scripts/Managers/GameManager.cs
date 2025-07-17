@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
     public void FailGame()
     {
         Debug.Log("Game lost!");
+        PlayerController player = FindFirstObjectByType<PlayerController>();
+        if (player != null) player.gameObject.SetActive(false);
         endScreen.EndGame();
     }
 
