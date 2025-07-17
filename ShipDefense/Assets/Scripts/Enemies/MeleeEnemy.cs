@@ -27,8 +27,17 @@ public class MeleeEnemy : Enemy
     }
     protected override void Update()
     {
-        if (stop) { return; }
-        if (currentState == EnemyState.Dead) return;
+        if (stop)
+        {
+            DisableStun();
+            DisableAttackWarning();
+            hurtbox.Deactivate();
+        }
+        if (currentState == EnemyState.Dead) {
+            DisableStun();
+            DisableAttackWarning();
+            hurtbox.Deactivate();
+        }
         base.Update();
         targetLayer = LayerMask.GetMask("Player");
         float currentSpeed = agent.velocity.magnitude;
@@ -45,6 +54,7 @@ public class MeleeEnemy : Enemy
                 break;
 
             case EnemyState.Attack:
+                UpdateAttackDirection();
                 HandleAttack();
                 break;
         }
@@ -91,7 +101,6 @@ public class MeleeEnemy : Enemy
             isAttacking = true;
             lastAttackTime = Time.time;
             animator.SetBool("Attacking", true);
-            UpdateAttackDirection();
         }
     }
     public virtual void Attack()
