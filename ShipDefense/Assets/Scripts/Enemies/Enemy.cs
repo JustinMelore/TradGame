@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 /// <summary>
 /// Script to define enemy behavior. This script is mostly for testing purposes and will later be exchanged with more specific scripts for different enemy types.
 /// </summary>
@@ -21,6 +22,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected Animator animator;
     [Header("VFX")]
     [SerializeField] protected ParticleSystem enemyDamageParticles;
+
+    [Header("SFX")]
+    [SerializeField] protected AudioSource audioSource;
+    [SerializeField] protected AudioClip enemyDamageSound;
     
     protected NavMeshAgent agent;
     protected EnemyState currentState;
@@ -145,6 +150,7 @@ public class Enemy : MonoBehaviour
     {
         if(!introDone) { return; }
         health -= damage;
+        PlaySound(enemyDamageSound);
         //Debug.Log("Enemy damaged. New health is " + health);
         Instantiate(enemyDamageParticles, transform.position, Quaternion.identity);
         if (health <= 0) KillEnemy();
@@ -204,6 +210,12 @@ public class Enemy : MonoBehaviour
                 animator.SetTrigger("Dead");
                 break;
         }
+    }
+
+    private void PlaySound(AudioClip audio)
+    {
+        audioSource.pitch = Random.Range(0.8f, 1.2f);
+        audioSource.PlayOneShot(audio);
     }
 }
 
