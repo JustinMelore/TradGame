@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerParrybox parrybox;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private AudioSource audioSource;
-
+   
     [Header("Movement Settings")]
     [SerializeField] private float movementSpeed;
     [SerializeField] private float dodgeSpeed;
@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float attackDuration;
     [SerializeField] private float attackCooldown;
     [SerializeField] private int healthFromParry;
+    [SerializeField] private Transform attackpointer;
 
     [Header("Sounds")]
     [SerializeField] private AudioClip swordSwing;
@@ -120,6 +121,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 mouseInput = input.Get<Vector2>();
         mousePosition = playerCamera.ScreenToWorldPoint(new Vector3(mouseInput.x, mouseInput.y, 1f));
+        animator.SetFloat("IdleX", mousePosition.x);
     }
 
     /// <summary>
@@ -128,6 +130,7 @@ public class PlayerController : MonoBehaviour
     private void OnParry()
     {
         if (isParrying || parryOnCooldown || isDodging || isAttacking) return;
+        UpdateAttackDirection();
         currentParryTime = 0f;
         animator.SetTrigger("Parry");
         isParrying = true;
@@ -141,6 +144,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isAttacking || attackOnCooldown || isDodging || isParrying) return;
         attackAnimationDirection = (mousePosition - transform.position).normalized;
+        UpdateAttackDirection();
         currentAttackTime = 0f;
         isAttacking = true;
         animator.SetTrigger("Attack");
@@ -151,7 +155,14 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        UpdateAttackDirection();
+        Vector3 direction = mousePosition - transform.position;
+        direction.z = 0f;
+        direction.Normalize();
+        Vector3 arrowOffset = direction * 1.3f;
+        attackpointer.position = transform.position + arrowOffset;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        attackpointer.rotation = Quaternion.Euler(0f, 0f, angle - 90f);
+
         if (!isDodging)
         {
             player.linearVelocity = movementDirection * movementSpeed;

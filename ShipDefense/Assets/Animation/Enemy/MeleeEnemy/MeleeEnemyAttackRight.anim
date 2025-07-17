@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MeleeEnemyAttack
+  m_Name: MeleeEnemyAttackRight
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -22,15 +22,15 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 9056733257342189275, guid: 858322f2f7eccfc4b924d1e26ac80725, type: 3}
-    - time: 0.23333333
+    - time: 0.25
       value: {fileID: 9056733257342189275, guid: 858322f2f7eccfc4b924d1e26ac80725, type: 3}
-    - time: 0.46666667
+    - time: 0.5
       value: {fileID: 1135038483143520219, guid: 1a904b331633d5649b0b468105552e17, type: 3}
-    - time: 0.7
+    - time: 0.75
       value: {fileID: 1135038483143520219, guid: 1a904b331633d5649b0b468105552e17, type: 3}
-    - time: 0.93333334
+    - time: 1
       value: {fileID: -5009149464888732873, guid: 54814e553b09d9647b4e04bd2fff1635, type: 3}
-    - time: 1.1666666
+    - time: 1.25
       value: {fileID: -6479214544313528894, guid: bf18565572f599e47bf45215d065008b, type: 3}
     attribute: m_Sprite
     path: 
@@ -65,7 +65,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.1833333
+    m_StopTime: 1.2666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -85,21 +85,35 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.7
+  - time: 0.5
+    functionName: AttackWarning
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.51666665
     functionName: CanParry
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.15
+  - time: 1
+    functionName: DisableAttackWarning
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.2166667
     functionName: Attack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.1666666
+  - time: 1.25
     functionName: OnAttackEnd
     data: 
     objectReferenceParameter: {fileID: 0}

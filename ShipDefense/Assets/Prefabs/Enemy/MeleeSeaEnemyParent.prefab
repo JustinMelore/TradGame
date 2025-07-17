@@ -40,9 +40,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8025426067759184770}
     m_Modifications:
+    - target: {fileID: 1997414147007716633, guid: 36771441c2e878e40872329ebaee2865, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7482667652216324306, guid: a1a9dc9f4b57ad942bd3ec13dd2c7d2a, type: 3}
+    - target: {fileID: 1997414147007716633, guid: 36771441c2e878e40872329ebaee2865, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6138813387607737495, guid: 36771441c2e878e40872329ebaee2865, type: 3}
       propertyPath: m_Name
       value: MeleeSeaEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355955104883904954, guid: 36771441c2e878e40872329ebaee2865, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6613597719191493643, guid: 36771441c2e878e40872329ebaee2865, type: 3}
       propertyPath: m_LocalScale.x

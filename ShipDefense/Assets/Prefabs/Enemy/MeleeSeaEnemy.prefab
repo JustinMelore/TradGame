@@ -452,6 +452,8 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 0
+  attackWarningSign: {fileID: 0}
+  stunSign: {fileID: 0}
   canParry: 0
   enemyHitbox: {fileID: 791621457454603155}
 --- !u!95 &8815836370398095847

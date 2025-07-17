@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MeleeEnemy : Enemy
@@ -7,12 +8,14 @@ public class MeleeEnemy : Enemy
     [SerializeField] protected int meleeDamage = 5;
     [SerializeField] protected EnemyHurtbox hurtbox;
     [SerializeField] protected Transform attackDirection;
-    [SerializeField] protected float attackDuration;
+    [SerializeField] protected float attackDuration = 1.4f;
     [SerializeField] protected float attackRadius = 1.0f;
     [SerializeField] protected float patrolRadius = 4.0f;
     [SerializeField] protected float detectionRadius = 6.0f;
     [SerializeField] protected float chaseSpeed = 2.0f;
     [SerializeField] protected LayerMask targetLayer;
+    [SerializeField] protected GameObject attackWarningSign;
+    [SerializeField] protected GameObject stunSign;
 
     private float attackTimer = 0f;
     protected bool isAttacking = false;
@@ -24,12 +27,22 @@ public class MeleeEnemy : Enemy
     }
     protected override void Update()
     {
+        if (stop)
+        {
+            DisableStun();
+            DisableAttackWarning();
+            hurtbox.Deactivate();
+        }
+        if (currentState == EnemyState.Dead) {
+            DisableStun();
+            DisableAttackWarning();
+            hurtbox.Deactivate();
+        }
         base.Update();
         targetLayer = LayerMask.GetMask("Player");
         float currentSpeed = agent.velocity.magnitude;
         animator.SetFloat("Speed", currentSpeed);
         animator.SetBool("HasTarget", DetectTargetInRadius(detectionRadius));
-
         switch (currentState)
         {
             case EnemyState.Patrol:
@@ -41,6 +54,7 @@ public class MeleeEnemy : Enemy
                 break;
 
             case EnemyState.Attack:
+                UpdateAttackDirection();
                 HandleAttack();
                 break;
         }
@@ -64,7 +78,7 @@ public class MeleeEnemy : Enemy
         agent.speed = chaseSpeed;
         agent.SetDestination(target.transform.position);
 
-        if (DetectTargetInRadius(attackRadius))
+        if (DetectTargetInRadius(attackRadius) && Time.time - lastAttackTime >= attackCooldown)
         {
             agent.ResetPath();
             SwitchState(EnemyState.Attack);
@@ -76,12 +90,18 @@ public class MeleeEnemy : Enemy
     }
     protected void HandleAttack()
     {
-        if (!isAttacking)
+        //if (!isAttacking)
+        //{
+        //    isAttacking = true;
+        //    animator.SetBool("Attacking", true);
+        //}
+        //Debug.Log("Melee Enemy attacks!");
+        if (!isAttacking && Time.time - lastAttackTime >= attackCooldown)
         {
             isAttacking = true;
+            lastAttackTime = Time.time;
             animator.SetBool("Attacking", true);
         }
-        //Debug.Log("Melee Enemy attacks!");
     }
     public virtual void Attack()
     {
@@ -91,9 +111,22 @@ public class MeleeEnemy : Enemy
         attackDirection.position = transform.position + directionToTarget * attackOffset;
         float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
         attackDirection.rotation = Quaternion.Euler(0f, 0f, angle);
+        float x = directionToTarget.x;
+        animator.SetFloat("AttackX", x >= 0 ? 1f : 0f);
         hurtbox.transform.position = attackDirection.position;
         hurtbox.transform.rotation = attackDirection.rotation;
         hurtbox.Activate(meleeDamage);
+    }
+    public void UpdateAttackDirection()
+    {
+        if (currentState == EnemyState.Stunned) return;
+        Vector3 directionToTarget = (target.transform.position - transform.position).normalized;
+        float attackOffset = 1.2f;
+        attackDirection.position = transform.position + directionToTarget * attackOffset;
+        float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
+        attackDirection.rotation = Quaternion.Euler(0f, 0f, angle);
+        float x = directionToTarget.x;
+        animator.SetFloat("AttackX", x >= 0 ? 1f : 0f);
     }
     public void CanParry()
     {
@@ -122,6 +155,23 @@ public class MeleeEnemy : Enemy
         }
         canParry = false;
         hurtbox.Deactivate();
+    }
+
+    public void AttackWarning()
+    {
+        attackWarningSign.SetActive(true);
+    }
+    public void DisableAttackWarning()
+    {
+        attackWarningSign.SetActive(false);
+    }
+    public void ShowStun()
+    {
+        stunSign.SetActive(true);
+    }
+    public void DisableStun()
+    {
+        stunSign.SetActive(false);
     }
     protected override void HandlePatrol()
     {

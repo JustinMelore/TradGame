@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -29,6 +30,8 @@ public class Enemy : MonoBehaviour
     protected float idleTimer;
     protected float stunTimer;
     protected float stunDuration;
+    protected Boolean stop = false;
+    protected Boolean introDone = false;
 
     protected virtual void Awake()
     {
@@ -45,6 +48,7 @@ public class Enemy : MonoBehaviour
     }
     protected virtual void Update()
     {
+        if (stop) { return; }
         if (currentState == EnemyState.Dead) return;
         switch (currentState)
         {
@@ -139,6 +143,7 @@ public class Enemy : MonoBehaviour
     /// <param name="damage">The amount of damage to apply</param>
     public virtual void DamageEnemy(int damage)
     {
+        if(!introDone) { return; }
         health -= damage;
         //Debug.Log("Enemy damaged. New health is " + health);
         Instantiate(enemyDamageParticles, transform.position, Quaternion.identity);
@@ -151,6 +156,7 @@ public class Enemy : MonoBehaviour
     {
         //Debug.Log("Enemy killed!");
         currentState = EnemyState.Dead;
+        stop = true;
         if (agent != null)
         {
             agent.ResetPath();
@@ -163,6 +169,7 @@ public class Enemy : MonoBehaviour
     }
     public void OnIntroComplete()
     {
+        introDone = true;
         animator.SetTrigger("IntroDone");
     }
     protected virtual void SwitchState(EnemyState newState)
