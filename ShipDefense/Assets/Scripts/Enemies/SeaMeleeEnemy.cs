@@ -29,6 +29,11 @@ public class SeaMeleeEnemy : MeleeEnemy
 
     }
 
+    protected override void HandlePatrol()
+    {
+        
+    }
+
     protected override void Update()
     {
         if (currentState == EnemyState.Dead) return;
