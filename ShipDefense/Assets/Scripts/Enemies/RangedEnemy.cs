@@ -53,6 +53,12 @@ public class RangedEnemy : Enemy
         if (target == null || currentState != EnemyState.Chase) return;
         agent.speed = chaseSpeed;
         agent.SetDestination(target.transform.position);
+        float dirX = target.transform.position.x - transform.position.x;
+        if (Mathf.Abs(dirX) > 0.1f)
+        {
+            animator.SetFloat("RunX", dirX > 0 ? 1f : -1f);
+        }
+
         FireProjectile();
         if (DetectTargetInRadius(beginEvadingRadius))
         {
@@ -72,6 +78,11 @@ public class RangedEnemy : Enemy
             Vector2 randomDir = Random.insideUnitCircle * patrolRadius;
             Vector3 patrolTarget = transform.position + new Vector3(randomDir.x, randomDir.y, 0f);
             agent.SetDestination(patrolTarget);
+            float dirX = patrolTarget.x - transform.position.x;
+            if (Mathf.Abs(dirX) > 0.1f)
+            {
+                animator.SetFloat("RunX", dirX > 0 ? 1f : -1f);
+            }
         }
         if (DetectTargetInRadius(detectionRadius))
         {

@@ -77,7 +77,11 @@ public class MeleeEnemy : Enemy
         if (target == null || currentState != EnemyState.Chase) return;
         agent.speed = chaseSpeed;
         agent.SetDestination(target.transform.position);
-
+        Vector2 dirToTarget = (target.transform.position - transform.position).normalized;
+        if (dirToTarget.x != 0)
+        {
+            animator.SetFloat("RunX", dirToTarget.x > 0 ? 1f : -1f);
+        }
         if (DetectTargetInRadius(attackRadius) && Time.time - lastAttackTime >= attackCooldown)
         {
             agent.ResetPath();
@@ -88,7 +92,7 @@ public class MeleeEnemy : Enemy
            SwitchState(EnemyState.Patrol);
         }
     }
-    protected void HandleAttack()
+    protected virtual void HandleAttack()
     {
         //if (!isAttacking)
         //{
@@ -181,6 +185,11 @@ public class MeleeEnemy : Enemy
             Vector2 randomDir = Random.insideUnitCircle * patrolRadius;
             Vector3 patrolTarget = transform.position + new Vector3(randomDir.x, randomDir.y, 0f);
             agent.SetDestination(patrolTarget);
+            float directionX = patrolTarget.x - transform.position.x;
+            if (Mathf.Abs(directionX) > 0.1f) 
+            {
+                animator.SetFloat("RunX", directionX > 0 ? 1f : -1f);
+            }
         }
         if (DetectTargetInRadius(detectionRadius))
         {
