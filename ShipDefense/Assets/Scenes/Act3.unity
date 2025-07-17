@@ -1440,7 +1440,7 @@ PrefabInstance:
     - target: {fileID: 614813324011356980, guid: 9d6bce5bb67429d49b3cbb94be3c899b, type: 3}
       propertyPath: m_NavMeshData
       value: 
-      objectReference: {fileID: 23800000, guid: e41a59f2d7579fb4ca9de090d2fc2e34, type: 2}
+      objectReference: {fileID: 23800000, guid: 087357d33a9aca84fa20186e06e09980, type: 2}
     - target: {fileID: 846883207741772627, guid: 9d6bce5bb67429d49b3cbb94be3c899b, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[94].m_Data
       value: 
