@@ -42,6 +42,8 @@ public class StoryScreen : MonoBehaviour
     public void RevealStoryScreen()
     {
         gameObject.SetActive(true);
+        AudioSource audioSource = GetComponent<AudioSource>();
+        if (audioSource != null) audioSource.Play();
         StartCoroutine(RevealStoryScreenCoroutine());
     }
 
