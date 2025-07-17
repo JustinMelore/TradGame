@@ -65,4 +65,11 @@ public class SeaMeleeEnemy : MeleeEnemy
     {
         Destroy(transform.parent.gameObject);
     }
+
+    public override void Attack()
+    {
+        if (currentState == EnemyState.Stunned) return;
+        hurtbox.enabled = true;
+        hurtbox.Activate(meleeDamage);
+    }
 }
