@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerParrybox parrybox;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource parryAudioSource;
    
     [Header("Movement Settings")]
     [SerializeField] private float movementSpeed;
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] private AudioClip swordSwing;
     [SerializeField] private AudioClip DogeSound;
+    [SerializeField] private AudioClip successfulParrySound;
     [Header("VFX")]
     [SerializeField] private GameObject playerDamageVFX;
     [SerializeField] private GameObject playerDeflectVFX;
@@ -380,6 +382,12 @@ public class PlayerController : MonoBehaviour
         audioSource.PlayOneShot(audio);
     }
 
+    private void PlaySound(AudioClip audio, AudioSource source)
+    {
+        source.pitch = Random.Range(0.8f, 1.2f);
+        audioSource.PlayOneShot(audio);
+    }
+
     /// <summary>
     /// Spawns in an instance of the playerDeflectVFX particles
     /// </summary>
@@ -396,6 +404,7 @@ public class PlayerController : MonoBehaviour
         health += healthFromParry;
         health = Mathf.Clamp(health, 0, maxhealth);
         healthUI.SetHealth(health, maxhealth);
+        PlaySound(successfulParrySound, parryAudioSource);
     }
 }
  
