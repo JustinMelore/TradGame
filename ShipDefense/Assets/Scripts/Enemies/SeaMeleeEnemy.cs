@@ -21,7 +21,6 @@ public class SeaMeleeEnemy : MeleeEnemy
         }
         lastAttackTime = Time.time;
         health = maxhealth;
-        //attackDirection.localEulerAngles = Vector3.zero;
     }
 
     protected override void Start()

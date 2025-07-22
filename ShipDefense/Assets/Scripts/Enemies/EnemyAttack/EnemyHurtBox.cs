@@ -25,14 +25,13 @@ public class EnemyHurtbox : Hurtbox
     {
         if (collision.CompareTag("Player"))
         {
-            //PlayerController player = collision.GetComponentInParent<PlayerController>();
-            //if (player != null)
-            //{
+            PlayerController player = collision.GetComponentInParent<PlayerController>();
+            if (player != null)
+            {
                 //player.DamagePlayer(damage);
-                //Debug.Log("Enemy hit the player! with Damage" + damage);
                 hitPlayer = true;
-                Deactivate();
-            //}
+                //Deactivate();
+            }
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
@@ -47,21 +46,49 @@ public class EnemyHurtbox : Hurtbox
         } else if(collision.CompareTag("PlayerParryTag"))
         {
             hitParryBox = true;
-            Deactivate();
+            //Deactivate();
         }
     }
 
 
-    //private void LateUpdate()
+    private void LateUpdate()
+    {
+        if (!hitParryBox)
+        {
+            if (hitPlayer && !hitPlayerOnce)
+            {
+                player.DamagePlayer(damage);
+                //hitPlayerOnce = true;
+                Debug.Log("Enemy hit the player! with Damage" + damage);
+            }
+            else if (hitShip && !hitShipOnce)
+            {
+                SeaMeleeEnemy seaMeleeEnemy = GetComponentInParent<SeaMeleeEnemy>();
+                if (seaMeleeEnemy != null)
+                {
+                    ship.DamageShip(damage);
+                    //hitShipOnce = true;
+                    Debug.Log("Enemy hit the ship for " + damage + " damage");
+                }
+            }
+        }
+        if (hitPlayer || hitShip || hitParryBox) Deactivate();
+        hitPlayer = false;
+        hitShip = false;
+        hitParryBox = false;
+    }
+
+    //private void OnDisable()
     //{
-    //    if(!hitParryBox)
+    //    if (!hitParryBox)
     //    {
-    //        if(hitPlayer && !hitPlayerOnce)
+    //        if (hitPlayer && !hitPlayerOnce)
     //        {
     //            player.DamagePlayer(damage);
     //            hitPlayerOnce = true;
     //            Debug.Log("Enemy hit the player! with Damage" + damage);
-    //        } else if(hitShip && !hitShipOnce)
+    //        }
+    //        else if (hitShip && !hitShipOnce)
     //        {
     //            SeaMeleeEnemy seaMeleeEnemy = GetComponentInParent<SeaMeleeEnemy>();
     //            if (seaMeleeEnemy != null)
@@ -75,33 +102,7 @@ public class EnemyHurtbox : Hurtbox
     //    hitPlayer = false;
     //    hitShip = false;
     //    hitParryBox = false;
+    //    hitPlayerOnce = false;
+    //    hitShipOnce = false;
     //}
-
-    private void OnDisable()
-    {
-        if (!hitParryBox)
-        {
-            if (hitPlayer && !hitPlayerOnce)
-            {
-                player.DamagePlayer(damage);
-                hitPlayerOnce = true;
-                Debug.Log("Enemy hit the player! with Damage" + damage);
-            }
-            else if (hitShip && !hitShipOnce)
-            {
-                SeaMeleeEnemy seaMeleeEnemy = GetComponentInParent<SeaMeleeEnemy>();
-                if (seaMeleeEnemy != null)
-                {
-                    ship.DamageShip(damage);
-                    hitShipOnce = true;
-                    Debug.Log("Enemy hit the ship for " + damage + " damage");
-                }
-            }
-        }
-        hitPlayer = false;
-        hitShip = false;
-        hitParryBox = false;
-        hitPlayerOnce = false;
-        hitShipOnce = false;
-    }
 }
