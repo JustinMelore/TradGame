@@ -444,7 +444,7 @@ MonoBehaviour:
   enemyDamageParticles: {fileID: 3352877640750334326, guid: 419faec969e95b0489372eb1b831e400, type: 3}
   audioSource: {fileID: 4624374498291146535}
   enemyDamageSound: {fileID: 8300000, guid: ccecab111a3765245a966bc5a53bb958, type: 3}
-  meleeDamage: 5
+  meleeDamage: 10
   hurtbox: {fileID: 4744141567988537960}
   attackDirection: {fileID: 8829589820334125635}
   attackDuration: 0.3
