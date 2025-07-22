@@ -9,7 +9,6 @@ public class SeaMeleeEnemy : MeleeEnemy
     [SerializeField] private GameObject enemyHitbox;
 
 
-    //TODO Implement wave spawner implementation
     protected override void Awake()
     {
         target = FindFirstObjectByType<PlayerController>().gameObject;
@@ -22,6 +21,7 @@ public class SeaMeleeEnemy : MeleeEnemy
         }
         lastAttackTime = Time.time;
         health = maxhealth;
+        //attackDirection.localEulerAngles = Vector3.zero;
     }
 
     protected override void Start()
@@ -69,7 +69,7 @@ public class SeaMeleeEnemy : MeleeEnemy
     public override void Attack()
     {
         if (currentState == EnemyState.Stunned) return;
-        hurtbox.enabled = true;
+        isAttacking = true;
         hurtbox.Activate(meleeDamage);
     }
 }

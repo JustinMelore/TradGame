@@ -31,7 +31,7 @@ public class EnemyHurtbox : Hurtbox
                 //player.DamagePlayer(damage);
                 //Debug.Log("Enemy hit the player! with Damage" + damage);
                 hitPlayer = true;
-                //Deactivate();
+                Deactivate();
             //}
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
@@ -42,7 +42,7 @@ public class EnemyHurtbox : Hurtbox
                 //ship.DamageShip(damage);
                 //Debug.Log("Enemy hit the ship for " + damage + " damage");
                 hitShip = true;
-                Deactivate();
+                //Deactivate();
             }
         } else if(collision.CompareTag("PlayerParryTag"))
         {
