@@ -58,7 +58,7 @@ public class Ship : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (gameManager == null) gameManager = FindFirstObjectByType<GameManager>();
-        if (healthBar == null) healthBar = FindFirstObjectByType<Canvas>().transform.Find("ShipHealthBar").GetComponent<PlayerHealthUI>();
+        if (healthBar == null) healthBar = FindFirstObjectByType<Canvas>().transform.Find("ShipHealthBarContainer").Find("ShipHealthBar").GetComponent<PlayerHealthUI>();
         healthBar.SetHealth(currentShipHealth, shipHealth);
     }
 
