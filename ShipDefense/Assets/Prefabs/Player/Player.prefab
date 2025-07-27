@@ -242,9 +242,9 @@ MonoBehaviour:
   healthUI: {fileID: 0}
   maxhealth: 50
   parryDuration: 0.5
-  parryCooldown: 0.25
+  parryCooldown: 0.1
   damage: 5
-  attackDuration: 0.35
+  attackDuration: 0.1
   attackCooldown: 0.25
   healthFromParry: 5
   attackpointer: {fileID: 1506355283019450625}

@@ -315,6 +315,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3373668944814141917, guid: e9f3e007eef86984aa58ef7babf7b1c0, type: 3}
   m_PrefabInstance: {fileID: 5054132920944058665}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &469770340 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2933630436081569040, guid: e9f3e007eef86984aa58ef7babf7b1c0, type: 3}
+  m_PrefabInstance: {fileID: 5054132920944058665}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bcaef4161212ab46baa086cb0d2c73d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1548,9 +1559,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2367699985549124048, guid: da71ff931c4b51a459b36e254aa5108b, type: 3}
-      propertyPath: gameManager
+      propertyPath: healthUI
       value: 
-      objectReference: {fileID: 268777749}
+      objectReference: {fileID: 469770340}
     - target: {fileID: 2367699985549124048, guid: da71ff931c4b51a459b36e254aa5108b, type: 3}
       propertyPath: playerCamera
       value: 
